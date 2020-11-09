@@ -3,6 +3,7 @@ package arginine;
 import methionine.Electra;
 import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
+import serine.webmedia.WebMediaList;
 import tryptophan.survey.action.ActionSetLambda;
 import tryptophan.survey.metric.MetricQueryInterface;
 import tryptophan.survey.publicview.PublicViewLambda;
@@ -32,8 +33,11 @@ public class AurigaObject {
         return authlambda;
     }
     //*************************************************************
+    /**
+     * The direct connection to projects data
+     */
     ProjectLambda workteamlamda = null;
-    public ProjectLambda getWorkTeamLambda () throws Exception {
+    public ProjectLambda getProjectLambda () throws Exception {
         if (workteamlamda == null) {
             workteamlamda = new ProjectLambda();
             workteamlamda.setElectraObject(electra);
@@ -101,6 +105,10 @@ public class AurigaObject {
         }
         return responcelambda;
     }
+    //*************************************************************
+    //*************************************************************
+    static final WebMediaList MEDIALIST = new WebMediaList();
+    public WebMediaList mediaList () { return MEDIALIST; }
     //*************************************************************
 }
 //**************************************************************************
