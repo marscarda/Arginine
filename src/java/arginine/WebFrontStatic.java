@@ -13,21 +13,23 @@ public class WebFrontStatic extends WebFrontAlpha {
     static final int MAXAGE = 3600;
     //***********************************************************************
     //FONTS
-    public static final String MENIUNG20 = "menuing";
     public static final String TEXTGRAL20 = "general";
     //***********************************************************************
     //CSSs
-    public static final String CSSROOT = "augcguuacgcagagugcaugac";
-    public static final String CSSFORM = "auggucccugcgauggagcugca";
-    public static final String CSSLISTANDBOX = "auggagccgaucagcgauggag";
-    public static final String CSSPOPUP = "auggagccgaucagccgaugcaag";
+    public static final String CSSROOT = "bghrtrgdftyffhgtytdfg";
+    //public static final String CSSFORM = "auggucccugcgauggagcugca";
+    //public static final String CSSLISTANDBOX = "auggagccgaucagcgauggag";
+    //public static final String CSSPOPUP = "auggagccgaucagccgaugcaag";
     //=======================================================================
     //JS
+    /*
     public static final String JSHTTP = "ndfrtgdger";
     public static final String JSTAGANIMATE = "augucauggcuugguacuagugacgu";
     public static final String JSMAP = "augucauggcucagucacfgu";
+    */
     //***********************************************************************
     //BITMAP
+    /*
     public static final String ZOOMINICON = "mssewsdtetsda";
     public static final String ZOOMOUTICON = "bstdrgdgdfgd";
     public static final String HANDICON = "rwerdfsdfsdfs";
@@ -38,6 +40,7 @@ public class WebFrontStatic extends WebFrontAlpha {
     public static final String SAMPLES = "gergrtrterter";
     //-----------------------------------------------------------------------
     public static final String SAMPLETUBE = "sedfgddjghjgjjjdfg";
+    */
     //***********************************************************************
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -59,24 +62,24 @@ public class WebFrontStatic extends WebFrontAlpha {
         //-------------------------------------------------------------------
         //CSSs
         if (resourcename.equals(CSSROOT)) dispatchfile = "/static2020/root.css";
-        if (resourcename.equals(CSSFORM)) dispatchfile = "/static2020/form.css";
-        if (resourcename.equals(CSSLISTANDBOX)) dispatchfile = "/static2020/listandbox.css";
-        if (resourcename.equals(CSSPOPUP)) dispatchfile = "/static2020/popup.css";
+        //if (resourcename.equals(CSSFORM)) dispatchfile = "/static2020/form.css";
+        //if (resourcename.equals(CSSLISTANDBOX)) dispatchfile = "/static2020/listandbox.css";
+        //if (resourcename.equals(CSSPOPUP)) dispatchfile = "/static2020/popup.css";
         //-------------------------------------------------------------------
         //JS
-        if (resourcename.equals(JSHTTP)) dispatchfile = "/static2020/httprequest.js";
-        if (resourcename.equals(JSTAGANIMATE)) dispatchfile = "/static2020/taganimate.js";
-        if (resourcename.equals(JSMAP)) dispatchfile = "/static2020/mapdata.js";
+        //if (resourcename.equals(JSHTTP)) dispatchfile = "/static2020/httprequest.js";
+        //if (resourcename.equals(JSTAGANIMATE)) dispatchfile = "/static2020/taganimate.js";
+        //if (resourcename.equals(JSMAP)) dispatchfile = "/static2020/mapdata.js";
         //-------------------------------------------------------------------
         //BITMAP
-        if (resourcename.equals(ZOOMINICON)) dispatchfile = "/static2020/zoomin.png";
-        if (resourcename.equals(ZOOMOUTICON)) dispatchfile = "/static2020/zoomout.png";
-        if (resourcename.equals(HANDICON)) dispatchfile = "/static2020/hand.png";
-        if (resourcename.equals(PUBVIEW)) dispatchfile = "/static2020/publicview.png";
-        if (resourcename.equals(MULTIPLECHEXCLUSIVE)) dispatchfile = "/static2020/multiplechexcl.png";
-        if (resourcename.equals(SAMPLING)) dispatchfile = "/static2020/sampling.png";
-        if (resourcename.equals(SAMPLES)) dispatchfile = "/static2020/samples.png";
-        if (resourcename.equals(SAMPLETUBE)) dispatchfile = "/static2020/sampletube.png";
+        //if (resourcename.equals(ZOOMINICON)) dispatchfile = "/static2020/zoomin.png";
+        //if (resourcename.equals(ZOOMOUTICON)) dispatchfile = "/static2020/zoomout.png";
+        //if (resourcename.equals(HANDICON)) dispatchfile = "/static2020/hand.png";
+        //if (resourcename.equals(PUBVIEW)) dispatchfile = "/static2020/publicview.png";
+        //if (resourcename.equals(MULTIPLECHEXCLUSIVE)) dispatchfile = "/static2020/multiplechexcl.png";
+        //if (resourcename.equals(SAMPLING)) dispatchfile = "/static2020/sampling.png";
+        //if (resourcename.equals(SAMPLES)) dispatchfile = "/static2020/samples.png";
+        //if (resourcename.equals(SAMPLETUBE)) dispatchfile = "/static2020/sampletube.png";
         //-------------------------------------------------------------------
         if (dispatchfile == null) {
             libintfc.setStatusResponse(404);
