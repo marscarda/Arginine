@@ -17,7 +17,7 @@ public class WebFrontStatic extends WebFrontAlpha {
     //***********************************************************************
     //CSSs
     public static final String CSSROOT = "bghrtrgdftyffhgtytdfg";
-    //public static final String CSSFORM = "auggucccugcgauggagcugca";
+    public static final String CSSFORM = "vfrddh675ttyutyutyut";
     //public static final String CSSLISTANDBOX = "auggagccgaucagcgauggag";
     //public static final String CSSPOPUP = "auggagccgaucagccgaugcaag";
     //=======================================================================
@@ -62,7 +62,7 @@ public class WebFrontStatic extends WebFrontAlpha {
         //-------------------------------------------------------------------
         //CSSs
         if (resourcename.equals(CSSROOT)) dispatchfile = "/static2020/root.css";
-        //if (resourcename.equals(CSSFORM)) dispatchfile = "/static2020/form.css";
+        if (resourcename.equals(CSSFORM)) dispatchfile = "/static2020/form.css";
         //if (resourcename.equals(CSSLISTANDBOX)) dispatchfile = "/static2020/listandbox.css";
         //if (resourcename.equals(CSSPOPUP)) dispatchfile = "/static2020/popup.css";
         //-------------------------------------------------------------------

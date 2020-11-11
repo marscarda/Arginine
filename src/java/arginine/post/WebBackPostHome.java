@@ -1,8 +1,8 @@
-package arginine.main;
+package arginine.post;
 //***************************************************************************
 import arginine.WebBackAlpha;
 //***************************************************************************
-public class WebBackHome extends WebBackAlpha {
-
+public class WebBackPostHome extends WebBackAlpha {
+    
 }
 //***************************************************************************

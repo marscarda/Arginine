@@ -9,6 +9,7 @@ package arginine;
 //import alanine.universe.WebFrontUniverses;
 //import alanine.users.WebFrontUsers;
 //import alanine.workspace.WebFrontWorkspace;
+import arginine.main.WebFrontAuth;
 import methionine.auth.User;
 import methionine.project.Project;
 //***************************************************************************
@@ -53,13 +54,13 @@ public class WebBackAlpha {
         return project;
     }
     //***********************************************************************
-    /*
     public String getAuthURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(WebFrontAuth.PAGE);
         return url.toString();
     }
     //=======================================================================
+    /*
     public String logOutURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(WebFrontLogout.PAGE);
