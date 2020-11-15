@@ -17,6 +17,30 @@
 <%@include file="../main/header.jsp" %>
 <div class="content">
     <h1>Posting page!</h1>
+
+
+
+
+
+
+
+
+    <div style="width: 300px">
+        <form id="formcreateworkspace">
+        <input type="text" name="<%--=ApiCreateWorkspace.NAME--%>" value="" placeholder="Name for your new workspace" />
+        <div style="height: 10px"></div>
+        <button class="greenwidththin" onclick="createWorkspace(); return false;">Create Workspace</button>
+        </form>
+    </div>
+
+
+
+
+
+
+
+
+
 </div>
 </body>
 </html>

@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebListener;
 import methionine.Electra;
 import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
+import methionine.pub.publication.PubsLambda;
+import methionine.pub.publication.PubsTables;
 import tryptophan.survey.metric.MetricQueryInterface;
 import tryptophan.survey.SurveyTabs;
 import tryptophan.universe.UniverseQryInterface;
@@ -163,6 +165,20 @@ public class ContextListener implements ServletContextListener {
             }
             catch (Exception e) {
                 System.out.println("ERROR: Ensuring " + LifeTimeValues.dbsurvey + " tables error");
+                System.out.println(e.getMessage());
+            }            
+        }
+        //----------------------------------------------------------
+        if (LifeTimeValues.dbpublication != null) {
+            PubsTables pubs = new PubsTables();
+            pubs.setElectraObject(electra);
+            pubs.setDataBaseName(LifeTimeValues.dbpublication);
+            try { 
+                pubs.ensureTables();
+                System.out.println("Tables in " + LifeTimeValues.dbpublication + " Ensured");
+            }
+            catch (Exception e) {
+                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbpublication + " tables error");
                 System.out.println(e.getMessage());
             }            
         }
