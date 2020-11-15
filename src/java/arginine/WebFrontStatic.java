@@ -22,9 +22,9 @@ public class WebFrontStatic extends WebFrontAlpha {
     //public static final String CSSPOPUP = "auggagccgaucagccgaugcaag";
     //=======================================================================
     //JS
-    /*
     public static final String JSHTTP = "ndfrtgdger";
     public static final String JSTAGANIMATE = "augucauggcuugguacuagugacgu";
+    /*
     public static final String JSMAP = "augucauggcucagucacfgu";
     */
     //***********************************************************************
@@ -67,8 +67,8 @@ public class WebFrontStatic extends WebFrontAlpha {
         //if (resourcename.equals(CSSPOPUP)) dispatchfile = "/static2020/popup.css";
         //-------------------------------------------------------------------
         //JS
-        //if (resourcename.equals(JSHTTP)) dispatchfile = "/static2020/httprequest.js";
-        //if (resourcename.equals(JSTAGANIMATE)) dispatchfile = "/static2020/taganimate.js";
+        if (resourcename.equals(JSHTTP)) dispatchfile = "/static2020/httprequest.js";
+        if (resourcename.equals(JSTAGANIMATE)) dispatchfile = "/static2020/taganimate.js";
         //if (resourcename.equals(JSMAP)) dispatchfile = "/static2020/mapdata.js";
         //-------------------------------------------------------------------
         //BITMAP

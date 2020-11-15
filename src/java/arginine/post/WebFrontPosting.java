@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 //***************************************************************************
-@WebServlet(name = "WebFronPosting", urlPatterns = {WebFronPosting.PAGE}, loadOnStartup=1)
-public class WebFronPosting extends WebFrontAlpha {
+@WebServlet(name = "WebFronPosting", urlPatterns = {WebFrontPosting.PAGE}, loadOnStartup=1)
+public class WebFrontPosting extends WebFrontAlpha {
     public static final String PAGE = "/post/home";
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -29,9 +29,11 @@ public class WebFronPosting extends WebFrontAlpha {
         back.setRootURL(flowbeta.getRootURL());
         back.setLoggedInUser(flowbeta.getLogedUser());
         back.setLoginToken(session.getLoginToken());
+        //-------------------------------------------------------------------
         
 
         
+        //-------------------------------------------------------------------
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
