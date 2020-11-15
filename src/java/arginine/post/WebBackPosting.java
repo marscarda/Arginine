@@ -2,7 +2,7 @@ package arginine.post;
 //***************************************************************************
 import arginine.WebBackAlpha;
 //***************************************************************************
-public class WebBackPostHome extends WebBackAlpha {
+public class WebBackPosting extends WebBackAlpha {
     
 }
 //***************************************************************************

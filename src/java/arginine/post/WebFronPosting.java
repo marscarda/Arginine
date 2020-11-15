@@ -2,11 +2,13 @@ package arginine.post;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.WebFrontAlpha;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 //***************************************************************************
-public class WebFronPostHome extends WebFrontAlpha {
+@WebServlet(name = "WebFronPosting", urlPatterns = {WebFronPosting.PAGE}, loadOnStartup=1)
+public class WebFronPosting extends WebFrontAlpha {
     public static final String PAGE = "/post/home";
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -23,7 +25,7 @@ public class WebFronPostHome extends WebFrontAlpha {
             this.toAuthPage(flowbeta);
             return;
         }
-        WebBackPostHome back = new WebBackPostHome();
+        WebBackPosting back = new WebBackPosting();
         back.setRootURL(flowbeta.getRootURL());
         back.setLoggedInUser(flowbeta.getLogedUser());
         back.setLoginToken(session.getLoginToken());
@@ -31,6 +33,9 @@ public class WebFronPostHome extends WebFrontAlpha {
 
         
         request.setAttribute(PAGEATTRKEY, back);
+        //===================================================================
+        this.beforeSend(flowbeta);
+        this.dispatchNormal("/render2020/posting/posting.jsp", request, response);
         //===================================================================
         this.finallJob(flowbeta);
         this.destroyFlowBeta(flowbeta);
