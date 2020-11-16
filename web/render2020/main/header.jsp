@@ -27,6 +27,15 @@
     font-weight: normal;
     color: #ffffff;
 }
+.menuouter {
+    background-color: #eeffee;
+    border-bottom: solid 1px #555555;
+    padding: 5px 30px;
+}
+.menuinner {
+    display: flex;
+    flex-direction: row;
+}
 </style>
 <div class="headertop">
     <div class="blueouter">
@@ -55,8 +64,25 @@
             </div>
         </div>
     </div>
+                
+                
+    <div class="menuouter">
+        <div class="menuinner">
+            <div style="flex: 3; text-align: left; font-size: 15px">
+                <a href="<%=hback.getHomeURL()%>" style="color: #030; text-decoration: none">Home</a>
+            </div>
+            <div style="flex: 2; text-align: right; font-size: 12px; display: flex; flex-direction: column-reverse">
+                <div>
+                <% if (lgdinuser.isAdmin()) { %>
+                <a href="<%=hback.postingURL()%>" style="color: #030; text-decoration: none">Posting</a>
+                <% } %>
+                </div>
+            </div>
+        </div>
+    </div>                
+                
+                
 </div>
-
 <script>
 var promptokcall = null;
 function showPrompt (message, promptcall) {

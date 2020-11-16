@@ -20,6 +20,9 @@ public class WebFrontHome extends WebFrontAlpha {
         FlowBeta flowbeta = this.createFlowBeta(request, response);
         this.initialJob(flowbeta);
         //===================================================================
+        if (this.toSSLIfLoggedIn(flowbeta)) return;
+        if (this.toNonSSLIfNotLoggedIn(flowbeta)) return;
+        //===================================================================
         WebMediaList medlist = flowbeta.getAurigaObject().mediaList();
         //===================================================================
         Session session = flowbeta.getSession();
