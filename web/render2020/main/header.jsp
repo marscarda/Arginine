@@ -51,9 +51,59 @@
                     <a href="<%=hback.getAuthURL()%>" style="color: #ffffff; text-decoration: none">Signup</a>
                 </div>
                 <% } %>
-
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<script>
+var promptokcall = null;
+function showPrompt (message, promptcall) {
+    promptokcall = promptcall;
+    var msg = document.getElementById('promptmessage');
+    var div = document.getElementById('promptactiontop');
+    msg.innerHTML = message;
+    div.style.height = "100%";
+    div.style.width = "100%";
+    var promptshow = new DivPopUpPromptShow();
+    promptshow.setElement(document, 'confirmbox');
+    promptshow.start();
+}
+function promptOK () {
+    if (promptokcall === null) alert ("Dont forget to define promptokcall");
+    promptokcall();
+    var div = document.getElementById('promptactiontop');
+    div.style.height = 0;
+    div.style.width = 0;
+}
+function promptCancel () {
+    var div = document.getElementById('promptactiontop');
+    div.style.height = 0;
+    div.style.width = 0;
+}
+function showNotice (message, color) {
+    var msg = document.getElementById('messagebox');
+    msg.style.color = color;
+    msg.innerHTML = decodeURI(message);
+    var popupmessage = new DivPopUpMessage();
+    popupmessage.setElement(document, 'messagebox');
+    popupmessage.start();
+}
+</script>
+<div id="promptactiontop" class="popupformmodal">
+    <div id="confirmbox" class="confirmbox">
+        <div id="promptmessage">Message</div>
+        <div style="margin-top: 20px; display: flex; flex-direction: row">
+            <div style="flex: 1; text-align: right; margin-right: 10px">
+                <button class="okbutton" onclick="promptOK(); return false;">Ok</button>
+            </div>
+            <div style="flex: 1; text-align: left; margin-left: 10px">
+                <button class="cancelbutton" onclick="promptCancel(); return false">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="messagebox" class="messagebox">
+    <div id="noticemessage">Message</div>
 </div>

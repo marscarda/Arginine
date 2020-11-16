@@ -19,7 +19,7 @@ public class WebFrontStatic extends WebFrontAlpha {
     public static final String CSSROOT = "bghrtrgdftyffhgtytdfg";
     public static final String CSSFORM = "vfrddh675ttyutyutyut";
     //public static final String CSSLISTANDBOX = "auggagccgaucagcgauggag";
-    //public static final String CSSPOPUP = "auggagccgaucagccgaugcaag";
+    public static final String CSSPOPUP = "auggagccgaucagccgaugcaag";
     //=======================================================================
     //JS
     public static final String JSHTTP = "ndfrtgdger";
@@ -64,7 +64,7 @@ public class WebFrontStatic extends WebFrontAlpha {
         if (resourcename.equals(CSSROOT)) dispatchfile = "/static2020/root.css";
         if (resourcename.equals(CSSFORM)) dispatchfile = "/static2020/form.css";
         //if (resourcename.equals(CSSLISTANDBOX)) dispatchfile = "/static2020/listandbox.css";
-        //if (resourcename.equals(CSSPOPUP)) dispatchfile = "/static2020/popup.css";
+        if (resourcename.equals(CSSPOPUP)) dispatchfile = "/static2020/popup.css";
         //-------------------------------------------------------------------
         //JS
         if (resourcename.equals(JSHTTP)) dispatchfile = "/static2020/httprequest.js";

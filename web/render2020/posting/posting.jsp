@@ -13,9 +13,35 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSROOT%>">
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSFORM%>">
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSPOPUP%>">
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
+function addPost (post, isnew) {
+    var top;
+    var line;
+    var column;
+    var link;
+    /*---------------------------------------------------*/    
+    top = document.createElement("div");
+    top.setAttribute('id', 'post' + post.postid);
+    top.setAttribute('style', 'padding: 15px 0px; border-bottom: solid 1px #dddddd');
+    if (isnew) top.style.opacity = 0;
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row');
+    /*---------------------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
+    column.innerHTML = post.title;
+    line.appendChild(column);
+    /*---------------------------------------------------*/
+    top.appendChild(line);
+    if (isnew)
+        document.getElementById('postlist').insertBefore(top, document.getElementById('postlist').childNodes[0]);
+    else document.getElementById('postlist').appendChild(top);
+    /*---------------------------------------------------*/
+    
+}
 function createPost () {
     var form = document.getElementById('formcreatepost');
     var formdata = new FormData(form);
@@ -33,7 +59,13 @@ function createPost () {
             showNotice (objresp.description, '#ff3333');
             return;
         }
+        /*---------------------------------------------------*/
         form.reset();
+        addPost(objresp.post, true);
+        var turnon = new ElementFadeIn();
+        turnon.setElement(document, 'post' + objresp.post.postid);
+        turnon.start();
+        /*---------------------------------------------------*/
     }
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
@@ -73,7 +105,7 @@ function createPost () {
 
 
 
-
+    <div id="postlist" style="width: 100%"></div>
 
 
 
