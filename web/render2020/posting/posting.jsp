@@ -17,6 +17,14 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
+var posts = <%=back.jPosts()%>
+let initPosts = () => {
+    var div = document.getElementById('postlist');
+    while (div.hasChildNodes())
+        div.removeChild(div.lastChild);
+    for (n = 0; n < posts.count; n++) 
+        addPost(posts.items[n], false);
+}
 function addPost (post, isnew) {
     var top;
     var line;
@@ -112,4 +120,5 @@ function createPost () {
 
 </div>
 </body>
+<script>initPosts();</script>
 </html>

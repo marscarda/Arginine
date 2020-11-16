@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
+import methionine.pub.publication.PostRecord;
 //***************************************************************************
 @WebServlet(name = "WebFronPosting", urlPatterns = {WebFrontPosting.PAGE}, loadOnStartup=1)
 public class WebFrontPosting extends WebFrontAlpha {
@@ -30,9 +31,16 @@ public class WebFrontPosting extends WebFrontAlpha {
         back.setLoggedInUser(flowbeta.getLogedUser());
         back.setLoginToken(session.getLoginToken());
         //-------------------------------------------------------------------
-        
-
-        
+        try {
+            PostRecord[] posts = flowbeta.getAurigaObject().getPubsLambda().getPostRecords();
+            back.setPosts(posts);
+        }
+        catch (Exception e) {
+            //----------------------------------------------
+            System.out.println("Failed to get post list (Web)");
+            System.out.println(e.getMessage());
+            //----------------------------------------------
+        }
         //-------------------------------------------------------------------
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
