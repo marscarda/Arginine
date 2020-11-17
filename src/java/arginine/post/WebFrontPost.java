@@ -6,19 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
-import methionine.pub.publication.PostRecord;
 //***************************************************************************
-@WebServlet(name = "WebFronPosting", urlPatterns = {WebFrontPosting.PAGE}, loadOnStartup=1)
-public class WebFrontPosting extends WebFrontAlpha {
-    public static final String PAGE = "/posting/home";
+@WebServlet(name = "WebFrontPost", urlPatterns = {WebFrontPost.URLPATTERN}, loadOnStartup=1)
+public class WebFrontPost extends WebFrontAlpha {
+    public static final String PAGE = "/posting/post";
+    public static final String URLPATTERN = PAGE + "/*";
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         //===================================================================
         FlowBeta flowbeta = this.createFlowBeta(request, response);
         this.initialJob(flowbeta);
         //===================================================================
-        if (this.toSSLIfLoggedIn(flowbeta)) return;
-        if (this.toNonSSLIfNotLoggedIn(flowbeta)) return;
+
         //===================================================================
         //If there is not valid session.
         Session session = flowbeta.getSession();
@@ -26,26 +25,17 @@ public class WebFrontPosting extends WebFrontAlpha {
             this.toAuthPage(flowbeta);
             return;
         }
-        WebBackPosting back = new WebBackPosting();
+        WebBackPost back = new WebBackPost();
         back.setRootURL(flowbeta.getRootURL());
         back.setLoggedInUser(flowbeta.getLogedUser());
         back.setLoginToken(session.getLoginToken());
         //-------------------------------------------------------------------
-        try {
-            PostRecord[] posts = flowbeta.getAurigaObject().getPubsLambda().getPostRecords();
-            back.setPosts(posts);
-        }
-        catch (Exception e) {
-            //----------------------------------------------
-            System.out.println("Failed to get post list (Web)");
-            System.out.println(e.getMessage());
-            //----------------------------------------------
-        }
+
         //-------------------------------------------------------------------
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
-        this.dispatchNormal("/render2020/posting/posting.jsp", request, response);
+        this.dispatchNormal("/render2020/posting/postdetail.jsp", request, response);
         //===================================================================
         this.finallJob(flowbeta);
         this.destroyFlowBeta(flowbeta);
@@ -54,3 +44,4 @@ public class WebFrontPosting extends WebFrontAlpha {
     //***********************************************************************
 }
 //***************************************************************************
+

@@ -20,5 +20,12 @@ public class WebBackPosting extends WebBackAlpha {
         return JPosts.getPosts(posts).toString();
     }
     //***********************************************************************
+    public String postDetailURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontPost.PAGE);
+        return url.toString();
+    }        
+    //=======================================================================
+    //***********************************************************************
 }
 //***************************************************************************

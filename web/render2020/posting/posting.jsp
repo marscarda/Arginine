@@ -43,6 +43,15 @@ function addPost (post, isnew) {
     column.innerHTML = post.title;
     line.appendChild(column);
     /*---------------------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 1; text-align: right");
+    link = document.createElement("a");
+    link.setAttribute("href", "<%=back.postDetailURL()%>/" + post.postid);
+    link.setAttribute("style", "color: #05f; text-decoration: none; font-size: 12px; font-weight: 600");
+    link.innerHTML = "Details";
+    column.appendChild(link);
+    line.appendChild(column);
+    /*---------------------------------------------------*/
     top.appendChild(line);
     if (isnew)
         document.getElementById('postlist').insertBefore(top, document.getElementById('postlist').childNodes[0]);
@@ -87,37 +96,27 @@ function createPost () {
     }    
 }
 </script>
-    
-
 <title>Post create and go</title>
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
 <div class="content">
-    <h1>Posting page!</h1>
-
-
-
-
-
-
-
-    <div style="width: 300px">
-        <form id="formcreatepost">
-            <input type="text" name="<%=ApiCreatePost.TITLE%>" value="" placeholder="Title for your post" />
-        <div style="height: 10px"></div>
-        <button class="greenwidththin" onclick="createPost(); return false;">Create Post</button>
-        </form>
+    <h2>Posting page!</h2>
+    <div style="display: flex; flex-direction: row; margin-top: 30px">
+        <div style="width: 300px">
+            <form id="formcreatepost">
+                <input type="text" name="<%=ApiCreatePost.TITLE%>" value="" placeholder="Title for your post" />
+            <div style="height: 10px"></div>
+            <button class="greenwidththin" onclick="createPost(); return false;">Create Post</button>
+            </form>
+        </div>
+        <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>
+        <div style="flex: 1; margin-left: 30px">
+            <div style="font-size: 13px; font-weight: bold; color: #444444; margin-bottom: 10px; 
+                 border-bottom: solid 1px #cccccc; padding: 0 0 8px 0px;">Posts</div>
+            <div id="postlist" style="width: 100%"></div>
+        </div>        
     </div>
-
-
-
-
-    <div id="postlist" style="width: 100%"></div>
-
-
-
-
 </div>
 </body>
 <script>initPosts();</script>
