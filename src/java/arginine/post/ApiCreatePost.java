@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methionine.auth.Session;
-import methionine.pub.publication.PostRecord;
+import serine.blogging.publication.PostRecord;
 //***************************************************************************
 @WebServlet(name = "ApiCreatePost", urlPatterns = {ApiCreatePost.URL}, loadOnStartup=1)
 public class ApiCreatePost extends ApiAlpha {

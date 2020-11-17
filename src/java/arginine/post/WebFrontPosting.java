@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
-import methionine.pub.publication.PostRecord;
+import serine.blogging.publication.PostRecord;
 //***************************************************************************
 @WebServlet(name = "WebFronPosting", urlPatterns = {WebFrontPosting.PAGE}, loadOnStartup=1)
 public class WebFrontPosting extends WebFrontAlpha {

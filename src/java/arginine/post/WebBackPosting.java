@@ -2,7 +2,7 @@ package arginine.post;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JPosts;
-import methionine.pub.publication.PostRecord;
+import serine.blogging.publication.PostRecord;
 //***************************************************************************
 public class WebBackPosting extends WebBackAlpha {
     //***********************************************************************

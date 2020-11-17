@@ -3,7 +3,7 @@ package arginine;
 import methionine.Electra;
 import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
-import methionine.pub.publication.PubsLambda;
+import serine.blogging.publication.PubsLambda;
 import serine.webmedia.WebMediaList;
 import tryptophan.survey.action.ActionSetLambda;
 import tryptophan.survey.metric.MetricQueryInterface;

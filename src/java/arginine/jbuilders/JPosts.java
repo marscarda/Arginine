@@ -3,7 +3,7 @@ package arginine.jbuilders;
 import mars.jsonsimple.JsonArray;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
-import methionine.pub.publication.PostRecord;
+import serine.blogging.publication.PostRecord;
 //***************************************************************************
 public class JPosts {
     //***********************************************************************
