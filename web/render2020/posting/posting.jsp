@@ -57,7 +57,6 @@ function addPost (post, isnew) {
         document.getElementById('postlist').insertBefore(top, document.getElementById('postlist').childNodes[0]);
     else document.getElementById('postlist').appendChild(top);
     /*---------------------------------------------------*/
-    
 }
 function createPost () {
     var form = document.getElementById('formcreatepost');

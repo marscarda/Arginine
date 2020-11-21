@@ -37,7 +37,7 @@ public class WebFrontPost extends WebFrontAlpha {
         back.setLoginToken(session.getLoginToken());
         //-------------------------------------------------------------------
         try {
-            PostRecord post = flowbeta.getAurigaObject().getPubsLambda().getPostRecord(0);
+            PostRecord post = flowbeta.getAurigaObject().getPubsLambda().getPostRecord(postid);
             back.setPostRecord(post);
         }
         catch (AppException e) {

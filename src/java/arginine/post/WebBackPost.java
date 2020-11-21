@@ -13,7 +13,12 @@ public class WebBackPost extends WebBackAlpha {
         return post;
     }
     //***********************************************************************
-    
+    public String getCreateTextPartURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiCreateTextPart.URL);
+        return url.toString();
+    }
+    //***********************************************************************
 }
 //***************************************************************************
 
