@@ -16,8 +16,11 @@ import serine.blogging.publication.PostPart;
 @WebServlet(name = "ApiCreatePostPart", urlPatterns = {ApiCreateTextPart.URL}, loadOnStartup=1)
 public class ApiCreateTextPart extends ApiAlpha {
     public static final String URL = "/post/createtxtpart";
+    public static final String PARTID = "partid";
+    public static final String TYPE = "type";
     public static final String POSTID = "postid";
     public static final String TEXT = "text";
+    public static final String JPART = "part";
     //***********************************************************************
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -46,6 +49,12 @@ public class ApiCreateTextPart extends ApiAlpha {
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
             jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "post created"));
             //----------------------------------------
+            JsonObject jpart = new JsonObject();
+            jpart.addPair(new JsonPair(PARTID, part.getID()));
+            jpart.addPair(new JsonPair(TYPE, part.partType()));
+            jpart.addPair(new JsonPair(POSTID, part.postID()));
+            jpart.addPair(new JsonPair(TEXT, part.getText()));
+            jsonresp.addPair(new JsonPair(JPART, jpart));
             //----------------------------------------
             this.sendResponse(resp, jsonresp);
         }

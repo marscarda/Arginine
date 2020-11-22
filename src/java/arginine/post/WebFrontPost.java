@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.AppException;
 import methionine.auth.Session;
+import serine.blogging.publication.PostPart;
 import serine.blogging.publication.PostRecord;
 //***************************************************************************
 @WebServlet(name = "WebFrontPost", urlPatterns = {WebFrontPost.URLPATTERN}, loadOnStartup=1)
@@ -38,7 +39,9 @@ public class WebFrontPost extends WebFrontAlpha {
         //-------------------------------------------------------------------
         try {
             PostRecord post = flowbeta.getAurigaObject().getPubsLambda().getPostRecord(postid);
+            PostPart[] parts = flowbeta.getAurigaObject().getPubsLambda().getPostParts(postid);
             back.setPostRecord(post);
+            back.setParts(parts);
         }
         catch (AppException e) {
             if (e.getErrorCode() != AppException.OBJECTNOTFOUND) {
