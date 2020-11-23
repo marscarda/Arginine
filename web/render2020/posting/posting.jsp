@@ -40,7 +40,16 @@ function addPost (post, isnew) {
     /*---------------------------------------------------*/
     column = document.createElement("div");
     column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
-    column.innerHTML = post.title;
+    link = document.createElement("a");
+    link.setAttribute("href", "<%=back.postDetailURL()%>/" + post.postid);
+    link.setAttribute("style", "color: #05f; text-decoration: none");
+    link.innerHTML = post.title;
+    column.appendChild(link);
+    line.appendChild(column);
+    /*---------------------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 6; font-size: 13px; color: #999");
+    column.innerHTML = post.sumary;
     line.appendChild(column);
     /*---------------------------------------------------*/
     column = document.createElement("div");
@@ -86,6 +95,7 @@ function createPost () {
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
     req.addParam('<%=ApiCreatePost.TITLE%>', formdata.get('<%=ApiCreatePost.TITLE%>'));
+    req.addParam('<%=ApiCreatePost.SUMARY%>', formdata.get('<%=ApiCreatePost.SUMARY%>'));
     req.setURL('<%=back.getCreatePostURL()%>');
     try { 
         req.executepost(); 
@@ -105,6 +115,7 @@ function createPost () {
         <div style="width: 300px">
             <form id="formcreatepost">
                 <input type="text" name="<%=ApiCreatePost.TITLE%>" value="" placeholder="Title for your post" />
+                <textarea type="text" name="<%=ApiCreatePost.SUMARY%>" placeholder="Post sumary"></textarea>
             <div style="height: 10px"></div>
             <button class="greenwidththin" onclick="createPost(); return false;">Create Post</button>
             </form>

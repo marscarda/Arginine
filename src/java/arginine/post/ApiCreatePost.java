@@ -15,6 +15,8 @@ public class ApiCreatePost extends ApiAlpha {
     public static final String URL = "/post/createpost";
     public static final String POSTID = "postid";
     public static final String TITLE = "title";
+    public static final String SUMARY = "sumary";
+    public static final String PUBLISHED = "published";
     public static final String JPOST = "post";
     //***********************************************************************
     @Override
@@ -31,10 +33,12 @@ public class ApiCreatePost extends ApiAlpha {
         }
         //==========================================================
         String title = req.getParameter(TITLE);
+        String sumary = req.getParameter(SUMARY);
         try {
             //----------------------------------------
             PostRecord post = new PostRecord();
             post.setTitle(title);
+            post.setSumary(sumary);
             flowalpha.getAurigaObject().getPubsLambda().createPost(post);
             //----------------------------------------
             JsonObject jsonresp = new JsonObject();
@@ -44,6 +48,8 @@ public class ApiCreatePost extends ApiAlpha {
             JsonObject jpost = new JsonObject();
             jpost.addPair(new JsonPair(POSTID, post.postID()));
             jpost.addPair(new JsonPair(TITLE, post.postTitle()));
+            jpost.addPair(new JsonPair(SUMARY, post.postSumary()));
+            jpost.addPair(new JsonPair(PUBLISHED, post.isPublished()));
             jsonresp.addPair(new JsonPair(JPOST, jpost));
             this.sendResponse(resp, jsonresp);
         }        

@@ -45,25 +45,38 @@ function addTextPart (part, isnew) {
     /*---------------------------------------------------*/
     top = document.createElement("div");
     top.setAttribute('id', 'part' + part.partid);
-    top.setAttribute('style', 'padding: 15px 0px; border-bottom: solid 1px #dddddd');
+    top.setAttribute('style', 'padding: 17px 15px; border: solid 1px #e9e9e9; border-radius: 4px; margin-bottom: 20px');
     if (isnew) top.style.opacity = 0;
+    /*---------------------------------------------------*/
     line = document.createElement("div");
-    line.setAttribute('style', 'display: flex; flex-direction: row');
-    /*---------------------------------------------------*/
-    column = document.createElement("div");
-    column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
-    column.innerHTML = part.text;
-    line.appendChild(column);
-    /*---------------------------------------------------*/
+    line.setAttribute('style', 'font-size: 12px; font-weight: bold; color: #888; margin-bottom: 7px');
+    line.innerHTML = 'Text paragraph';
     top.appendChild(line);
+    /*---------------------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'font-size: 14px; font-weight: normal; color: #333');
+    line.innerHTML = part.text;
+    top.appendChild(line);    
+    /*---------------------------------------------------*/
     document.getElementById('partlist').appendChild(top);
-    /*
-    if (isnew)
-        document.getElementById('partlist').insertBefore(top, document.getElementById('partlist').childNodes[0]);
-    else document.getElementById('partlist').appendChild(top);
-    */
     /*---------------------------------------------------*/
 }
+/*------------------------------------------------------------------*/
+function showAddText () {
+    document.getElementById('divaddpviewcandidate').style.height = '100%';
+    document.getElementById('divaddpviewcandidate').style.width = '100%';
+    var turnon = new ElementFadeIn();
+    turnon.setElement(document, 'divaddpviewcandidate');
+    turnon.start();
+}
+function hideAddText () {
+    var form = document.getElementById('formcreatetext');
+    document.getElementById('divaddpviewcandidate').style.height = '0px';
+    document.getElementById('divaddpviewcandidate').style.width = '0px';
+    document.getElementById('divaddpviewcandidate').style.opacity = 0;
+    form.reset();
+}
+/*------------------------------------------------------------------*/
 function createTextPart () {
     var form = document.getElementById('formcreatetext');
     var formdata = new FormData(form);
@@ -85,6 +98,7 @@ function createTextPart () {
         form.reset();
         showNotice ('Paragraph added', '#229900');
         addPart(objresp.part, true);
+        hideAddText();
         var turnon = new ElementFadeIn();
         turnon.setElement(document, 'part' + objresp.part.partid);
         turnon.start();
@@ -107,18 +121,57 @@ function createTextPart () {
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
-<div class="content">
-<h1>Post page!</h1>
-        <div style="width: 300px">
-            <form id="formcreatetext">
-                <textarea name="<%=ApiCreateTextPart.TEXT%>" value="" placeholder="Type the paragraph text here"></textarea>
+<div id="divaddpviewcandidate" class="popupformmodal">
+    <div id="boxaddpviewcandidate" class="formbox" style="width: 600px">
+        <form id="formcreatetext">
+            <textarea name="<%=ApiCreateTextPart.TEXT%>" style="height: 150px" value="" placeholder="Type the paragraph text here"></textarea>
             <div style="height: 10px"></div>
             <button class="greenwidththin" onclick="createTextPart(); return false;">Add paragraph</button>
-            </form>
+            <button class="graywidththin" onclick="hideAddText(); return false;">Cancel</button>
+        </form>
+    </div>
+</div>
+<div class="content">
+<h1>Post page!</h1>
+<div style="margin-top: 50px; display: flex; flex-direction: row">
+    <div style="width: 350px">
+        <div style="font-size: 17px; font-weight: 600; color: #666;">
+            <%=post.postTitle()%>
         </div>
+        <div style="font-size: 15px; color: #666; margin-top: 20px">
+            <%=post.postSumary()%>
+        </div>
+        <div style="margin-top: 30px; height: 150px; border-top: solid 1px #cccccc">
+            <div style="margin-top: 20px; margin-bottom: 30px; font-size: 16px; font-weight: bold; #333">
+                Add Part
+            </div>
+            <div style="float: left; width: 90px">
+                <div style="text-align: center">
+                    <a href="#" style="color: #0055ff; text-decoration: none" onclick="showAddText(); return false;" >
+                    <img src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.TEXTICON%>" style="width: 60px; height: 60px" alt="Public view">
+                    </a>
+                </div>
+                <div style="font-size: 11px; text-align: center; margin-top: 4px">
+                    <a href="#" style="color: #0055ff; text-decoration: none" onclick="showAddText(); return false;" >Text Paragraph</a>
+                </div>
+            </div>
+            <div style="clear: both"></div>                    
+        </div>
+    </div>
+    <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>
+    <div style="margin-left: 30px; flex: 1">
+        <div style="font-size: 13px; font-weight: bold; color: #444444; margin-bottom: 20px; border-bottom: solid 1px #cccccc; padding: 0 0 8px 0px;">Post Parts</div>
+        <div id="partlist" style="width: 100%"></div>
+    </div>
+</div>
 
-    <div style="font-size: 13px; font-weight: bold; color: #444444; margin-bottom: 10px; border-bottom: solid 1px #cccccc; padding: 0 0 8px 0px;">Posts</div>
-    <div id="partlist" style="width: 100%"></div>
+
+
+
+
+
+    
+    
 </div>
 </body>
 <script>initParts();</script>

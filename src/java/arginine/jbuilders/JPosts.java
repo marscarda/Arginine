@@ -14,6 +14,8 @@ public class JPosts {
         for (PostRecord post : posts) {
             jarray.addPair(new JsonPair("postid", post.postID()));
             jarray.addPair(new JsonPair("title", post.postTitle()));
+            jarray.addPair(new JsonPair("sumary", post.postSumary()));
+            jarray.addPair(new JsonPair("published", post.isPublished()));
             jarray.addToArray();
         }        
         jposts.addPair(new JsonPair("count", jarray.getCount()));
