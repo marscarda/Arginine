@@ -2,7 +2,6 @@ package arginine.post;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JPosts;
-import serine.blogging.publication.PostPart;
 import serine.blogging.publication.PostRecord;
 //***************************************************************************
 public class WebBackPost extends WebBackAlpha {
@@ -14,13 +13,16 @@ public class WebBackPost extends WebBackAlpha {
         return post;
     }
     //***********************************************************************
-    PostPart[] parts = new PostPart[0];
-    void setParts (PostPart[] parts) { this.parts = parts; }
-    //=======================================================================
     public String jParts () {
-        return JPosts.getParts(parts).toString();
+        return JPosts.getParts(post.postParts()).toString();
     }
     //***********************************************************************
+    public String getPostingURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontPosting.PAGE);
+        return url.toString();
+    }
+    //=======================================================================
     public String getCreateTextPartURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(ApiCreateTextPart.URL);

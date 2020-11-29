@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 import methionine.auth.User;
 import methionine.project.Project;
+import serine.blogging.publication.PostRecord;
 import serine.webmedia.WebMediaList;
 //***************************************************************************
 @WebServlet(name = "WebFrontHome", urlPatterns = {WebFrontHome.PAGE}, loadOnStartup=1)
@@ -32,6 +33,16 @@ public class WebFrontHome extends WebFrontAlpha {
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(lggedinuser, project);
         back.setLoginToken(session.getLoginToken());
+        try {
+            PostRecord[] posts = flowbeta.getAurigaObject().getPubsLambda().getPostRecords();
+            back.setPosts(posts);
+        }
+        catch (Exception e) {
+            //----------------------------------------------
+            System.out.println("Failed to get post list (Web)");
+            System.out.println(e.getMessage());
+            //----------------------------------------------
+        }
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);

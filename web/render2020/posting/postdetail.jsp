@@ -132,7 +132,10 @@ function createTextPart () {
     </div>
 </div>
 <div class="content">
-<h1>Post page!</h1>
+<div style="margin-top: 20px; margin-bottom: 10px; text-align: left">
+<button class="linkblue" onclick="window.location='<%=back.getPostingURL()%>'">Posting home</button>
+</div>
+<h2>Post</h2>
 <div style="margin-top: 50px; display: flex; flex-direction: row">
     <div style="width: 350px">
         <div style="font-size: 17px; font-weight: 600; color: #666;">
@@ -164,14 +167,6 @@ function createTextPart () {
         <div id="partlist" style="width: 100%"></div>
     </div>
 </div>
-
-
-
-
-
-
-    
-    
 </div>
 </body>
 <script>initParts();</script>
