@@ -9,6 +9,7 @@ public class LifeTimeValues {
     static final String PROP_DATABASE_UNIVERSE = "db_universe";
     static final String PROP_DATABASE_METRICS = "db_metrics";
     static final String PROP_DATABASE_SURVEY = "db_survey";
+    static final String PROP_DATABASE_ACCESS = "db_access";
     //-----------------------------------------------------------------
     static final String PROP_DATABASE_PUBLICATION = "db_publication";
     //=================================================================
@@ -19,6 +20,7 @@ public class LifeTimeValues {
     public static String dbuniverse = null;
     public static String dbmetrics = null;
     public static String dbsurvey = null;
+    public static String dbaccess = null;
     //-----------------------------------------------------------------
     public static String dbpublication = null;
     //=================================================================
@@ -48,6 +50,10 @@ public class LifeTimeValues {
         aux = props.getProperty(PROP_DATABASE_SURVEY);
         if (aux == null) System.out.println("Warning: Property " + PROP_DATABASE_SURVEY + " Not set");
         else dbsurvey = aux;
+        //========================================================
+        aux = props.getProperty(PROP_DATABASE_ACCESS);
+        if (aux == null) System.out.println("Warning: Property " + PROP_DATABASE_ACCESS + " Not set");
+        else dbaccess = aux;
         //========================================================
         aux = props.getProperty(PROP_DATABASE_PUBLICATION);
         if (aux == null) System.out.println("Warning: Property " + PROP_DATABASE_PUBLICATION + " Not set");
