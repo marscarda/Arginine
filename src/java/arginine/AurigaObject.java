@@ -5,6 +5,7 @@ import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
 import serine.access.AccessLambda;
 import serine.blogging.publication.PubsLambda;
+import serine.pubs.object.ObjectPubLambda;
 import serine.webmedia.WebMediaList;
 import tryptophan.survey.action.ActionSetLambda;
 import tryptophan.survey.metric.MetricQueryInterface;
@@ -126,6 +127,16 @@ public class AurigaObject {
             pubslambda.setDataBaseName(LifeTimeValues.dbpublication);
         }
         return pubslambda;
+    }
+    //*************************************************************
+    ObjectPubLambda objpubslambda = null;
+    public ObjectPubLambda getObjectPubsLambda () throws Exception {
+        if (objpubslambda == null) {
+            objpubslambda = new ObjectPubLambda();
+            objpubslambda.setElectraObject(electra);
+            objpubslambda.setDataBaseName(LifeTimeValues.dbpublication);
+        }
+        return objpubslambda;
     }
     //*************************************************************
     static final WebMediaList MEDIALIST = new WebMediaList();
