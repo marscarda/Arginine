@@ -16,13 +16,13 @@ public class LifeTimeValues {
     static final String PROP_USING_SSL = "using_ssl";
     //*****************************************************************
     //Databases constants.
-    public static String dbauth = null;
-    public static String dbuniverse = null;
-    public static String dbmetrics = null;
-    public static String dbsurvey = null;
-    public static String dbaccess = null;
+    public static String dbauth = PROP_DATABASE_USERS;
+    public static String dbuniverse = PROP_DATABASE_UNIVERSE;
+    public static String dbmetrics = PROP_DATABASE_METRICS;
+    public static String dbsurvey = PROP_DATABASE_SURVEY;
+    public static String dbaccess = PROP_DATABASE_ACCESS;
     //-----------------------------------------------------------------
-    public static String dbpublication = null;
+    public static String dbpublication = PROP_DATABASE_PUBLICATION;
     //=================================================================
     public static boolean usingssl = false;
     //*****************************************************************

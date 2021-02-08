@@ -33,7 +33,6 @@ public class WebFrontObjectPubs extends WebFrontAlpha {
         //-------------------------------------------------------------------
         try {
             
-
         }
         catch (Exception e) {
 

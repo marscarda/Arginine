@@ -53,7 +53,7 @@ public class ApiCreatePost extends ApiAlpha {
             jsonresp.addPair(new JsonPair(JPOST, jpost));
             this.sendResponse(resp, jsonresp);
         }        
-            catch (Exception e) {
+        catch (Exception e) {
             sendServerErrorResponse(resp);
             System.out.println("Unable to create post");
             System.out.println(e.getMessage());            
