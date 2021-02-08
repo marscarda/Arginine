@@ -3,7 +3,7 @@ package arginine.objectpub;
 import arginine.ApiAlpha;
 import static arginine.ApiAlpha.UNAUTHORIZED;
 import arginine.FlowAlpha;
-import arginine.jbuilders.NewClass;
+import arginine.jbuilders.JObjectPubs;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,7 +61,7 @@ public class ApiCreateObjectPub extends ApiAlpha {
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
             jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Publication created"));
-            jsonresp.addPair(new JsonPair(JOBJECTPUB, NewClass.getObjectPub(objpub)));
+            jsonresp.addPair(new JsonPair(JOBJECTPUB, JObjectPubs.getObjectPub(objpub)));
             this.sendResponse(resp, jsonresp);
             //------------------------------------------------------
         }

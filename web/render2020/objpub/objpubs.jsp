@@ -28,9 +28,6 @@ function createPublication () {
     var form = document.getElementById('formcreatepub');
     var formdata = new FormData(form);
     var req = new HttpRequest();
-    
-
-    
     var callback = (status, objresp) => {
         if (status === 0) {
             showNotice ('Could not connect to server', '#ff3333');
@@ -44,12 +41,17 @@ function createPublication () {
             showNotice (objresp.description, '#ff3333');
             return;
         }
-        showNotice ('Access Created', '#229900');
+        showNotice ('Publication Created', '#229900');
+        
+        console.log(objresp);
+
+            /*
         closeCreateAccessForm();
         addAccess (objresp.accessrecord, true);
         var turnon = new ElementFadeIn();
         turnon.setElement(document, 'accessrec' + objresp.accessrecord.recordid);
         turnon.start();
+        */
     };
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
@@ -63,6 +65,7 @@ function createPublication () {
     }
 }
 
+<%@include file="./objpubspage.js" %>
 
 </script>
 
@@ -71,31 +74,32 @@ function createPublication () {
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
-
-
-
+<div id="divcreateobjpub" class="popupformmodal">
+    <div id="boxnewobjpub" class="formbox" style="width: 500px">
+        <div style="color: #666666; font-size: 17px; margin-bottom: 20px">New object publication</div>
+        <form id="formcreatepub">
+        <label for "<%=ApiCreateObjectPub.ACCESSNAME%>">Access name</label>
+        <input type="text" name="<%=ApiCreateObjectPub.ACCESSNAME%>" placeholder="Complete this" />
+        <label for "<%=ApiCreateObjectPub.TITLE%>">Title</label>
+        <input type="text" name="<%=ApiCreateObjectPub.TITLE%>" placeholder="Complete this" />
+        <textarea name="<%=ApiCreateObjectPub.TEXT%>" style="height: 150px" value="" placeholder="Type the paragraph text here"></textarea>
+        <button class="greenwidththin" onclick="createPublication(); return false;">Create</button>
+        <button class="graywidththin" onclick="closeCreateObjectPubForm(); return false;">Cancel</button>
+        </form>
+    </div>
+</div>
 <div class="content">
-<h2>Object Pubs!</h2>
+<h2>Object Publications</h2>
 
-
-
-<form id="formcreatepub">
-<label for "<%=ApiCreateObjectPub.ACCESSNAME%>">Access name</label>
-<input type="text" name="<%=ApiCreateObjectPub.ACCESSNAME%>" placeholder="Complete this" />
-<label for "<%=ApiCreateObjectPub.TITLE%>">Title</label>
-<input type="text" name="<%=ApiCreateObjectPub.TITLE%>" placeholder="Complete this" />
-<textarea name="<%=ApiCreateObjectPub.TEXT%>" style="height: 150px" value="" placeholder="Type the paragraph text here"></textarea>
-<button class="greenwidththin" onclick="createPublication(); return false;">Create</button>
-<button class="graywidththin" onclick="closeCreateAccessForm(); return false;">Cancel</button>
-</form>
-
-
-
-
-
-
-
-
+<div style="font-size: 16px; color: #444444; margin-top: 12px; font-weight: bold; border-top: solid 1px #dddddd; padding: 15px 0px">
+    <div style="float: left">Publications</div>    
+    <div style="float: right">
+        <a href="#" style="color: inherit; text-decoration: none" onclick="openCreateObjectPubForm(); return false">
+            <img src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.ADDCOMMAND%>" 
+                style="width: 20px; height: 20px" alt="Create Publication" title="Create New Publication" />
+        </a>
+    </div>
+</div>
 
 </div>
 

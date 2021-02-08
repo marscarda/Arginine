@@ -30,6 +30,9 @@ public class WebFrontStatic extends WebFrontAlpha {
     //***********************************************************************
     //BITMAP
     public static final String TEXTICON = "nfydfsdhtryhd";
+    //-----------------------------------------------------------------------
+    public static final String ADDCOMMAND = "nrffrtgfsdfs";
+
     /*
     public static final String ZOOMINICON = "mssewsdtetsda";
     public static final String ZOOMOUTICON = "bstdrgdgdfgd";
@@ -73,6 +76,7 @@ public class WebFrontStatic extends WebFrontAlpha {
         //if (resourcename.equals(JSMAP)) dispatchfile = "/static2020/mapdata.js";
         //-------------------------------------------------------------------
         if (resourcename.equals(TEXTICON)) dispatchfile = "/static2020/texticon.png";
+        if (resourcename.equals(ADDCOMMAND)) dispatchfile = "/static2020/addcommand.png";
         //BITMAP
         //if (resourcename.equals(ZOOMINICON)) dispatchfile = "/static2020/zoomin.png";
         //if (resourcename.equals(ZOOMOUTICON)) dispatchfile = "/static2020/zoomout.png";

@@ -1,11 +1,10 @@
 package arginine.jbuilders;
 //***************************************************************************
-
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import serine.pubs.object.ObjectPub;
-
-public class NewClass {
+//***************************************************************************
+public class JObjectPubs {
     //***********************************************************************
     public static final String COUNT = "count";
     public static final String ITEMS = "items";
