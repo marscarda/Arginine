@@ -17,14 +17,9 @@
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSPOPUP%>">
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
-
-
-
 <script>
-
+var objectpubs = <%=back.jObjectPubs()%>;
 function createPublication () {
-    
-    
     var form = document.getElementById('formcreatepub');
     var formdata = new FormData(form);
     var req = new HttpRequest();
@@ -41,17 +36,11 @@ function createPublication () {
             showNotice (objresp.description, '#ff3333');
             return;
         }
-        showNotice ('Publication Created', '#229900');
-        
-        console.log(objresp);
-
-            /*
-        closeCreateAccessForm();
-        addAccess (objresp.accessrecord, true);
+        closeCreateObjectPubForm();
+        addPub(objresp.objectpub, true);
         var turnon = new ElementFadeIn();
-        turnon.setElement(document, 'accessrec' + objresp.accessrecord.recordid);
+        turnon.setElement(document, 'objpub' + objresp.objectpub.objpubid);
         turnon.start();
-        */
     };
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
@@ -64,9 +53,7 @@ function createPublication () {
         alert (err.getMessage);
     }
 }
-
 <%@include file="./objpubspage.js" %>
-
 </script>
 
 
@@ -99,9 +86,10 @@ function createPublication () {
                 style="width: 20px; height: 20px" alt="Create Publication" title="Create New Publication" />
         </a>
     </div>
+    <div id="objpublist" style="width: 100%; margin-top: 30px; font-weight: normal"></div>
 </div>
 
 </div>
-
 </body>
+<script>initPubs();</script>
 </html>

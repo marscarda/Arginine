@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
+import serine.pubs.object.ObjectPub;
 //***************************************************************************
 @WebServlet(name = "WebFrontObjectPubs", urlPatterns = {WebFrontObjectPubs.PAGE}, loadOnStartup=1)
 public class WebFrontObjectPubs extends WebFrontAlpha {
@@ -32,10 +33,14 @@ public class WebFrontObjectPubs extends WebFrontAlpha {
         back.setLoginToken(session.getLoginToken());
         //-------------------------------------------------------------------
         try {
-            
+            ObjectPub[] pubs = flowbeta.getAurigaObject().getObjectPubsLambda().getObjectPubs();
+            back.setObjectPubs(pubs);
         }
         catch (Exception e) {
-
+            //----------------------------------------------
+            System.out.println("Failed to get object pubs (Web)");
+            System.out.println(e.getMessage());
+            //----------------------------------------------
         }
         //-------------------------------------------------------------------
         request.setAttribute(PAGEATTRKEY, back);
