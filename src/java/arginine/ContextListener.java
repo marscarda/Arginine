@@ -9,6 +9,7 @@ import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
 import serine.access.AccessLambda;
 import serine.pubs.PubsTables;
+import tryptophan.map.QueryMapTabs;
 import tryptophan.survey.metric.MetricQueryInterface;
 import tryptophan.survey.SurveyTabs;
 import tryptophan.universe.UniverseQryInterface;
@@ -137,6 +138,21 @@ public class ContextListener implements ServletContextListener {
             }
             catch (Exception e) {
                 System.out.println("ERROR: Ensuring " + LifeTimeValues.dbuniverse + " tables error");
+                System.out.println(e.getMessage());
+            }            
+        }
+        //----------------------------------------------------------
+        //We ensure Universe tables exists
+        if (LifeTimeValues.dbmaps != null) {
+            QueryMapTabs maps = new QueryMapTabs();
+            maps.setElectraObject(electra);
+            maps.setDataBaseName(LifeTimeValues.dbmaps);
+            try { 
+                maps.ensureTables();
+                System.out.println("Tables in " + LifeTimeValues.dbmaps + " Ensured");
+            }
+            catch (Exception e) {
+                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbmaps + " tables error");
                 System.out.println(e.getMessage());
             }            
         }
