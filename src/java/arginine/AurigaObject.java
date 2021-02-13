@@ -7,6 +7,7 @@ import serine.access.AccessLambda;
 import serine.blogging.publication.PubsLambda;
 import serine.pubs.object.ObjectPubLambda;
 import serine.webmedia.WebMediaList;
+import tryptophan.map.MapsLambda;
 import tryptophan.survey.action.ActionSetLambda;
 import tryptophan.survey.metric.MetricQueryInterface;
 import tryptophan.survey.publicview.PublicViewLambda;
@@ -57,6 +58,16 @@ public class AurigaObject {
             universeqryinterface.setDataBaseName(LifeTimeValues.dbuniverse);
         }
         return universeqryinterface;
+    }
+    //*************************************************************
+    MapsLambda mapslambda = null;
+    public MapsLambda getMapsLambda () {
+        if (mapslambda == null) {
+            mapslambda = new MapsLambda();
+            mapslambda.setElectraObject(electra);
+            mapslambda.setDataBaseName(LifeTimeValues.dbmaps);
+        }
+        return mapslambda;
     }
     //*************************************************************
     MetricQueryInterface metricsinterface = null;
