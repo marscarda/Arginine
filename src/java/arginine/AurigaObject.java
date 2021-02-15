@@ -7,7 +7,7 @@ import serine.access.AccessLambda;
 import serine.blogging.publication.PubsLambda;
 import serine.pubs.object.ObjectPubLambda;
 import serine.webmedia.WebMediaList;
-import tryptophan.map.MapsLambda;
+import threonine.map.MapsLambda;
 import tryptophan.survey.action.ActionSetLambda;
 import tryptophan.survey.metric.MetricQueryInterface;
 import tryptophan.survey.publicview.PublicViewLambda;

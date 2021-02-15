@@ -9,7 +9,7 @@ import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
 import serine.access.AccessLambda;
 import serine.pubs.PubsTables;
-import tryptophan.map.QueryMapTabs;
+import threonine.map.QueryMapTabs;
 import tryptophan.survey.metric.MetricQueryInterface;
 import tryptophan.survey.SurveyTabs;
 import tryptophan.universe.UniverseQryInterface;
