@@ -2,11 +2,10 @@ package arginine;
 //**************************************************************************
 import java.util.Properties;
 //**************************************************************************
-public class LifeTimeValues {
+public class LifeTimeValuesOld {
     //*****************************************************************
     //DATABASES PROPERTIES NAME.
     static final String PROP_DATABASE_USERS = "db_users";
-    static final String PROP_DATABASE_BILLING = "db_billing";
     static final String PROP_DATABASE_UNIVERSE = "db_universe";
     static final String PROP_DATABASE_MAPS = "db_maps";
     static final String PROP_DATABASE_METRICS = "db_metrics";
@@ -19,7 +18,6 @@ public class LifeTimeValues {
     //*****************************************************************
     //Databases constants.
     public static String dbauth = PROP_DATABASE_USERS;
-    public static String dbbilling = PROP_DATABASE_BILLING;
     public static String dbuniverse = PROP_DATABASE_UNIVERSE;
     public static String dbmaps = PROP_DATABASE_MAPS;
     public static String dbmetrics = PROP_DATABASE_METRICS;
@@ -42,10 +40,6 @@ public class LifeTimeValues {
         aux = props.getProperty(PROP_DATABASE_USERS);
         if (aux == null) System.out.println("Warning: Property " + PROP_DATABASE_USERS + " Not set");
         else dbauth = aux;
-        //--------------------------------------------------------
-        aux = props.getProperty(PROP_DATABASE_BILLING);
-        if (aux == null) System.out.println("Warning: Property " + PROP_DATABASE_BILLING + " Not set");
-        else dbbilling = aux;
         //--------------------------------------------------------
         aux = props.getProperty(PROP_DATABASE_UNIVERSE);
         if (aux == null) System.out.println("Warning: Property " + PROP_DATABASE_UNIVERSE + " Not set");

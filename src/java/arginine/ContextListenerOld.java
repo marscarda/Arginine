@@ -4,7 +4,6 @@ import java.util.Properties;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import methinine.billing.BillingLambda;
 import methionine.Electra;
 import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
@@ -16,7 +15,7 @@ import tryptophan.survey.SurveyTabs;
 import tryptophan.universe.UniverseQryInterface;
 //****************************************************************************
 @WebListener
-public class ContextListener implements ServletContextListener {
+public class ContextListenerOld implements ServletContextListener {
     //***********************************************************************
     //These properties are directly initialized into Electra.
     static final String PROP_MASTER_DBHOST = "db_master_host";
@@ -124,21 +123,6 @@ public class ContextListener implements ServletContextListener {
             }
             catch (Exception e) {
                 System.out.println("ERROR: Ensuring " + LifeTimeValues.dbauth + " tables error");
-                System.out.println(e.getMessage());
-            }            
-        }
-        //----------------------------------------------------------
-        //We ensure Billing tables exist 
-        if (LifeTimeValues.dbbilling != null) {
-            BillingLambda billing = new BillingLambda();
-            billing.setElectraObject(electra);
-            billing.setDataBaseName(LifeTimeValues.dbbilling);
-            try { 
-                billing.ensureTables();
-                System.out.println("Billing Tables in " + LifeTimeValues.dbbilling + " Ensured");
-            }
-            catch (Exception e) {
-                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbbilling + " tables error");
                 System.out.println(e.getMessage());
             }            
         }
