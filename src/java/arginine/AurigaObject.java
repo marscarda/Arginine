@@ -1,5 +1,6 @@
 package arginine;
 //**************************************************************************
+import methinine.billing.BillingLambda;
 import methionine.Electra;
 import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
@@ -48,6 +49,16 @@ public class AurigaObject {
             workteamlamda.setDataBaseName(LifeTimeValues.dbauth);
         }
         return workteamlamda;
+    }
+    //*************************************************************
+    BillingLambda billinglambda = null;
+    public BillingLambda getBillingLambda () {
+        if (billinglambda == null) {
+            billinglambda = new BillingLambda();
+            billinglambda.setElectraObject(electra);
+            billinglambda.setDataBaseName(LifeTimeValues.dbbilling);
+        }
+        return billinglambda;
     }
     //*************************************************************
     UniverseQryInterface universeqryinterface = null;
