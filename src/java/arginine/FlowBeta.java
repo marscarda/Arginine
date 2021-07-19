@@ -47,7 +47,7 @@ public class FlowBeta extends FlowAlpha {
         if (!session.isValid()) { return new Project(); }
         if (session.getCurrentProject() == 0) return new Project();
         try {
-            project = this.getAurigaObject().getProjectLambda().getWorkTeam(session.getCurrentProject(), session.getUserId());
+            project = this.getAurigaObject().getProjectLambda().getProject(session.getCurrentProject(), session.getUserId());
             return project;
         }
         catch (AppException e) {

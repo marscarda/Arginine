@@ -70,9 +70,12 @@ public class ContextListener implements ServletContextListener {
         String master = properties.getProperty(PROP_DBMASTER);
         //-----------------------------------------------------
         if (masterhost == null) System.out.println("Warning: Property " + PROP_MASTER_DBHOST + " Not set");
-        else Electra.setDefaultMasterHost(masterhost);
-        if (slavehost == null) System.out.println("Warning: Property " + PROP_SLAVE_DBHOST + " Not set");
-        else Electra.setDefaultSlaveHost(slavehost);
+        Electra.setDefaultMasterHost(masterhost);
+        if (slavehost == null) { 
+            System.out.println("Warning: Property " + PROP_SLAVE_DBHOST + " Not set");
+            slavehost = masterhost;
+        }
+        Electra.setDefaultSlaveHost(slavehost);
         if (user == null) System.out.println("Warning: Property " + PROP_DBUSER + " Not set");
         else Electra.setDefaultDBUser(user);
         if (pass == null) System.out.println("Warning: Property " + PROP_DBPASS + " Not set");
