@@ -4,6 +4,7 @@ import arginine.main.WebFrontAuth;
 import arginine.main.WebFrontHome;
 import arginine.main.WebFrontLogout;
 import arginine.post.WebFrontPosting;
+import arginine.user.WebFrontUsers;
 import methionine.auth.User;
 import methionine.project.Project;
 //***************************************************************************
@@ -60,6 +61,16 @@ public class WebBackAlpha {
         return url.toString();
     }
     //=======================================================================
+    public String usersURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontUsers.PAGE);
+        return url.toString();
+    }
+    
+    
+    
+    
+    //=======================================================================
     public String postingURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(WebFrontPosting.PAGE);
@@ -82,28 +93,6 @@ public class WebBackAlpha {
     public String mapRecordsURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(WebFrontMapRecords.PAGE);
-        return url.toString();
-    }
-    */
-    //***********************************************************************
-    //Menu
-    //=======================================================================
-    /*
-    public String getWorkspaceURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(WebFrontWorkspace.PAGE);
-        return url.toString();
-    }
-    //=======================================================================
-    public String getMyMetrics () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(WebFrontMyMetrics.PAGE);
-        return url.toString();
-    }
-    //=======================================================================
-    public String getSurveyPanelURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(WebFrontSurveyDashboard.PAGE);
         return url.toString();
     }
     */
