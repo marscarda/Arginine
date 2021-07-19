@@ -46,6 +46,7 @@ public class WebFrontUsers extends WebFrontAlpha {
         WebBackUsers back = new WebBackUsers();
         back.setRootURL(flowbeta.getRootURL());
         back.setLoggedInUser(flowbeta.getLogedUser());
+        back.setLoginToken(session.getLoginToken());
         //===================================================================
         try { 
             User[] users = flowbeta.getAurigaObject().getAuthLambda().getUsers(startat, false); 

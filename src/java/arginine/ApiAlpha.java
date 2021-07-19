@@ -30,7 +30,6 @@ public class ApiAlpha extends HttpServlet {
     public static final long UNAUTHORIZED = 403;
     //***********************************************************************
     protected FlowAlpha createFlowAlpha (HttpServletRequest req, HttpServletResponse resp) {
-        
         FlowAlpha flowalpha = new FlowAlpha();
         flowalpha.setRequest(req);
         flowalpha.setResponse(resp);

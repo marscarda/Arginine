@@ -43,8 +43,8 @@ function fetchUserList () {
             return;
         }
         console.log(objresp);
-        //users = objresp.folders;
-        //fillFolders();
+        users = objresp.users;
+        fillUsers();
     }
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
@@ -57,9 +57,80 @@ function fetchUserList () {
         alert (err.getMessage);
     }
 }
+
+
+function fillUsers () {
+    var div = document.getElementById('userslist');
+    div.style.opacity = 0;
+    while (div.hasChildNodes())
+        div.removeChild(div.lastChild);
+    for (n = 0; n < users.count; n++)
+        addUser(users.items[n]);
+    var turnon = new ElementFadeIn();
+    turnon.setElement(document, 'userslist');
+    turnon.start();
+}
+
+
+
+
+function addUser (user) {
+    
+    
+    /*---------------------------------------------------*/
+    var top;
+    var line;
+    var column;
+    var link;
+    /*---------------------------------------------------*/
+    top = document.createElement("div");
+    top.setAttribute('id', 'user' + user.userid);
+    top.setAttribute('style', 'padding: 15px 0px; border-bottom: solid 1px #dddddd');
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row');
+    /*---------------------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
+    column.innerHTML = user.username;
+    line.appendChild(column);
+    /*---------------------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
+    column.innerHTML = user.userid;
+    line.appendChild(column);
+    /*---------------------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
+    column.innerHTML = user.isadmin;
+    line.appendChild(column);
+    /*---------------------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
+    column.innerHTML = "Account";
+    line.appendChild(column);
+    /*---------------------------------------------------*/
+
+    
+        
+    top.appendChild(line);
+    /*---------------------------------------------------*/
+    document.getElementById('userslist').appendChild(top);
+    /*---------------------------------------------------*/
+    
+    
+    
+    
+    
+    
+    
+    
+        
+    
+}
+
+
+
 </script>
-
-
 <title>Users Administration</title>
 </head>
 <body>
@@ -75,7 +146,7 @@ function fetchUserList () {
         <div style="width: 450px; float: left">
             <form id="formsearchusers" class="search">
             <div>
-              <input type="text" placeholder="Show 10 user starting at or after" name="<%=ApiGetUserList.STARTAT%>">
+              <input type="text" placeholder="Show a number of users starting at or after" name="<%=ApiGetUserList.STARTAT%>">
               <button onclick="fetchUserList(); return false">Search</button>
             </div>
             </form>        
@@ -84,39 +155,6 @@ function fetchUserList () {
     </div>
 </div>    
 <div style="height: 100px"></div>    
-
-    
-    
-    
-
-
-    <div style="width: 100%; display: flex; flex-direction: row">
-        <div style="flex: 2">
-            <div class="listheaderouter" style="margin-top: 20px">
-            <div class="listheaderinner" style="margin-top: 20px">
-                <div style="flex: 3; text-align: left">User ID</div>
-                <div style="flex: 3; text-align: left">Login Name</div>
-                <div style="flex: 3; text-align: left">Email</div >
-                <div style="flex: 1">&nbsp;</div>
-            </div>
-            </div>
-            <% for (User user : users) { %>
-            <div class="listrowouter">
-            <div class="listrowinner">
-                <div style="flex: 3; text-align: left; font-size: 13px"><%=user.userID()%></div>
-                <div style="flex: 3; text-align: left; font-size: 14px"><%=user.loginName()%></div>
-                <div style="flex: 3; text-align: left; font-size: 14px"><%=user.eMail()%></div>
-                <div style="flex: 1; font-size: 22px; font-weight: bold; text-align: right">
-                <a href="<%=back.userDetailURL()%>/<%=user.userID()%>" 
-                   style="color: #0055ff; text-decoration: none">></a>
-                </div>
-            </div>
-            </div>
-            <% } %>
-        </div>
-        <div style="flex: 3">
-        </div>            
-    </div>
 </div>
 </body>
 </html>

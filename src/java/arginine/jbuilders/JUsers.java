@@ -18,7 +18,7 @@ public class JUsers {
         JsonObject jrecords = new JsonObject();
         JsonArray jarray = new JsonArray();
         for (User user : users) {
-            jarray.addPair(new JsonPair(ISADMIN, user.userID()));
+            jarray.addPair(new JsonPair(USERID, user.userID()));
             jarray.addPair(new JsonPair(USERNAME, user.loginName()));
             jarray.addPair(new JsonPair(ISADMIN, user.isAdmin()));
             jarray.addToArray();

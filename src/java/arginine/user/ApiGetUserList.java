@@ -1,10 +1,6 @@
 package arginine.user;
 //***************************************************************************
 import arginine.ApiAlpha;
-import static arginine.ApiAlpha.RESULT;
-import static arginine.ApiAlpha.RESULTDESCRIPTION;
-import static arginine.ApiAlpha.RESULTOK;
-import static arginine.ApiAlpha.UNAUTHORIZED;
 import arginine.FlowAlpha;
 import arginine.jbuilders.JUsers;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +24,6 @@ public class ApiGetUserList extends ApiAlpha {
         this.initializeJob(flowalpha);
         //==========================================================
         Session session = flowalpha.getSession();
-        /*
         boolean allowed = false;
         if (session.isAdmin()) allowed = true;
         if (!allowed) {
@@ -36,7 +31,6 @@ public class ApiGetUserList extends ApiAlpha {
             fleeRequest(flowalpha);
             return;
         }
-        */
         //==========================================================
         String startat = req.getParameter(STARTAT);
         try { 
