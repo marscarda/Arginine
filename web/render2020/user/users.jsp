@@ -14,15 +14,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSROOT%>">
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSFORM%>">
-<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%--=WebFrontStatic.CSSLISTANDBOX--%>">
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSPOPUP%>">
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
-
 <script>
 var users = {};
 function fetchUserList () {
@@ -49,7 +45,7 @@ function fetchUserList () {
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
     req.addParam('<%=ApiGetUserList.STARTAT%>', formdata.get('<%=ApiGetUserList.STARTAT%>'));
-    req.setURL('<%=back.userGetUserListURL()%>');
+    req.setURL('<%=back.userListURL()%>');
     try { 
         req.executepost(); 
     }
@@ -57,8 +53,6 @@ function fetchUserList () {
         alert (err.getMessage);
     }
 }
-
-
 function fillUsers () {
     var div = document.getElementById('userslist');
     div.style.opacity = 0;
@@ -70,13 +64,7 @@ function fillUsers () {
     turnon.setElement(document, 'userslist');
     turnon.start();
 }
-
-
-
-
 function addUser (user) {
-    
-    
     /*---------------------------------------------------*/
     var top;
     var line;
@@ -106,30 +94,24 @@ function addUser (user) {
     /*---------------------------------------------------*/
     column = document.createElement("div");
     column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
+    link = document.createElement("a");
+    link.setAttribute("href", "<%=back.userAccountURL()%>/" + user.userid);
+    link.setAttribute("style", "color: #0055ff; text-decoration: none");
+    link.innerHTML = "Account";
+    column.appendChild(link);
+    line.appendChild(column);
+    /*
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
     column.innerHTML = "Account";
     line.appendChild(column);
+    */
     /*---------------------------------------------------*/
-
-    
-        
     top.appendChild(line);
     /*---------------------------------------------------*/
     document.getElementById('userslist').appendChild(top);
     /*---------------------------------------------------*/
-    
-    
-    
-    
-    
-    
-    
-    
-        
-    
 }
-
-
-
 </script>
 <title>Users Administration</title>
 </head>

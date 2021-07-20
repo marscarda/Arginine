@@ -1,6 +1,7 @@
 package arginine.user;
 //***************************************************************************
 import arginine.WebBackAlpha;
+import arginine.finantial.WebFrontUserAccount;
 import methionine.auth.User;
 //***************************************************************************
 public class WebBackUsers extends WebBackAlpha {
@@ -18,9 +19,15 @@ public class WebBackUsers extends WebBackAlpha {
         return url.toString();
     }
     //==============================================================
-    public String userGetUserListURL () {
+    public String userListURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(ApiGetUserList.URL);
+        return url.toString();
+    }
+    //==============================================================
+    public String userAccountURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append( WebFrontUserAccount.PAGE);
         return url.toString();
     }
     //***************************************************************

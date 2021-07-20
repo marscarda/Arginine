@@ -65,19 +65,14 @@
         </div>
     </div>
                 
-                
     <div class="menuouter">
         <div class="menuinner">
             <div style="flex: 3; text-align: left; font-size: 15px">
                 <a href="<%=hback.getHomeURL()%>" style="color: #030; text-decoration: none">Home</a>
             </div>
-            
             <div style="flex: 3; text-align: left; font-size: 15px">
                 <a href="<%=hback.usersURL()%>" style="color: #030; text-decoration: none">Users</a>
             </div>
-            
-            
-            
             <div style="flex: 2; text-align: right; font-size: 12px; display: flex; flex-direction: column-reverse">
                 <div>
                 <% if (lgdinuser.isAdmin()) { %>
@@ -87,8 +82,6 @@
             </div>
         </div>
     </div>                
-                
-                
 </div>
 <script>
 var promptokcall = null;
