@@ -15,14 +15,160 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
-var preriods = <%=back.jperiods()%>;
+var periods = <%=back.jperiods()%>;
+
+
+
+
+let fillPeriods = (fade) => {
+    var div = document.getElementById('periodslist');
+    if (fade) div.style.opacity = 0;
+    while (div.hasChildNodes())
+        div.removeChild(div.lastChild);
+    for (n = 0; n < periods.count; n++) {
+        addUsagePeriod(periods.items[n]);
+    }
+    if (fade) {
+        var turnon = new ElementFadeIn();
+        turnon.setElement(document, 'periodslist');
+        turnon.start();
+    }
+}
+
+
+
+function addUsagePeriod (period) {
+    
+    var top;
+    var line;
+    var column;
+    var link;
+    top = document.createElement("div");
+    top.setAttribute('id', 'ledgerentry' + period.idecode);
+    top.setAttribute('style', 'padding: 5px 0px');
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row');
+    /*----------------------------------------*/
+    
+
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "width: 120px; font-size: 11px; font-weight: normal; color: #222");
+    column.innerHTML = decodeURIComponent(decodeURI(period.datestart));
+    line.appendChild(column);   
+    top.appendChild(line);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "width: 180px; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = decodeURI(period.event);
+    line.appendChild(column);
+    top.appendChild(line);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "width: 120px; font-size: 11px; font-weight: normal; color: #222");
+    column.innerHTML = decodeURIComponent(decodeURI(period.dateend));
+    line.appendChild(column);
+    top.appendChild(line);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "width: 210px; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = decodeURIComponent(decodeURI(period.projectname));
+    line.appendChild(column);
+    top.appendChild(line);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "width: 90px; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(period.costperday));
+    line.appendChild(column);
+    top.appendChild(line);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "width: 90px; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(period.finalminutes));
+    line.appendChild(column);
+    top.appendChild(line);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "width: 90px; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(period.finalcost));
+    line.appendChild(column);
+    top.appendChild(line);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 1; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    if (period.billed !== 0) column.innerHTML = "Yes"
+    else column.innerHTML = "No"
+    line.appendChild(column);
+    top.appendChild(line);
+    /*----------------------------------------*/
+
+
+    /*----------------------------------------*/
+    document.getElementById('periodslist').appendChild(top);
+    /*----------------------------------------*/
+}
 </script>
 <title>System Usage</title>
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
 <div class="content">
-    <h2>Usage & Billing</h2>
+<h2>Usage & Billing</h2>
+<div style="display: flex; flex-direction: row; margin-top: 30px">
+    
+    
+    <div style="width: 180px">
+    Panel A
+    </div>    
+    <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>
+    <div style="flex: 1; margin-left: 30px">
+        <div style="width: 100%; font-weight: normal; border-bottom: solid 1px #ccc">
+            <div style="display: flex; flex-direction: row; padding: 5px 0px">
+                
+                <div style="width: 300px; font-size: 14px; font-weight: normal; color: #444">
+                    Start
+                </div>
+                
+                <div style="width: 120px; font-size: 14px; font-weight: normal; color: #444">
+                    End
+                </div>
+
+                <div style="width: 210px; font-size: 14px; font-weight: normal; color: #444">
+                    Project
+                </div>
+
+                <div style="width: 90px; font-size: 14px; font-weight: normal; color: #444; text-align: right">
+                    Cost/day
+                </div>
+
+
+                <div style="width: 90px; font-size: 14px; font-weight: normal; color: #444; text-align: right">
+                    Minutes
+                </div>
+
+                <div style="width: 90px; font-size: 14px; font-weight: normal; color: #444; text-align: right">
+                    Final cost
+                </div>
+
+                <div style="flex: 1; font-size: 12px; font-weight: normal; color: #888; text-align: right">
+                    Billed
+                </div>
+
+                
+            </div>
+
+        </div>
+        
+        
+        <div id="periodslist" style="width: 100%; margin-top: 10px; font-weight: normal"></div>
+    </div>    
+    
+</div>    
+    
+    
+    
 </div>
 </body>
+<script>fillPeriods(false);</script>
 </html>
