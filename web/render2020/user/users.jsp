@@ -38,7 +38,6 @@ function fetchUserList () {
             showNotice(objresp.description, '#ff3333');
             return;
         }
-        console.log(objresp);
         users = objresp.users;
         fillUsers();
     }

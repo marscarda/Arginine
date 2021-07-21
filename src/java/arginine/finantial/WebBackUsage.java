@@ -5,7 +5,7 @@ import arginine.jbuilders.JBilling;
 import methinine.billing.BillingPeriod;
 //***************************************************************************
 public class WebBackUsage extends WebBackAlpha {
-    //===============================================================
+    //***************************************************************
     BillingPeriod[] periods = null;
     void setPeriods (BillingPeriod[] periods) { this.periods = periods; }
     public BillingPeriod[] getPeriods () {
@@ -15,6 +15,13 @@ public class WebBackUsage extends WebBackAlpha {
     public String jperiods () {
         return JBilling.usagePeriods(getPeriods()).toString();
     }
+    //***************************************************************
+    public String fetchUsagePeriodsURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiFetchUsagePeriods.URL);
+        return url.toString();
+    } 
     //===============================================================
+    //***************************************************************    
 }
 //***************************************************************************

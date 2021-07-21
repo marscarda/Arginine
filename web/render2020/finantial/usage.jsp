@@ -1,3 +1,4 @@
+<%@page import="arginine.ApiAlpha"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="arginine.WebFrontAlpha"%>
 <%@page import="arginine.finantial.WebBackUsage"%>
@@ -101,6 +102,35 @@ function addUsagePeriod (period) {
     document.getElementById('periodslist').appendChild(top);
     /*----------------------------------------*/
 }
+let loadUsagePeriods = () => {
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showNotice('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showNotice('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showNotice(objresp.description, '#ff3333');
+            return;
+        }
+        console.log(objresp);
+        periods = objresp.periods;
+        fillPeriods(true);
+    }
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.setURL('<%=back.fetchUsagePeriodsURL()%>');
+    try { 
+        req.executepost(); 
+    }
+    catch(err) {
+        alert (err.getMessage);
+    }
+}
 </script>
 <title>System Usage</title>
 </head>
@@ -113,7 +143,7 @@ function addUsagePeriod (period) {
         <div style="padding: 10px 0px; border-top: solid 1px #ccc; border-bottom: solid 1px #ccc">
             <div style="font-size: 12px; font-weight: 600">View Periods</div>
             <div style="margin-top: 10px">
-                <a href="#" class="filterperiods">All</a>
+                <a href="#" class="filterperiods" onclick="loadUsagePeriods(); return false;" >All</a>
             </div>
             <div style="margin-top: 10px">
                 <a href="" class="filterperiods">Open</a>

@@ -1,6 +1,7 @@
 package arginine.finantial;
 //***************************************************************************
 import arginine.ApiAlpha;
+import static arginine.ApiAlpha.UNAUTHORIZED;
 import arginine.FlowAlpha;
 import arginine.jbuilders.JBilling;
 import javax.servlet.annotation.WebServlet;
@@ -8,16 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
-import methinine.billing.LedgerEntry;
+import methinine.billing.BillingPeriod;
 import methionine.auth.Session;
 //***************************************************************************
-@WebServlet(name = "ApiAddLedgerEntry", urlPatterns = {ApiAddLedgerEntry.URL}, loadOnStartup=1)
-public class ApiAddLedgerEntry extends ApiAlpha {
-    public static final String URL = "/users/addledgerentry";
-    public static final String USERID = "userid";
-    public static final String DESCRIPTION = "description";
-    public static final String SIZE = "size";
-    public static final String JENTRY = "entry";
+@WebServlet(name = "ApiFetchUsagePeriods", urlPatterns = {ApiFetchUsagePeriods.URL}, loadOnStartup=1)
+public class ApiFetchUsagePeriods extends ApiAlpha {
+    public static final String URL = "/account/fetchusageperiods";
+    public static final String JPERIODS = "periods";
     //***********************************************************************
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -34,31 +32,20 @@ public class ApiAddLedgerEntry extends ApiAlpha {
             return;
         }
         //==========================================================
-        long userid = 0;
-        int size = 0;
-        String description = req.getParameter(DESCRIPTION);
-        try { userid = Long.parseLong(req.getParameter(USERID)); } catch (Exception e) {}
-        try { size = Integer.parseInt(req.getParameter(SIZE)); } catch (Exception e) {}
         try {
-            LedgerEntry entry = new LedgerEntry();
-            entry.setUserID(userid);
-            entry.setDescription(description);
-            entry.setSize(size);
-            flowalpha.getAurigaObject().getBillingLambda().addEntryToLedger(entry);
+            //----------------------------------------
+            BillingPeriod[] periods = flowalpha.getAurigaObject().getBillingLambda().getBillingPeriods();
+            //----------------------------------------
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
-            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Ledger Entry Added"));
-            //-------------------------------------------------------
-            jsonresp.addPair(new JsonPair(JENTRY, JBilling.getLedgerEntry(entry)));
-            //-------------------------------------------------------
+            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "User list"));
+            jsonresp.addPair(new JsonPair(JPERIODS, JBilling.usagePeriods(periods)));
             this.sendResponse(resp, jsonresp);
-        }
-//        catch (AppException e) {
-//            this.sendErrorResponse(resp, e.getMessage(), e.getErrorCode());
-//        }        
+            //----------------------------------------
+        }    
         catch (Exception e) {
             sendServerErrorResponse(resp);
-            System.out.println("Unable to add ledger entry");
+            System.out.println("Unable to fetch usage periods Api nmjkjhg");
             System.out.println(e.getMessage());            
         }
         //==========================================================
