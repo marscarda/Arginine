@@ -1,7 +1,6 @@
 package arginine.finantial;
 //***************************************************************************
 import arginine.ApiAlpha;
-import static arginine.ApiAlpha.UNAUTHORIZED;
 import arginine.FlowAlpha;
 import arginine.jbuilders.JBilling;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methinine.billing.BillingPeriod;
+import methinine.billing.UsageFilter;
 import methionine.auth.Session;
 //***************************************************************************
 @WebServlet(name = "ApiFetchUsagePeriods", urlPatterns = {ApiFetchUsagePeriods.URL}, loadOnStartup=1)
 public class ApiFetchUsagePeriods extends ApiAlpha {
     public static final String URL = "/account/fetchusageperiods";
+    public static final String OPEN = "open";
+    public static final String CLOSED = "closed";
+    public static final String BILLED = "billed";
+    public static final String NOTBILLED = "notbilled";
     public static final String JPERIODS = "periods";
     //***********************************************************************
     @Override
@@ -32,9 +36,14 @@ public class ApiFetchUsagePeriods extends ApiAlpha {
             return;
         }
         //==========================================================
+        UsageFilter filter = new UsageFilter();
+        try { filter.setOpen(Integer.parseInt(req.getParameter(OPEN))); } catch(Exception e) {}
+        try { filter.setClosed(Integer.parseInt(req.getParameter(CLOSED))); } catch(Exception e) {}
+        try { filter.setBilled(Integer.parseInt(req.getParameter(BILLED))); } catch(Exception e) {}
+        try { filter.setNoBilled(Integer.parseInt(req.getParameter(NOTBILLED))); } catch(Exception e) {}
         try {
             //----------------------------------------
-            BillingPeriod[] periods = flowalpha.getAurigaObject().getBillingLambda().getBillingPeriods();
+            BillingPeriod[] periods = flowalpha.getAurigaObject().getBillingLambda().getBillingPeriods(filter);
             //----------------------------------------
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));

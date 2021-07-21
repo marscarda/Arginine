@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methinine.billing.BillingPeriod;
+import methinine.billing.UsageFilter;
 import methionine.auth.Session;
 //***************************************************************************
 @WebServlet(name = "WebFrontUsage", urlPatterns = {WebFrontUsage.PAGE}, loadOnStartup=1)
@@ -43,11 +44,9 @@ public class WebFrontUsage extends WebFrontAlpha {
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try{
-            BillingPeriod[] periods = flowbeta.getAurigaObject().getBillingLambda().getBillingPeriods();
-            
-            
+            UsageFilter filter = new UsageFilter();
+            BillingPeriod[] periods = flowbeta.getAurigaObject().getBillingLambda().getBillingPeriods(filter);
             back.setPeriods(periods);
-    
         }
         catch (Exception e) {
             //----------------------------------------------

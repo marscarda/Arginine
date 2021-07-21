@@ -1,5 +1,6 @@
-<%@page import="arginine.ApiAlpha"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="arginine.finantial.ApiFetchUsagePeriods"%>
+<%@page import="arginine.ApiAlpha"%>
 <%@page import="arginine.WebFrontAlpha"%>
 <%@page import="arginine.finantial.WebBackUsage"%>
 <%@page import="arginine.WebFrontStatic"%>
@@ -102,7 +103,7 @@ function addUsagePeriod (period) {
     document.getElementById('periodslist').appendChild(top);
     /*----------------------------------------*/
 }
-let loadUsagePeriods = () => {
+let loadUsagePeriods = (open, closed, billed, notbilled) => {
     var req = new HttpRequest();
     var callback = (status, objresp) => {
         if (status === 0) {
@@ -117,12 +118,15 @@ let loadUsagePeriods = () => {
             showNotice(objresp.description, '#ff3333');
             return;
         }
-        console.log(objresp);
         periods = objresp.periods;
         fillPeriods(true);
     }
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.addParam('<%=ApiFetchUsagePeriods.OPEN%>',open);
+    req.addParam('<%=ApiFetchUsagePeriods.CLOSED%>',closed);
+    req.addParam('<%=ApiFetchUsagePeriods.BILLED%>',billed);
+    req.addParam('<%=ApiFetchUsagePeriods.NOTBILLED%>',notbilled);
     req.setURL('<%=back.fetchUsagePeriodsURL()%>');
     try { 
         req.executepost(); 
@@ -143,22 +147,22 @@ let loadUsagePeriods = () => {
         <div style="padding: 10px 0px; border-top: solid 1px #ccc; border-bottom: solid 1px #ccc">
             <div style="font-size: 12px; font-weight: 600">View Periods</div>
             <div style="margin-top: 10px">
-                <a href="#" class="filterperiods" onclick="loadUsagePeriods(); return false;" >All</a>
+                <a href="#" class="filterperiods" onclick="loadUsagePeriods(0,0,0,0); return false;" >All</a>
             </div>
             <div style="margin-top: 10px">
-                <a href="" class="filterperiods">Open</a>
+                <a href="" class="filterperiods" onclick="loadUsagePeriods(1,0,0,0); return false;">Open</a>
             </div>
             <div style="margin-top: 10px; color: #888">
                 Closed
             </div>
             <div style="margin-left: 15px; margin-top: 5px">
-                <a href="" class="filterperiods">All</a>
+                <a href="" class="filterperiods" onclick="loadUsagePeriods(0,1,0,0); return false;">All</a>
             </div>
             <div style="margin-left: 15px; margin-top: 5px">
-                <a href="" class="filterperiods">Billed</a>
+                <a href="" class="filterperiods" onclick="loadUsagePeriods(0,1,1,0); return false;">Billed</a>
             </div>
             <div style="margin-left: 15px; margin-top: 5px">
-                <a href="" class="filterperiods">Not billed</a>
+                <a href="" class="filterperiods" onclick="loadUsagePeriods(0,1,0,1); return false;">Not billed</a>
             </div>
         </div>
         <div style="margin-top: 20px; font-size: 13px; color: #666">Close periods</div>
@@ -193,7 +197,6 @@ let loadUsagePeriods = () => {
         </div>
         <div id="periodslist" style="width: 100%; margin-top: 10px; font-weight: normal"></div>
     </div>    
-    
 </div>    
 </div>
 </body>
