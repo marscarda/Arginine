@@ -3,6 +3,7 @@ package arginine.jbuilders;
 import mars.jsonsimple.JsonArray;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
+import methinine.billing.BillingPeriod;
 import methinine.billing.FundTicket;
 import methinine.billing.LedgerEntry;
 //***************************************************************************
@@ -23,6 +24,16 @@ public class JBilling {
     //public static final String REMAINAMOUNT = "remainamount";
     public static final String DESCRIPTION = "description";
     //public static final String STATUS = "status";
+    public static final String IDECODE = "idcode";
+    public static final String PROJECTID = "projectid";
+    public static final String DATESTART = "datestart";
+    public static final String DATEEND = "dateend";
+    public static final String COSTPERDAY = "costperday";    
+    public static final String PROJECTNAME = "projectname";
+    public static final String EVENT = "event";
+    public static final String FINALMINUTES = "finalminutes";
+    public static final String FINALCOST = "finalcost";
+    public static final String BILLED = "billed";
     //***********************************************************************
     public static JsonObject getLedgerEntryList (LedgerEntry[] entries) {
         JsonObject jentries = new JsonObject();
@@ -50,19 +61,30 @@ public class JBilling {
         return jentry;
     }
     //***********************************************************************
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public static JsonObject usagePeriods (BillingPeriod[] periods) {
+        JsonObject jentries = new JsonObject();
+        
+        
+        
+        JsonArray jarray = new JsonArray();
+        for (BillingPeriod period : periods) {
+            jarray.addPair(new JsonPair(IDECODE, period.idCode()));
+            jarray.addPair(new JsonPair(USERID, period.userID()));
+            jarray.addPair(new JsonPair(PROJECTID, period.projectID()));
+            jarray.addPair(new JsonPair(DATESTART, period.dateStart()));
+            jarray.addPair(new JsonPair(DATEEND, period.dateEnd()));
+            jarray.addPair(new JsonPair(COSTPERDAY, period.costPerDay()));
+            jarray.addPair(new JsonPair(PROJECTNAME, period.projectName()));
+            jarray.addPair(new JsonPair(EVENT, period.startingEvent()));
+            jarray.addPair(new JsonPair(FINALMINUTES, period.finalMinutes()));
+            jarray.addPair(new JsonPair(FINALCOST, period.finalCost()));
+            jarray.addPair(new JsonPair(BILLED, period.billed()));
+            jarray.addToArray();
+        }
+        jentries.addPair(new JsonPair(COUNT, jarray.getCount()));
+        jentries.addPair(new JsonPair(ITEMS, jarray.getArray()));
+        return jentries;
+    }
     //***********************************************************************
     /*
     public static JsonObject getFundPostsList (FundTicket[] posts) {

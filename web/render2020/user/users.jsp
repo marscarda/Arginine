@@ -129,7 +129,7 @@ function addUser (user) {
             <form id="formsearchusers" class="search">
             <div>
               <input type="text" placeholder="Show a number of users starting at or after" name="<%=ApiGetUserList.STARTAT%>">
-              <button onclick="fetchUserList(); return false">Search</button>
+              <button onclick="fetchUserList(); return false">Show</button>
             </div>
             </form>        
         </div><div style="clear: both; height: 50px"></div>

@@ -1,5 +1,6 @@
 package arginine;
 //***************************************************************************
+import arginine.finantial.WebFrontUsage;
 import arginine.main.WebFrontAuth;
 import arginine.main.WebFrontHome;
 import arginine.main.WebFrontLogout;
@@ -66,9 +67,18 @@ public class WebBackAlpha {
         url.append(WebFrontUsers.PAGE);
         return url.toString();
     }
+    //=======================================================================
+    public String usageURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontUsage.PAGE);
+        return url.toString();
+    }
+    //=======================================================================
     
     
-    
+
+    //***********************************************************************
+
     
     //=======================================================================
     public String postingURL () {
