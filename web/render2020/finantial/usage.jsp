@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="arginine.finantial.ApiCutUsagePeriods"%>
 <%@page import="arginine.finantial.ApiFetchUsagePeriods"%>
 <%@page import="arginine.ApiAlpha"%>
 <%@page import="arginine.WebFrontAlpha"%>
@@ -135,6 +136,45 @@ let loadUsagePeriods = (open, closed, billed, notbilled) => {
         alert (err.getMessage);
     }
 }
+let cutUsagePeriods = () => {
+    var form = document.getElementById('formcutperiods');
+    var formdata = new FormData (form);
+    var strval = formdata.get('<%=ApiCutUsagePeriods.COUNT%>');
+    if (isNaN(strval) || strval.length === 0) {
+        showNotice('Enter a valid number', '#0099ff');
+        return;
+    }
+    var count = parseInt(strval);
+    var message = "You are cutting " + count + " usage periods";
+    var confirm = () => {
+        var req = new HttpRequest();
+        var callback = (status, objresp) => {
+            if (status === 0) {
+                showNotice('Could not connect to server', '#ff3333');
+                return;
+            }
+            if (status !== 200) {
+                showNotice('Error server. Probably in maintenance', '#ff3333');
+                return;
+            }
+            if (objresp.result !== 'OK') {
+                showNotice(objresp.description, '#ff3333');
+                return;
+            }
+            showNotice(objresp.description, '#229900');
+            loadUsagePeriods(1,0,0,0);
+        }
+        req.setCallBack(callback);
+        req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+        req.addParam('<%=ApiCutUsagePeriods.COUNT%>', count);
+        req.setURL('<%=back.cutUsagePeriodsURL() %>');
+        try { req.executepost(); }
+        catch(err) {
+            alert (err.getMessage);
+        }
+    }
+    showPrompt(message, confirm);
+}
 </script>
 <title>System Usage</title>
 </head>
@@ -166,10 +206,10 @@ let loadUsagePeriods = (open, closed, billed, notbilled) => {
             </div>
         </div>
         <div style="margin-top: 20px; font-size: 13px; color: #666">Close periods</div>
-        <form id="formsearchusers" class="docount">
+        <form id="formcutperiods" class="docount">
         <div>
-          <input type="text" placeholder="N Periods to close" name="<%--=ApiGetUserList.STARTAT--%>">
-          <button onclick="fetchUserList(); return false">Close</button>
+            <input type="text" placeholder="N Periods to cut" name="<%=ApiCutUsagePeriods.COUNT%>">
+            <button onclick="cutUsagePeriods(); return false">Cut</button>
         </div>
         </form>
         <div style="clear: both"></div>

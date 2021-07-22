@@ -63,9 +63,6 @@ public class JBilling {
     //***********************************************************************
     public static JsonObject usagePeriods (BillingPeriod[] periods) {
         JsonObject jentries = new JsonObject();
-        
-        
-        
         JsonArray jarray = new JsonArray();
         for (BillingPeriod period : periods) {
             jarray.addPair(new JsonPair(IDECODE, period.idCode()));

@@ -6,6 +6,8 @@ import static arginine.finantial.ApiFetchUsagePeriods.OPEN;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mars.jsonsimple.JsonObject;
+import mars.jsonsimple.JsonPair;
 import methionine.auth.Session;
 //***************************************************************************
 @WebServlet(name = "ApiCutUsagePeriods", urlPatterns = {ApiCutUsagePeriods.URL}, loadOnStartup=1)
@@ -28,11 +30,15 @@ public class ApiCutUsagePeriods extends ApiAlpha {
         }
         //==========================================================
         int count = 0;
-        try { count = Integer.parseInt(req.getParameter(OPEN)); } catch(Exception e) {}
+        try { count = Integer.parseInt(req.getParameter(COUNT)); } catch(Exception e) {}
         try {
-            
-            
-            
+            flowalpha.getAurigaObject().getBillingLambda().cutUsagePeriods(count);
+            JsonObject jsonresp = new JsonObject();
+            jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
+            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Periods Cut Done"));
+            //-------------------------------------------------------
+            this.sendResponse(resp, jsonresp);
+            //-------------------------------------------------------
         }        
         catch (Exception e) {
             sendServerErrorResponse(resp);
