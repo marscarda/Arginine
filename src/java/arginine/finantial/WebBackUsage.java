@@ -22,6 +22,11 @@ public class WebBackUsage extends WebBackAlpha {
         return url.toString();
     } 
     //===============================================================
+    public String cutUsagePeriodsURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiCutUsagePeriods.URL);
+        return url.toString();
+    } 
     //***************************************************************    
 }
 //***************************************************************************
