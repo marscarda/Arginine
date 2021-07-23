@@ -6,20 +6,21 @@ import mars.jsonsimple.JsonPair;
 import methinine.billing.BillingPeriod;
 import methinine.billing.FundTicket;
 import methinine.billing.LedgerEntry;
+import methinine.billing.Payment;
 //***************************************************************************
 public class JBilling {
     //***********************************************************************
     public static final String COUNT = "count";
     public static final String ITEMS = "items";
     //-----------------------------------------------------------------------
-    public static final String TICKETID = "ticketid";
+    public static final String PAYMENTID = "paymentid";
     public static final String USERID = "userid";
     public static final String DATE = "date";
     public static final String SIZE = "size";
     //public static final String SPENT = "spent";
     //public static final String REMAIN = "remain";
-    //public static final String CURRENCY = "currency";
-    //public static final String AMOUNT = "amount";
+    public static final String CURRENCY = "currency";
+    public static final String AMOUNT = "amount";
     //public static final String SPENTAMOUNT = "spentamount";
     //public static final String REMAINAMOUNT = "remainamount";
     public static final String DESCRIPTION = "description";
@@ -41,7 +42,7 @@ public class JBilling {
         for (LedgerEntry entry : entries) {
             jarray.addPair(new JsonPair(DATE, entry.getDate()));
             jarray.addPair(new JsonPair(USERID, entry.userID()));
-            jarray.addPair(new JsonPair(TICKETID, entry.tiketID()));
+            jarray.addPair(new JsonPair(PAYMENTID, entry.tiketID()));
             jarray.addPair(new JsonPair(DESCRIPTION, entry.description()));
             jarray.addPair(new JsonPair(SIZE, entry.entrySize()));
             jarray.addToArray();
@@ -55,10 +56,17 @@ public class JBilling {
         JsonObject jentry = new JsonObject();
         jentry.addPair(new JsonPair(DATE, entry.getDate()));
         jentry.addPair(new JsonPair(USERID, entry.userID()));
-        jentry.addPair(new JsonPair(TICKETID, entry.tiketID()));
+        jentry.addPair(new JsonPair(PAYMENTID, entry.tiketID()));
         jentry.addPair(new JsonPair(DESCRIPTION, entry.description()));
         jentry.addPair(new JsonPair(SIZE, entry.entrySize()));
         return jentry;
+    }
+    //***********************************************************************
+    public static JsonObject getPayment (Payment payment) {
+        JsonObject jpayment = new JsonObject();
+        jpayment.addPair(new JsonPair(PAYMENTID, payment.paymentID()));
+        jpayment.addPair(new JsonPair(DATE, payment.getDate()));
+        return jpayment;
     }
     //***********************************************************************
     public static JsonObject usagePeriods (BillingPeriod[] periods) {
@@ -123,12 +131,6 @@ public class JBilling {
         jrecord.addPair(new JsonPair(STATUS, post.getStatus()));
         return jrecord;
     }
-    */
-    //***********************************************************************
-    /*
-    */
-    //=======================================================================
-    /*
     */
     //***********************************************************************
 }

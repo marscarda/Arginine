@@ -30,20 +30,18 @@ public class WebBackUserAccount extends WebBackAlpha {
     }
     //===============================================================
     FundTicket[] fundposts = null;
+    @Deprecated
     void setFundPosts (FundTicket[] posts) { fundposts = posts; }
+    @Deprecated
     public FundTicket[] getfFundPosts () {
         if (fundposts == null) return new FundTicket[0];
         return fundposts;
     }
-    
+    @Deprecated
     public String jFundPosts () {
-        
-        
         //return JBilling.getFundPostsList(getfFundPosts()).toString();
         return "";
-        
     }
-    
     //***************************************************************
     public String addLedgerEntryURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
@@ -51,8 +49,12 @@ public class WebBackUserAccount extends WebBackAlpha {
         return url.toString();
     } 
     //===============================================================
-    
-    
+    public String createPaymentURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiCreatePayment.URL);
+        return url.toString();
+    }
+    //===============================================================
     /*
     public String createFundPostURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
@@ -66,23 +68,6 @@ public class WebBackUserAccount extends WebBackAlpha {
         return url.toString();
     }
     */
-    
-    
     //***************************************************************
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   
 }
 //***************************************************************************

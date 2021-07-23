@@ -1,3 +1,5 @@
+<%@page import="lycine.billing.UsageCost"%>
+<%@page import="arginine.finantial.ApiCreatePayment"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="arginine.finantial.ApiAddLedgerEntry"%>
 <%@page import="arginine.ApiAlpha"%>
@@ -112,6 +114,59 @@ function addLedgerEntry (entry, isnew) {
     else document.getElementById('ledgerlist').appendChild(top);
     /*----------------------------------------*/
 }
+
+function openCreatePayment () {
+    document.getElementById('divcreatepayment').style.height = '100%';
+    document.getElementById('divcreatepayment').style.width = '100%';
+    var turnon = new ElementFadeIn();
+    turnon.setElement(document, 'createpaymentbox');
+    turnon.start();
+}
+function closeCreatePayment () {
+    document.getElementById('divcreatepayment').style.height = '0px';
+    document.getElementById('divcreatepayment').style.width = '0px';
+    document.getElementById('formcreatepayment').reset();
+}
+function createPayment () {
+    var form = document.getElementById('formcreatepayment');
+    var formdata = new FormData (form);
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showNotice('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showNotice('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showNotice(objresp.description, '#ff3333');
+            return;
+        }
+        console.log(objresp);
+        closeCreatePayment();
+        /*
+        addLedgerEntry (objresp.entry, true);
+        var turnon = new ElementFadeIn();
+        turnon.setElement(document, 'ledgerentry' + entryid);
+        turnon.start();
+        entryid++;
+        */
+    }
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.addParam('<%=ApiCreatePayment.USERID%>', <%=user.userID()%>);
+    req.addParam('<%=ApiCreatePayment.CURRENCY%>', formdata.get('<%=ApiCreatePayment.CURRENCY%>'));
+    req.addParam('<%=ApiCreatePayment.AMOUNT%>', formdata.get('<%=ApiCreatePayment.AMOUNT%>'));
+    req.addParam('<%=ApiCreatePayment.SIZE%>', formdata.get('<%=ApiCreatePayment.SIZE%>'));
+    req.setURL('<%=back.createPaymentURL()%>');
+    try { req.executepost(); }
+    catch(err) {
+        alert (err.getMessage);
+    }
+}
+
 </script>
 <title>User Account</title>
 </head>
@@ -131,17 +186,45 @@ function addLedgerEntry (entry, isnew) {
         <button class="graywidththin" onclick="closeAddLedgerEntry(); return false;">Cancel</button>
     </div>
 </div>
+<div id="divcreatepayment" class="popupformmodal">
+    <div id="createpaymentbox" class="formbox" style="width: 500px">
+        <div style="color: #666666; font-size: 17px; margin-bottom: 20px">Credit New Payment</div>
+        <form id="formcreatepayment">
+            <label for="<%=ApiCreatePayment.CURRENCY%>">Currency</label>
+            <input type="text" name="<%=ApiCreatePayment.CURRENCY%>" placeholder="US Dollar?, Pounds?" />
+            <label for="<%=ApiCreatePayment.AMOUNT%>">Amount</label>
+            <input type="text" name="<%=ApiCreatePayment.AMOUNT%>" placeholder="Amount in money" />
+            <label for="<%=ApiCreatePayment.SIZE%>">Size</label>
+            <input type="text" name="<%=ApiCreatePayment.SIZE%>" placeholder="Quantity of <%=UsageCost.CURRENCYNAMES%>" />
+            <div style="height: 35px"></div>
+        </form>
+        <button class="greenwidththin" onclick="createPayment(); return false;">Create</button>
+        <button class="graywidththin" onclick="closeCreatePayment(); return false;">Cancel</button>
+    </div>
+</div>
 <div class="content">
 <h2>User Account</h2>
 <div style="display: flex; flex-direction: row; margin-top: 30px">
-    
     <div style="width: 230px">
         Panel A
     </div>    
     <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>
     <div style="width: 250px; margin-left: 30px">
-        Panel B
-    </div>    
+        <div style="margin-top: 15px">
+            <div style="font-size: 16px; color: #444444; margin-top: 12px; font-weight: bold; float: left">
+                Payments
+            </div>
+            <div style="font-size: 16px; color: #444444; margin-top: 12px; font-weight: bold; float: right">
+                <a href="#" style="color: inherit; text-decoration: none" onclick="openCreatePayment(); return false">
+                    <img src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.ADDCOMMAND%>" 
+                            style="width: 20px; height: 20px" alt="newfolder" title="New Folder" />
+                </a>
+            </div>
+            <div style="font-size: 16px; color: #444444; margin-top: 12px; border-top: solid 1px #dddddd; padding: 15px 0px">
+                <div id="paymentlist" style="width: 100%; margin-top: 30px; font-weight: normal"></div>
+            </div>
+        </div>
+    </div>
     <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>
     <div style="flex: 1; margin-left: 30px">
         <div style="margin-top: 15px">
@@ -159,12 +242,8 @@ function addLedgerEntry (entry, isnew) {
             </div>
         </div>
     </div>
-
-
 </div>
-
 </div>
-
 </body>
 <script>/*initFundPosts();*/initLedger();</script>
 </html>
