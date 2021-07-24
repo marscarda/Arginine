@@ -51,6 +51,12 @@ public class WebBackUserAccount extends WebBackAlpha {
         return url.toString();
     }
     //===============================================================
+    public String getLedgerURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiFetchLedger.URL);
+        return url.toString();
+    }
+    //===============================================================
     /*
     public String setTicketInactiveURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());

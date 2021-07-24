@@ -1,3 +1,4 @@
+<%@page import="arginine.finantial.ApiFetchLedger"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="lycine.billing.UsageCost"%>
 <%@page import="arginine.finantial.ApiCreatePayment"%>
@@ -70,14 +71,46 @@ function createLedgerEntry () {
         alert (err.getMessage);
     }
 }
-let initLedger = () => {
+let fetchLedger = () => {
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showNotice('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showNotice('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showNotice(objresp.description, '#ff3333');
+            return;
+        }
+        entries = objresp.ledger;
+        initLedger(0);
+    }
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.addParam('<%=ApiFetchLedger.USERID%>', <%=user.userID()%>);
+    req.setURL('<%=back.getLedgerURL()%>');
+    try { req.executepost(); }
+    catch(err) {
+        alert (err.getMessage);
+    }
+}
+let initLedger = (op) => {
     var div = document.getElementById('ledgerlist');
+    div.style.opacity = op;
     while (div.hasChildNodes())
         div.removeChild(div.lastChild);
     for (n = 0; n < entries.count; n++) {
         addLedgerEntry(entries.items[n], false);
         entryid++;
     }
+    if (op === 1) return;
+    var turnon = new ElementFadeIn();
+    turnon.setElement(document, 'ledgerlist');
+    turnon.start();
 }
 function addLedgerEntry (entry, isnew) {
     var top;
@@ -95,6 +128,11 @@ function addLedgerEntry (entry, isnew) {
     column = document.createElement("div");
     column.setAttribute("style", "flex: 2; font-size: 13px; font-weight: normal; color: #222");
     column.innerHTML = entry.date;
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 2; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = entry.paymentcode;
     line.appendChild(column);
     /*----------------------------------------*/
     column = document.createElement("div");
@@ -148,6 +186,7 @@ function createPayment () {
         var turnon = new ElementFadeIn();
         turnon.setElement(document, 'payment' + objresp.payment.paymentid);
         turnon.start();
+        fetchLedger();
     }
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
@@ -371,5 +410,5 @@ let addPayment = (payment, isnew) => {
 </div>
 </div>
 </body>
-<script>fillPayments();initLedger();</script>
+<script>fillPayments();initLedger(1);</script>
 </html>
