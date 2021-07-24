@@ -50,11 +50,11 @@ public class WebFrontUserAccount extends WebFrontAlpha {
         back.setLoginToken(session.getLoginToken());
         try{
             User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
-            int totalbalance = flowbeta.getAurigaObject().getBillingLambda().getTotalBalanceForUserID(userid);
+            //int totalbalance = flowbeta.getAurigaObject().getBillingLambda().getTotalBalanceForUserID(userid);
             Payment[] payments = flowbeta.getAurigaObject().getBillingLambda().getPayments(userid);
             LedgerEntry[] ledger = flowbeta.getAurigaObject().getBillingLambda().getLedgerForUserID(userid);
             back.setUser(user);
-            back.setTotalBalance(totalbalance);
+            //back.setTotalBalance(totalbalance);
             back.setPayments(payments);
             back.setLedger(ledger);
         }

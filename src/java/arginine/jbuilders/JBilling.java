@@ -42,7 +42,7 @@ public class JBilling {
         for (LedgerEntry entry : entries) {
             jarray.addPair(new JsonPair(DATE, entry.getDate()));
             jarray.addPair(new JsonPair(USERID, entry.userID()));
-            jarray.addPair(new JsonPair(PAYMENTID, entry.tiketID()));
+            jarray.addPair(new JsonPair(PAYMENTCODE, entry.paymentCode()));
             jarray.addPair(new JsonPair(DESCRIPTION, entry.description()));
             jarray.addPair(new JsonPair(SIZE, entry.entrySize()));
             jarray.addToArray();
@@ -56,7 +56,7 @@ public class JBilling {
         JsonObject jentry = new JsonObject();
         jentry.addPair(new JsonPair(DATE, entry.getDate()));
         jentry.addPair(new JsonPair(USERID, entry.userID()));
-        jentry.addPair(new JsonPair(PAYMENTID, entry.tiketID()));
+        jentry.addPair(new JsonPair(PAYMENTCODE, entry.paymentCode()));
         jentry.addPair(new JsonPair(DESCRIPTION, entry.description()));
         jentry.addPair(new JsonPair(SIZE, entry.entrySize()));
         return jentry;
