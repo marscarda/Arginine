@@ -2,8 +2,8 @@ package arginine.finantial;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;
-import methinine.billing.FundTicket;
 import methinine.billing.LedgerEntry;
+import methinine.billing.Payment;
 import methionine.auth.User;
 //***************************************************************************
 public class WebBackUserAccount extends WebBackAlpha {
@@ -29,18 +29,14 @@ public class WebBackUserAccount extends WebBackAlpha {
         return JBilling.getLedgerEntryList(getEntries()).toString();
     }
     //===============================================================
-    FundTicket[] fundposts = null;
-    @Deprecated
-    void setFundPosts (FundTicket[] posts) { fundposts = posts; }
-    @Deprecated
-    public FundTicket[] getfFundPosts () {
-        if (fundposts == null) return new FundTicket[0];
-        return fundposts;
+    Payment[] payments = null;
+    void setPayments (Payment[] payments) { this.payments = payments; }
+    public Payment[] getPayments () {
+        if (payments == null) return new Payment[0];
+        return payments;
     }
-    @Deprecated
-    public String jFundPosts () {
-        //return JBilling.getFundPostsList(getfFundPosts()).toString();
-        return "";
+    public String jPayments () {
+        return JBilling.getPaymentList(this.getPayments()).toString();
     }
     //***************************************************************
     public String addLedgerEntryURL () {
@@ -56,12 +52,6 @@ public class WebBackUserAccount extends WebBackAlpha {
     }
     //===============================================================
     /*
-    public String createFundPostURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(ApiCreateFundPost.URL);
-        return url.toString();
-    }
-    //===============================================================
     public String setTicketInactiveURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(ApiSetTicketInactive.URL);

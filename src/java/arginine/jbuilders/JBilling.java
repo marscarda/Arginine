@@ -4,7 +4,6 @@ import mars.jsonsimple.JsonArray;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methinine.billing.BillingPeriod;
-import methinine.billing.FundTicket;
 import methinine.billing.LedgerEntry;
 import methinine.billing.Payment;
 //***************************************************************************
@@ -14,6 +13,7 @@ public class JBilling {
     public static final String ITEMS = "items";
     //-----------------------------------------------------------------------
     public static final String PAYMENTID = "paymentid";
+    public static final String PAYMENTCODE = "paymentcode";
     public static final String USERID = "userid";
     public static final String DATE = "date";
     public static final String SIZE = "size";
@@ -62,10 +62,31 @@ public class JBilling {
         return jentry;
     }
     //***********************************************************************
+    public static JsonObject getPaymentList (Payment[] payments) {
+        JsonObject jpayments = new JsonObject();
+        JsonArray jarray = new JsonArray();
+        for (Payment payment : payments) {
+            jarray.addPair(new JsonPair(PAYMENTID, payment.paymentID()));
+            jarray.addPair(new JsonPair(PAYMENTCODE, payment.getCode()));
+            jarray.addPair(new JsonPair(DATE, payment.getDate()));
+            jarray.addPair(new JsonPair(CURRENCY, payment.getCurrency()));
+            jarray.addPair(new JsonPair(AMOUNT, payment.getAmount()));
+            jarray.addPair(new JsonPair(SIZE, payment.getSize()));
+            jarray.addToArray();
+        }
+        jpayments.addPair(new JsonPair(COUNT, jarray.getCount()));
+        jpayments.addPair(new JsonPair(ITEMS, jarray.getArray()));
+        return jpayments;
+    }
+    //=======================================================================
     public static JsonObject getPayment (Payment payment) {
         JsonObject jpayment = new JsonObject();
         jpayment.addPair(new JsonPair(PAYMENTID, payment.paymentID()));
+        jpayment.addPair(new JsonPair(PAYMENTCODE, payment.getCode()));
         jpayment.addPair(new JsonPair(DATE, payment.getDate()));
+        jpayment.addPair(new JsonPair(CURRENCY, payment.getCurrency()));
+        jpayment.addPair(new JsonPair(AMOUNT, payment.getAmount()));
+        jpayment.addPair(new JsonPair(SIZE, payment.getSize()));
         return jpayment;
     }
     //***********************************************************************
@@ -90,48 +111,6 @@ public class JBilling {
         jentries.addPair(new JsonPair(ITEMS, jarray.getArray()));
         return jentries;
     }
-    //***********************************************************************
-    /*
-    public static JsonObject getFundPostsList (FundTicket[] posts) {
-        JsonObject jposts = new JsonObject();
-        JsonArray jarray = new JsonArray();
-        for (FundTicket post : posts) {
-            jarray.addPair(new JsonPair(POSTID, post.postID()));
-            jarray.addPair(new JsonPair(DATE, post.getDate()));
-            jarray.addPair(new JsonPair(DESCRIPTION, post.getDescription()));
-            jarray.addPair(new JsonPair(SIZE, post.getSize()));
-            jarray.addPair(new JsonPair(SPENT, post.getSpent()));
-            jarray.addPair(new JsonPair(REMAIN, post.getRemain()));
-            jarray.addPair(new JsonPair(CURRENCY, post.getCurrency()));
-            jarray.addPair(new JsonPair(AMOUNT, post.getAmount()));
-            jarray.addPair(new JsonPair(SPENTAMOUNT, post.getSpentAmount()));
-            jarray.addPair(new JsonPair(REMAINAMOUNT, post.getRemainAmount()));
-            jarray.addPair(new JsonPair(STATUS, post.getStatus()));
-            jarray.addToArray();
-        }
-        jposts.addPair(new JsonPair(COUNT, jarray.getCount()));
-        jposts.addPair(new JsonPair(ITEMS, jarray.getArray()));
-        return jposts;
-    }
-    */
-    //=======================================================================
-    /*
-    public static JsonObject getFundPost (FundTicket post) {
-        JsonObject jrecord = new JsonObject();
-        jrecord.addPair(new JsonPair(POSTID, post.postID()));
-        jrecord.addPair(new JsonPair(DATE, post.getDate()));
-        jrecord.addPair(new JsonPair(DESCRIPTION, post.getDescription()));
-        jrecord.addPair(new JsonPair(SIZE, post.getSize()));
-        jrecord.addPair(new JsonPair(SPENT, post.getSpent()));
-        jrecord.addPair(new JsonPair(REMAIN, post.getRemain()));
-        jrecord.addPair(new JsonPair(CURRENCY, post.getCurrency()));
-        jrecord.addPair(new JsonPair(AMOUNT, post.getAmount()));
-        jrecord.addPair(new JsonPair(SPENTAMOUNT, post.getSpentAmount()));
-        jrecord.addPair(new JsonPair(REMAINAMOUNT, post.getRemainAmount()));
-        jrecord.addPair(new JsonPair(STATUS, post.getStatus()));
-        return jrecord;
-    }
-    */
     //***********************************************************************
 }
 //***************************************************************************

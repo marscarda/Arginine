@@ -1,6 +1,6 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="lycine.billing.UsageCost"%>
 <%@page import="arginine.finantial.ApiCreatePayment"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="arginine.finantial.ApiAddLedgerEntry"%>
 <%@page import="arginine.ApiAlpha"%>
 <%@page import="arginine.WebFrontStatic"%>
@@ -21,6 +21,7 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
 var entryid = 1;
+var payments = <%=back.jPayments()%>;
 var entries = <%=back.jLedgerEntries()%>;
 function openAddLedgerEntry () {
     document.getElementById('divaddledgerentry').style.height = '100%';
@@ -95,13 +96,11 @@ function addLedgerEntry (entry, isnew) {
     column.setAttribute("style", "flex: 2; font-size: 13px; font-weight: normal; color: #222");
     column.innerHTML = entry.date;
     line.appendChild(column);
-    top.appendChild(line);
     /*----------------------------------------*/
     column = document.createElement("div");
     column.setAttribute("style", "flex: 5; font-size: 13px; font-weight: normal; color: #222");
     column.innerHTML = decodeURIComponent(decodeURI(entry.description));
     line.appendChild(column);
-    top.appendChild(line);
     /*----------------------------------------*/
     column = document.createElement("div");
     column.setAttribute("style", "flex: 5; font-size: 13px; text-align: right; font-weight: normal; color: #222");
@@ -114,7 +113,6 @@ function addLedgerEntry (entry, isnew) {
     else document.getElementById('ledgerlist').appendChild(top);
     /*----------------------------------------*/
 }
-
 function openCreatePayment () {
     document.getElementById('divcreatepayment').style.height = '100%';
     document.getElementById('divcreatepayment').style.width = '100%';
@@ -146,13 +144,10 @@ function createPayment () {
         }
         console.log(objresp);
         closeCreatePayment();
-        /*
-        addLedgerEntry (objresp.entry, true);
+        addPayment (objresp.payment, true);
         var turnon = new ElementFadeIn();
-        turnon.setElement(document, 'ledgerentry' + entryid);
+        turnon.setElement(document, 'payment' + objresp.payment.paymentid);
         turnon.start();
-        entryid++;
-        */
     }
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
@@ -166,7 +161,136 @@ function createPayment () {
         alert (err.getMessage);
     }
 }
-
+let fillPayments = () => {
+    var div = document.getElementById('paymentlist');
+    while (div.hasChildNodes())
+        div.removeChild(div.lastChild);
+    for (n = 0; n < payments.count; n++) {
+        addPayment(payments.items[n], false);
+    }
+}
+let addPayment = (payment, isnew) => {
+    /*----------------------------------------*/
+    var top;
+    var line;
+    var column;
+    var link;
+    top = document.createElement("div");
+    top.setAttribute('id', 'payment' + payment.paymentid);
+    top.setAttribute('style', 'padding: 15px 10px; border: solid 1px #0C0; border-radius: 4px; margin-top: 8px');
+    if (isnew) top.style.opacity = 0;
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row');
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 1; font-size: 15px; font-weight: 600; color: #555");
+    column.innerHTML = payment.paymentcode;
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 1; font-size: 15px; font-weight: 600; color: #555; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(payment.date));
+    line.appendChild(column);
+    /*----------------------------------------*/
+    top.appendChild(line)
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'background-color: #bbb; height: 1px; margin-top: 10px');
+    top.appendChild(line)
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row; margin-top: 15px');
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 3; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = "Currency:";
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(payment.currency));
+    line.appendChild(column);
+    top.appendChild(line)
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row; margin-top: 6px');
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = "Payment amount:";
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(payment.amount));
+    line.appendChild(column);
+    top.appendChild(line)
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row; margin-top: 6px');
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = "spent mount:";
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(payment.spent));
+    line.appendChild(column);
+    top.appendChild(line)
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'background-color: #bbb; height: 1px; margin-top: 16px');
+    top.appendChild(line)
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row; margin-top: 15px');
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = "<%=UsageCost.CURRENCYNAMES%> received:";
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(payment.size));
+    line.appendChild(column);
+    top.appendChild(line)
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row; margin-top: 6px');
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = "<%=UsageCost.CURRENCYNAMES%> spent:";
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(payment.spent));
+    line.appendChild(column);
+    top.appendChild(line)
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row; margin-top: 6px');
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = "Remain:";
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(payment.remain));
+    line.appendChild(column);
+    top.appendChild(line)
+    /*----------------------------------------*/
+    if (isnew)
+        document.getElementById('paymentlist').insertBefore(top, document.getElementById('paymentlist').childNodes[0]);
+    else document.getElementById('paymentlist').appendChild(top);
+    /*----------------------------------------*/
+}
 </script>
 <title>User Account</title>
 </head>
@@ -220,6 +344,7 @@ function createPayment () {
                             style="width: 20px; height: 20px" alt="newfolder" title="New Folder" />
                 </a>
             </div>
+            <div style="clear: both"></div>
             <div style="font-size: 16px; color: #444444; margin-top: 12px; border-top: solid 1px #dddddd; padding: 15px 0px">
                 <div id="paymentlist" style="width: 100%; margin-top: 30px; font-weight: normal"></div>
             </div>
@@ -237,7 +362,8 @@ function createPayment () {
                             style="width: 20px; height: 20px" alt="newfolder" title="New Folder" />
                 </a>
             </div>
-            <div style="font-size: 16px; color: #444444; margin-top: 12px; border-top: solid 1px #dddddd; padding: 15px 0px">
+            <div style="clear: both"></div>
+            <div style="font-size: 16px; color: #444444; margin-top: 12px; border-top: solid 1px #dddddd; padding: 5px 0px">
                 <div id="ledgerlist" style="width: 100%; margin-top: 30px; font-weight: normal"></div>
             </div>
         </div>
@@ -245,5 +371,5 @@ function createPayment () {
 </div>
 </div>
 </body>
-<script>/*initFundPosts();*/initLedger();</script>
+<script>fillPayments();initLedger();</script>
 </html>

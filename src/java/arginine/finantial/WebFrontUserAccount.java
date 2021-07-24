@@ -5,8 +5,8 @@ import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import methinine.billing.FundTicket;
 import methinine.billing.LedgerEntry;
+import methinine.billing.Payment;
 import methionine.auth.Session;
 import methionine.auth.User;
 //***************************************************************************
@@ -51,16 +51,16 @@ public class WebFrontUserAccount extends WebFrontAlpha {
         try{
             User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
             int totalbalance = flowbeta.getAurigaObject().getBillingLambda().getTotalBalanceForUserID(userid);
-            FundTicket[] fundposts = flowbeta.getAurigaObject().getBillingLambda().fundTicketsByUser(userid);
+            Payment[] payments = flowbeta.getAurigaObject().getBillingLambda().getPayments(userid);
             LedgerEntry[] ledger = flowbeta.getAurigaObject().getBillingLambda().getLedgerForUserID(userid);
             back.setUser(user);
             back.setTotalBalance(totalbalance);
-            back.setFundPosts(fundposts);
+            back.setPayments(payments);
             back.setLedger(ledger);
         }
         catch (Exception e) {
             //----------------------------------------------
-            System.out.println("Failed to get acount standing for user (Web)");
+            System.out.println("Failed to get acount for user (Web) vfwqlmc");
             System.out.println(e.getMessage());
             //----------------------------------------------
         }
