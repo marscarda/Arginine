@@ -1,5 +1,5 @@
-<%@page import="arginine.finantial.ApiFetchLedger"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="arginine.finantial.ApiFetchLedger"%>
 <%@page import="lycine.billing.UsageCost"%>
 <%@page import="arginine.finantial.ApiCreatePayment"%>
 <%@page import="arginine.finantial.ApiAddLedgerEntry"%>
@@ -112,7 +112,7 @@ let initLedger = (op) => {
     turnon.setElement(document, 'ledgerlist');
     turnon.start();
 }
-function addLedgerEntry (entry, isnew) {
+let addLedgerEntry = (entry, isnew) => {
     var top;
     var line;
     var column;

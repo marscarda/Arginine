@@ -27,6 +27,12 @@ public class WebBackUsage extends WebBackAlpha {
         url.append(ApiCutUsagePeriods.URL);
         return url.toString();
     } 
+    //===============================================================
+    public String doBillingURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiDoBilling.URL);
+        return url.toString();
+    }
     //***************************************************************    
 }
 //***************************************************************************

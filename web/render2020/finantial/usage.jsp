@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="arginine.finantial.ApiDoBilling"%>
 <%@page import="arginine.finantial.ApiCutUsagePeriods"%>
 <%@page import="arginine.finantial.ApiFetchUsagePeriods"%>
 <%@page import="arginine.ApiAlpha"%>
@@ -175,6 +176,45 @@ let cutUsagePeriods = () => {
     }
     showPrompt(message, confirm);
 }
+let doBilling = () => {
+    var form = document.getElementById('formdobilling');
+    var formdata = new FormData (form);
+    var strval = formdata.get('<%=ApiDoBilling.COUNT%>');
+    if (isNaN(strval) || strval.length === 0) {
+        showNotice('Enter a valid number', '#0099ff');
+        return;
+    }
+    var count = parseInt(strval);
+    var message = "You are billing " + count + " users that have closed usage periods";
+    var confirm = () => {
+        var req = new HttpRequest();
+        var callback = (status, objresp) => {
+            if (status === 0) {
+                showNotice('Could not connect to server', '#ff3333');
+                return;
+            }
+            if (status !== 200) {
+                showNotice('Error server. Probably in maintenance', '#ff3333');
+                return;
+            }
+            if (objresp.result !== 'OK') {
+                showNotice(objresp.description, '#ff3333');
+                return;
+            }
+            showNotice(objresp.description, '#229900');
+            loadUsagePeriods(1,0,0,0);
+        }
+        req.setCallBack(callback);
+        req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+        req.addParam('<%=ApiDoBilling.COUNT%>', count);
+        req.setURL('<%=back.doBillingURL()%>');
+        try { req.executepost(); }
+        catch(err) {
+            alert (err.getMessage);
+        }
+    }
+    showPrompt(message, confirm);
+}
 </script>
 <title>System Usage</title>
 </head>
@@ -214,10 +254,10 @@ let cutUsagePeriods = () => {
         </form>
         <div style="clear: both"></div>
         <div style="margin-top: 20px; font-size: 13px; color: #666">Bill periods</div>
-        <form id="formsearchusers" class="docount">
+        <form id="formdobilling" class="docount">
         <div>
-          <input type="text" placeholder="N periods to bill" name="<%--=ApiGetUserList.STARTAT--%>">
-          <button onclick="fetchUserList(); return false">Bill</button>
+            <input type="text" placeholder="N users to bill" name="<%=ApiDoBilling.COUNT%>">
+            <button onclick="doBilling(); return false">Bill</button>
         </div>
         </form>
         <div style="clear: both"></div>
