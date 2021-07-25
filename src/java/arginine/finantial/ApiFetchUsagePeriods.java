@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
-import methinine.billing.BillingPeriod;
-import methinine.billing.UsageQueryData;
+import methionine.billing.BillingPeriod;
+import methionine.billing.UsageQueryData;
 import methionine.auth.Session;
 //***************************************************************************
 @WebServlet(name = "ApiFetchUsagePeriods", urlPatterns = {ApiFetchUsagePeriods.URL}, loadOnStartup=1)

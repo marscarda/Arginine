@@ -5,8 +5,8 @@ import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import methinine.billing.BillingPeriod;
-import methinine.billing.UsageQueryData;
+import methionine.billing.BillingPeriod;
+import methionine.billing.UsageQueryData;
 import methionine.auth.Session;
 //***************************************************************************
 @WebServlet(name = "WebFrontUsage", urlPatterns = {WebFrontUsage.PAGE}, loadOnStartup=1)

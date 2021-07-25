@@ -3,9 +3,9 @@ package arginine.jbuilders;
 import mars.jsonsimple.JsonArray;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
-import methinine.billing.BillingPeriod;
-import methinine.billing.LedgerEntry;
-import methinine.billing.Payment;
+import methionine.billing.BillingPeriod;
+import methionine.billing.LedgerEntry;
+import methionine.billing.Payment;
 //***************************************************************************
 public class JBilling {
     //***********************************************************************

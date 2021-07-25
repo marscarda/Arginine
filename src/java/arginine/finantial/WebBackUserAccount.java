@@ -2,8 +2,8 @@ package arginine.finantial;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;
-import methinine.billing.LedgerEntry;
-import methinine.billing.Payment;
+import methionine.billing.LedgerEntry;
+import methionine.billing.Payment;
 import methionine.auth.User;
 //***************************************************************************
 public class WebBackUserAccount extends WebBackAlpha {

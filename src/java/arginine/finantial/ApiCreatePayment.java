@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
-import methinine.billing.Payment;
+import methionine.billing.Payment;
 import methionine.auth.Session;
 //***************************************************************************
 @WebServlet(name = "ApiCreatePayment", urlPatterns = {ApiCreatePayment.URL}, loadOnStartup=1)

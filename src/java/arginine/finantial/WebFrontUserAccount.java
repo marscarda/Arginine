@@ -5,8 +5,8 @@ import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import methinine.billing.LedgerEntry;
-import methinine.billing.Payment;
+import methionine.billing.LedgerEntry;
+import methionine.billing.Payment;
 import methionine.auth.Session;
 import methionine.auth.User;
 //***************************************************************************
