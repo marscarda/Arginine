@@ -2,14 +2,14 @@ package arginine.finantial;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;
-import methionine.billing.BillingPeriod;
+import methionine.billing.UsagePeriod;
 //***************************************************************************
 public class WebBackUsage extends WebBackAlpha {
     //***************************************************************
-    BillingPeriod[] periods = null;
-    void setPeriods (BillingPeriod[] periods) { this.periods = periods; }
-    public BillingPeriod[] getPeriods () {
-        if (periods == null) return new BillingPeriod[0];
+    UsagePeriod[] periods = null;
+    void setPeriods (UsagePeriod[] periods) { this.periods = periods; }
+    public UsagePeriod[] getPeriods () {
+        if (periods == null) return new UsagePeriod[0];
         return periods;
     }
     public String jperiods () {

@@ -131,8 +131,17 @@ let addLedgerEntry = (entry, isnew) => {
     line.appendChild(column);
     /*----------------------------------------*/
     column = document.createElement("div");
-    column.setAttribute("style", "flex: 2; font-size: 13px; font-weight: normal; color: #222");
+    column.setAttribute("style", "flex: 1; font-size: 13px; font-weight: normal; color: #222");
     column.innerHTML = entry.paymentcode;
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 1; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = entry.billingref;
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 1; font-size: 13px; font-weight: normal; color: #222; text-align: right");
     line.appendChild(column);
     /*----------------------------------------*/
     column = document.createElement("div");
@@ -141,7 +150,7 @@ let addLedgerEntry = (entry, isnew) => {
     line.appendChild(column);
     /*----------------------------------------*/
     column = document.createElement("div");
-    column.setAttribute("style", "flex: 5; font-size: 13px; text-align: right; font-weight: normal; color: #222");
+    column.setAttribute("style", "flex: 2; font-size: 13px; text-align: right; font-weight: normal; color: #222");
     column.innerHTML = entry.size;
     line.appendChild(column);
     top.appendChild(line);

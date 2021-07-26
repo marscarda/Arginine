@@ -97,8 +97,7 @@ function addUsagePeriod (period) {
     /*----------------------------------------*/
     column = document.createElement("div");
     column.setAttribute("style", "flex: 1; font-size: 13px; font-weight: normal; color: #222; text-align: right");
-    if (period.billed !== 0) column.innerHTML = "Yes"
-    else column.innerHTML = "No"
+    column.innerHTML = period.billingref;
     line.appendChild(column);
     top.appendChild(line);
     /*----------------------------------------*/
@@ -272,7 +271,7 @@ let doBilling = () => {
                 <div style="width: 90px; font-size: 14px; font-weight: normal; color: #444; text-align: right">Cost/day</div>
                 <div style="width: 90px; font-size: 14px; font-weight: normal; color: #444; text-align: right">Minutes</div>
                 <div style="width: 90px; font-size: 14px; font-weight: normal; color: #444; text-align: right">Final cost</div>
-                <div style="flex: 1; font-size: 12px; font-weight: normal; color: #888; text-align: right">Billed</div>
+                <div style="flex: 1; font-size: 12px; font-weight: normal; color: #888; text-align: right">Billng ref</div>
             </div>
         </div>
         <div id="periodslist" style="width: 100%; margin-top: 10px; font-weight: normal"></div>

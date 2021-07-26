@@ -5,7 +5,7 @@ import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import methionine.billing.BillingPeriod;
+import methionine.billing.UsagePeriod;
 import methionine.billing.UsageQueryData;
 import methionine.auth.Session;
 //***************************************************************************
@@ -45,7 +45,7 @@ public class WebFrontUsage extends WebFrontAlpha {
         back.setLoginToken(session.getLoginToken());
         try{
             UsageQueryData querydata = new UsageQueryData();
-            BillingPeriod[] periods = flowbeta.getAurigaObject().getBillingLambda().getBillingPeriods(querydata);
+            UsagePeriod[] periods = flowbeta.getAurigaObject().getBillingLambda().getBillingPeriods(querydata);
             back.setPeriods(periods);
         }
         catch (Exception e) {

@@ -1,11 +1,6 @@
 package arginine.finantial;
 //***************************************************************************
 import arginine.ApiAlpha;
-import static arginine.ApiAlpha.COUNT;
-import static arginine.ApiAlpha.RESULT;
-import static arginine.ApiAlpha.RESULTDESCRIPTION;
-import static arginine.ApiAlpha.RESULTOK;
-import static arginine.ApiAlpha.UNAUTHORIZED;
 import arginine.FlowAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +41,7 @@ public class ApiDoBilling extends ApiAlpha {
         }        
         catch (Exception e) {
             sendServerErrorResponse(resp);
-            System.out.println("Unable to cut usage periods Api nmnwrfhg");
+            System.out.println("Unable to bill usage periods Api nmkiofhg");
             System.out.println(e.getMessage());            
         }
         //==========================================================

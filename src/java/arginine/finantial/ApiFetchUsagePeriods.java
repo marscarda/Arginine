@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
-import methionine.billing.BillingPeriod;
+import methionine.billing.UsagePeriod;
 import methionine.billing.UsageQueryData;
 import methionine.auth.Session;
 //***************************************************************************
@@ -43,7 +43,7 @@ public class ApiFetchUsagePeriods extends ApiAlpha {
         try { querydata.setNoBilled(Integer.parseInt(req.getParameter(NOTBILLED))); } catch(Exception e) {}
         try {
             //----------------------------------------
-            BillingPeriod[] periods = flowalpha.getAurigaObject().getBillingLambda().getBillingPeriods(querydata);
+            UsagePeriod[] periods = flowalpha.getAurigaObject().getBillingLambda().getBillingPeriods(querydata);
             //----------------------------------------
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));

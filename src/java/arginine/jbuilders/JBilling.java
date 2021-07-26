@@ -3,7 +3,7 @@ package arginine.jbuilders;
 import mars.jsonsimple.JsonArray;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
-import methionine.billing.BillingPeriod;
+import methionine.billing.UsagePeriod;
 import methionine.billing.LedgerEntry;
 import methionine.billing.Payment;
 //***************************************************************************
@@ -34,7 +34,7 @@ public class JBilling {
     public static final String EVENT = "event";
     public static final String FINALMINUTES = "finalminutes";
     public static final String FINALCOST = "finalcost";
-    public static final String BILLED = "billed";
+    public static final String BILLINGREF = "billingref";
     //***********************************************************************
     public static JsonObject getLedgerEntryList (LedgerEntry[] entries) {
         JsonObject jentries = new JsonObject();
@@ -45,6 +45,7 @@ public class JBilling {
             jarray.addPair(new JsonPair(PAYMENTCODE, entry.paymentCode()));
             jarray.addPair(new JsonPair(DESCRIPTION, entry.description()));
             jarray.addPair(new JsonPair(SIZE, entry.entrySize()));
+            jarray.addPair(new JsonPair(BILLINGREF, entry.billingRef()));
             jarray.addToArray();
         }
         jentries.addPair(new JsonPair(COUNT, jarray.getCount()));
@@ -59,6 +60,7 @@ public class JBilling {
         jentry.addPair(new JsonPair(PAYMENTCODE, entry.paymentCode()));
         jentry.addPair(new JsonPair(DESCRIPTION, entry.description()));
         jentry.addPair(new JsonPair(SIZE, entry.entrySize()));
+        jentry.addPair(new JsonPair(BILLINGREF, entry.billingRef()));
         return jentry;
     }
     //***********************************************************************
@@ -90,10 +92,10 @@ public class JBilling {
         return jpayment;
     }
     //***********************************************************************
-    public static JsonObject usagePeriods (BillingPeriod[] periods) {
+    public static JsonObject usagePeriods (UsagePeriod[] periods) {
         JsonObject jentries = new JsonObject();
         JsonArray jarray = new JsonArray();
-        for (BillingPeriod period : periods) {
+        for (UsagePeriod period : periods) {
             jarray.addPair(new JsonPair(IDECODE, period.idCode()));
             jarray.addPair(new JsonPair(USERID, period.userID()));
             jarray.addPair(new JsonPair(PROJECTID, period.projectID()));
@@ -104,7 +106,7 @@ public class JBilling {
             jarray.addPair(new JsonPair(EVENT, period.startingEvent()));
             jarray.addPair(new JsonPair(FINALMINUTES, period.finalMinutes()));
             jarray.addPair(new JsonPair(FINALCOST, period.finalCost()));
-            jarray.addPair(new JsonPair(BILLED, period.billed()));
+            jarray.addPair(new JsonPair(BILLINGREF, period.billReference()));
             jarray.addToArray();
         }
         jentries.addPair(new JsonPair(COUNT, jarray.getCount()));
