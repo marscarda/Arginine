@@ -17,12 +17,12 @@ public class JBilling {
     public static final String USERID = "userid";
     public static final String DATE = "date";
     public static final String SIZE = "size";
-    //public static final String SPENT = "spent";
-    //public static final String REMAIN = "remain";
+    public static final String SPENT = "spent";
+    public static final String REMAIN = "remain";
     public static final String CURRENCY = "currency";
     public static final String AMOUNT = "amount";
-    //public static final String SPENTAMOUNT = "spentamount";
-    //public static final String REMAINAMOUNT = "remainamount";
+    public static final String SPENTAMOUNT = "spentamount";
+    public static final String REMAINAMOUNT = "remainamount";
     public static final String DESCRIPTION = "description";
     //public static final String STATUS = "status";
     public static final String IDECODE = "idcode";
@@ -74,6 +74,10 @@ public class JBilling {
             jarray.addPair(new JsonPair(CURRENCY, payment.getCurrency()));
             jarray.addPair(new JsonPair(AMOUNT, payment.getAmount()));
             jarray.addPair(new JsonPair(SIZE, payment.getSize()));
+            jarray.addPair(new JsonPair(SPENT, payment.getSpent()));
+            jarray.addPair(new JsonPair(REMAIN, payment.getRemain()));
+            jarray.addPair(new JsonPair(SPENTAMOUNT, payment.getSpentSolid()));
+            jarray.addPair(new JsonPair(REMAINAMOUNT, payment.getRemainSolid()));
             jarray.addToArray();
         }
         jpayments.addPair(new JsonPair(COUNT, jarray.getCount()));
@@ -89,6 +93,10 @@ public class JBilling {
         jpayment.addPair(new JsonPair(CURRENCY, payment.getCurrency()));
         jpayment.addPair(new JsonPair(AMOUNT, payment.getAmount()));
         jpayment.addPair(new JsonPair(SIZE, payment.getSize()));
+        jpayment.addPair(new JsonPair(SPENT, payment.getSpent()));
+        jpayment.addPair(new JsonPair(REMAIN, payment.getRemain()));
+        jpayment.addPair(new JsonPair(SPENTAMOUNT, payment.getSpentSolid()));
+        jpayment.addPair(new JsonPair(REMAINAMOUNT, payment.getRemainSolid()));
         return jpayment;
     }
     //***********************************************************************

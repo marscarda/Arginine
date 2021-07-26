@@ -244,7 +244,7 @@ let doBilling = () => {
                 <a href="" class="filterperiods" onclick="loadUsagePeriods(0,1,0,1); return false;">Not billed</a>
             </div>
         </div>
-        <div style="margin-top: 20px; font-size: 13px; color: #666">Close periods</div>
+        <div style="margin-top: 20px; font-size: 13px; color: #666">Cut Usage Periods</div>
         <form id="formcutperiods" class="docount">
         <div>
             <input type="text" placeholder="N Periods to cut" name="<%=ApiCutUsagePeriods.COUNT%>">
@@ -252,7 +252,7 @@ let doBilling = () => {
         </div>
         </form>
         <div style="clear: both"></div>
-        <div style="margin-top: 20px; font-size: 13px; color: #666">Bill periods</div>
+        <div style="margin-top: 20px; font-size: 13px; color: #666">Bill Users</div>
         <form id="formdobilling" class="docount">
         <div>
             <input type="text" placeholder="N users to bill" name="<%=ApiDoBilling.COUNT%>">

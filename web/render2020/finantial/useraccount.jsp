@@ -280,12 +280,26 @@ let addPayment = (payment, isnew) => {
     /*----------------------------------------*/
     column = document.createElement("div");
     column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222");
-    column.innerHTML = "spent mount:";
+    column.innerHTML = "Spent mount:";
     line.appendChild(column);
     /*----------------------------------------*/
     column = document.createElement("div");
     column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222; text-align: right");
-    column.innerHTML = decodeURIComponent(decodeURI(payment.spent));
+    column.innerHTML = decodeURIComponent(decodeURI(payment.spentamount));
+    line.appendChild(column);
+    top.appendChild(line)
+    /*----------------------------------------*/
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row; margin-top: 6px');
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222");
+    column.innerHTML = "Remain mount:";
+    line.appendChild(column);
+    /*----------------------------------------*/
+    column = document.createElement("div");
+    column.setAttribute("style", "flex: 8; font-size: 13px; font-weight: normal; color: #222; text-align: right");
+    column.innerHTML = decodeURIComponent(decodeURI(payment.remainamount));
     line.appendChild(column);
     top.appendChild(line)
     /*----------------------------------------*/
@@ -377,8 +391,23 @@ let addPayment = (payment, isnew) => {
 <div class="content">
 <h2>User Account</h2>
 <div style="display: flex; flex-direction: row; margin-top: 30px">
-    <div style="width: 230px">
-        Panel A
+    <div style="width: 200px">
+        <div style="display: flex; flex-direction: row; font-size: 15px">
+            <div style="color: #666; flex: 2">
+                User:
+            </div>
+            <div style="color: #333; flex: 1; font-weight: 600; text-align: right">
+                <%=back.getUser().loginName()%>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row; font-size: 15px; margin-top: 10px">
+            <div style="color: #666; flex: 2">
+                Balance:
+            </div>
+            <div style="color: #333; flex: 1; font-weight: 600; text-align: right">
+                <%=back.getTotalBalance()%>
+            </div>
+        </div>
     </div>    
     <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>
     <div style="width: 250px; margin-left: 30px">
@@ -411,8 +440,17 @@ let addPayment = (payment, isnew) => {
                 </a>
             </div>
             <div style="clear: both"></div>
-            <div style="font-size: 16px; color: #444444; margin-top: 12px; border-top: solid 1px #dddddd; padding: 5px 0px">
-                <div id="ledgerlist" style="width: 100%; margin-top: 30px; font-weight: normal"></div>
+            <div style="display: flex; flex-direction: row; font-size: 12px; margin-top: 15px; color: #555">
+                <div style="flex: 2">Date</div>
+                <div style="flex: 1">Payment</div>
+                <div style="flex: 1; text-align: right">Bill Ref</div>
+                <div style="flex: 1"></div>
+                <div style="flex: 5">Description</div>
+                <div style="flex: 2; text-align: right">Size</div>
+            </div>
+            
+            <div style="font-size: 16px; color: #444444; margin-top: 6px; border-top: solid 1px #dddddd; padding: 5px 0px">
+                <div id="ledgerlist" style="width: 100%; margin-top: 6px; font-weight: normal"></div>
             </div>
         </div>
     </div>
