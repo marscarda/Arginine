@@ -13,7 +13,7 @@ import serine.pubs.PubsTables;
 import threonine.map.QueryMapTabs;
 import tryptophan.survey.metric.MetricQueryInterface;
 import tryptophan.survey.SurveyTabs;
-import tryptophan.universe.UniverseQryInterface;
+import threonine.universe.UniverseLambda;
 //****************************************************************************
 @WebListener
 public class ContextListener implements ServletContextListener {
@@ -148,7 +148,7 @@ public class ContextListener implements ServletContextListener {
         //----------------------------------------------------------
         //We ensure Universe tables exists
         if (LifeTimeValues.dbuniverse != null) {
-            UniverseQryInterface univ = new UniverseQryInterface();
+            UniverseLambda univ = new UniverseLambda();
             univ.setElectraObject(electra);
             univ.setDataBaseName(LifeTimeValues.dbuniverse);
             try { 

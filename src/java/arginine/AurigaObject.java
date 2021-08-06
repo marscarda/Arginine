@@ -14,7 +14,7 @@ import tryptophan.survey.metric.MetricQueryInterface;
 import tryptophan.survey.publicview.PublicViewLambda;
 import tryptophan.survey.reaction.ReactionLambda;
 import tryptophan.survey.sampling.SampleLamda;
-import tryptophan.universe.UniverseQryInterface;
+import threonine.universe.UniverseLambda;
 //**************************************************************************
 /**
  * Holds instances of interfaces to interact with the database.
@@ -61,10 +61,10 @@ public class AurigaObject {
         return billinglambda;
     }
     //*************************************************************
-    UniverseQryInterface universeqryinterface = null;
-    public UniverseQryInterface getUniverseQryInterface () throws Exception {
+    UniverseLambda universeqryinterface = null;
+    public UniverseLambda getUniverseLambda () throws Exception {
         if (universeqryinterface == null) {
-            universeqryinterface = new UniverseQryInterface();
+            universeqryinterface = new UniverseLambda();
             universeqryinterface.setElectraObject(electra);
             universeqryinterface.setDataBaseName(LifeTimeValues.dbuniverse);
         }
