@@ -1,5 +1,6 @@
 package arginine;
 //**************************************************************************
+import histidine.AurigaObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.AppException;

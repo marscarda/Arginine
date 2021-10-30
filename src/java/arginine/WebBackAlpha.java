@@ -4,7 +4,6 @@ import arginine.finantial.WebFrontUsage;
 import arginine.main.WebFrontAuth;
 import arginine.main.WebFrontHome;
 import arginine.main.WebFrontLogout;
-import arginine.post.WebFrontPosting;
 import arginine.user.WebFrontUsers;
 import methionine.auth.User;
 import methionine.project.Project;
@@ -80,12 +79,6 @@ public class WebBackAlpha {
     //***********************************************************************
 
     
-    //=======================================================================
-    public String postingURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(WebFrontPosting.PAGE);
-        return url.toString();
-    }
     //=======================================================================
     public String getHomeURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());

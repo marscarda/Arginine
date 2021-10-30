@@ -8,12 +8,12 @@ import methionine.billing.BillingLambda;
 import methionine.Electra;
 import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;
-import serine.access.AccessLambda;
-import serine.pubs.PubsTables;
+import histidine.AurigaObject;
+import tryptophan.design.DesignTabs;
 import threonine.map.QueryMapTabs;
-import tryptophan.survey.metric.MetricQueryInterface;
-import tryptophan.survey.SurveyTabs;
-import threonine.universe.UniverseLambda;
+import threonine.universe.UniverseAtlas;
+import tryptophan.trial.TrialTabs;
+import tryptophan.sample.SampleTabs;
 //****************************************************************************
 @WebListener
 public class ContextListener implements ServletContextListener {
@@ -71,15 +71,19 @@ public class ContextListener implements ServletContextListener {
         //-----------------------------------------------------
         if (masterhost == null) System.out.println("Warning: Property " + PROP_MASTER_DBHOST + " Not set");
         Electra.setDefaultMasterHost(masterhost);
+        //-----------------------------------------------------
         if (slavehost == null) { 
             System.out.println("Warning: Property " + PROP_SLAVE_DBHOST + " Not set");
             slavehost = masterhost;
         }
         Electra.setDefaultSlaveHost(slavehost);
+        //-----------------------------------------------------
         if (user == null) System.out.println("Warning: Property " + PROP_DBUSER + " Not set");
         else Electra.setDefaultDBUser(user);
+        //-----------------------------------------------------
         if (pass == null) System.out.println("Warning: Property " + PROP_DBPASS + " Not set");
         else Electra.setDefaultDBPass(pass);
+        //-----------------------------------------------------
         //Below. If this is the master DB server.
         if (master == null) System.out.println("Warning: Property " + PROP_DBMASTER + " Not set");
         else {
@@ -102,80 +106,157 @@ public class ContextListener implements ServletContextListener {
         Electra electra = new Electra();
         //----------------------------------------------------------
         //Ensures the auth database.
-        if (LifeTimeValues.dbauth != null) {
+        if (AurigaObject.dbauth != null) {
             AuthLamda auth = new AuthLamda();
             auth.setElectraObject(electra);
-            auth.setDataBaseName(LifeTimeValues.dbauth);
+            auth.setDataBaseName(AurigaObject.dbauth);
             try { 
                 auth.ensureTables();
-                System.out.println("Tables in " + LifeTimeValues.dbauth + " Ensured");
+                System.out.println("Tables in " + AurigaObject.dbauth + " Ensured");
             }
             catch (Exception e) {
-                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbauth + " tables error");
+                System.out.println("ERROR: Ensuring " + AurigaObject.dbauth + " tables error");
                 System.out.println(e.getMessage());
             }            
         }
         //----------------------------------------------------------
-        //We ensure Workteams tables exists 
-        if (LifeTimeValues.dbauth != null) {
+        //We ensure Project tables exists 
+        if (AurigaObject.dbauth != null) {
             ProjectLambda workteam = new ProjectLambda();
             workteam.setElectraObject(electra);
-            workteam.setDataBaseName(LifeTimeValues.dbauth);
+            workteam.setDataBaseName(AurigaObject.dbauth);
             try { 
                 workteam.ensureTables();
-                System.out.println("Workteam Tables in " + LifeTimeValues.dbauth + " Ensured");
+                System.out.println("Workteam Tables in " + AurigaObject.dbauth + " Ensured");
             }
             catch (Exception e) {
-                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbauth + " tables error");
+                System.out.println("ERROR: Ensuring " + AurigaObject.dbauth + " tables error");
                 System.out.println(e.getMessage());
             }            
         }
         //----------------------------------------------------------
         //We ensure Billing tables exist 
-        if (LifeTimeValues.dbbilling != null) {
+        if (AurigaObject.dbbilling != null) {
             BillingLambda billing = new BillingLambda();
             billing.setElectraObject(electra);
-            billing.setDataBaseName(LifeTimeValues.dbbilling);
+            billing.setDataBaseName(AurigaObject.dbbilling);
             try { 
                 billing.ensureTables();
-                System.out.println("Billing Tables in " + LifeTimeValues.dbbilling + " Ensured");
+                System.out.println("Billing Tables in " + AurigaObject.dbbilling + " Ensured");
             }
             catch (Exception e) {
-                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbbilling + " tables error");
+                System.out.println("ERROR: Ensuring " + AurigaObject.dbbilling + " tables error");
                 System.out.println(e.getMessage());
             }            
         }
         //----------------------------------------------------------
         //We ensure Universe tables exists
-        if (LifeTimeValues.dbuniverse != null) {
-            UniverseLambda univ = new UniverseLambda();
+        if (AurigaObject.dbuniverse != null) {
+            UniverseAtlas univ = new UniverseAtlas();
             univ.setElectraObject(electra);
-            univ.setDataBaseName(LifeTimeValues.dbuniverse);
+            univ.setDataBaseName(AurigaObject.dbuniverse);
             try { 
                 univ.ensureTables();
-                System.out.println("Tables in " + LifeTimeValues.dbuniverse + " Ensured");
+                System.out.println("Tables in " + AurigaObject.dbuniverse + " Ensured");
             }
             catch (Exception e) {
-                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbuniverse + " tables error");
+                System.out.println("ERROR: Ensuring " + AurigaObject.dbuniverse + " tables error");
                 System.out.println(e.getMessage());
             }            
         }
         //----------------------------------------------------------
-        //We ensure Universe tables exists
-        if (LifeTimeValues.dbmaps != null) {
+        //We ensure Maps tables exists
+        if (AurigaObject.dbmaps != null) {
             QueryMapTabs maps = new QueryMapTabs();
             maps.setElectraObject(electra);
-            maps.setDataBaseName(LifeTimeValues.dbmaps);
+            maps.setDataBaseName(AurigaObject.dbmaps);
             try { 
                 maps.ensureTables();
-                System.out.println("Tables in " + LifeTimeValues.dbmaps + " Ensured");
+                System.out.println("Tables in " + AurigaObject.dbmaps + " Ensured");
             }
             catch (Exception e) {
-                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbmaps + " tables error");
+                System.out.println("ERROR: Ensuring " + AurigaObject.dbmaps + " tables error");
                 System.out.println(e.getMessage());
             }            
         }
         //----------------------------------------------------------
+        if (AurigaObject.dbdesign != null) {
+            DesignTabs design = new DesignTabs();
+            design.setElectraObject(electra);
+            design.setDataBaseName(AurigaObject.dbdesign);
+            try { 
+                design.ensureTables();
+                System.out.println("Tables in " + AurigaObject.dbdesign + " Ensured");
+            }
+            catch (Exception e) {
+                System.out.println("ERROR: Ensuring " + AurigaObject.dbdesign + " tables error");
+                System.out.println(e.getMessage());
+            }            
+        }
+        //----------------------------------------------------------
+        if (AurigaObject.dbsample != null) {
+            SampleTabs sample = new SampleTabs();
+            sample.setElectraObject(electra);
+            sample.setDataBaseName(AurigaObject.dbsample);
+            try { 
+                sample.ensureTables();
+                System.out.println("Tables in " + AurigaObject.dbsample + " Ensured");
+            }
+            catch (Exception e) {
+                System.out.println("ERROR: Ensuring " + AurigaObject.dbsample + " tables error");
+                System.out.println(e.getMessage());
+            }            
+        }
+        //----------------------------------------------------------
+        if (AurigaObject.dbspace != null) {
+            TrialTabs environment = new TrialTabs();
+            environment.setElectraObject(electra);
+            environment.setDataBaseName(AurigaObject.dbspace);
+            try { 
+                environment.ensureTables();
+                System.out.println("Tables in " + AurigaObject.dbspace + " Ensured");
+            }
+            catch (Exception e) {
+                System.out.println("ERROR: Ensuring " + AurigaObject.dbspace + " tables error");
+                System.out.println(e.getMessage());
+            }            
+        }
+        //----------------------------------------------------------
+        /*
+        if (LifeTimeValues.dbsample != null) {
+            DesignTabs design = new DesignTabs();
+            design.setElectraObject(electra);
+            design.setDataBaseName(LifeTimeValues.dbsample);
+            try { 
+                design.ensureTables();
+                System.out.println("Tables in " + LifeTimeValues.dbsample + " Ensured");
+            }
+            catch (Exception e) {
+                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbsample + " tables error");
+                System.out.println(e.getMessage());
+            }            
+        }
+        */
+        //----------------------------------------------------------
+        // Below here deprecated.
+        //----------------------------------------------------------
+        /*
+        if (LifeTimeValues.dbsurvey != null) {
+            DesignTabs variable = new DesignTabs();
+            variable.setElectraObject(electra);
+            variable.setDataBaseName(LifeTimeValues.dbsurvey);
+            try { 
+                variable.ensureTables();
+                System.out.println("Tables in " + LifeTimeValues.dbsurvey + " Ensured");
+            }
+            catch (Exception e) {
+                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbsurvey + " tables error");
+                System.out.println(e.getMessage());
+            }            
+        }
+        */
+        //----------------------------------------------------------
+        /*
         if (LifeTimeValues.dbmetrics != null) {
             MetricQueryInterface metric = new MetricQueryInterface();
             metric.setElectraObject(electra);
@@ -189,7 +270,9 @@ public class ContextListener implements ServletContextListener {
                 System.out.println(e.getMessage());
             }            
         }
+        */
         //----------------------------------------------------------
+        /*
         if (LifeTimeValues.dbsurvey != null) {
             SurveyTabs survey = new SurveyTabs();
             survey.setElectraObject(electra);
@@ -203,34 +286,7 @@ public class ContextListener implements ServletContextListener {
                 System.out.println(e.getMessage());
             }            
         }
-        //----------------------------------------------------------
-        if (LifeTimeValues.dbaccess != null) {
-            AccessLambda accesslambda = new AccessLambda();
-            accesslambda.setElectraObject(electra);
-            accesslambda.setDataBaseName(LifeTimeValues.dbaccess);
-            try { 
-                accesslambda.ensureTables();
-                System.out.println("Tables in " + LifeTimeValues.dbaccess + " Ensured");
-            }
-            catch (Exception e) {
-                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbaccess + " tables error");
-                System.out.println(e.getMessage());
-            }            
-        }
-        //----------------------------------------------------------
-        if (LifeTimeValues.dbpublication != null) {
-            PubsTables pubs = new PubsTables();
-            pubs.setElectraObject(electra);
-            pubs.setDataBaseName(LifeTimeValues.dbpublication);
-            try { 
-                pubs.ensureTables();
-                System.out.println("Tables in " + LifeTimeValues.dbpublication + " Ensured");
-            }
-            catch (Exception e) {
-                System.out.println("ERROR: Ensuring " + LifeTimeValues.dbpublication + " tables error");
-                System.out.println(e.getMessage());
-            }            
-        }
+        */
         //----------------------------------------------------------
         electra.disposeDBConnection();
         //----------------------------------------------------------

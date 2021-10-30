@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.AppException;
+import methionine.auth.AuthErrorCodes;
 import methionine.auth.Session;
 import methionine.auth.User;
 //***************************************************************************
@@ -50,7 +51,7 @@ public class WebFrontUserDet extends WebFrontAlpha{
             back.setUser(user);
         }
         catch (AppException e) {
-            if (e.getErrorCode() != AppException.USERNOTFOUND) {
+            if (e.getErrorCode() != AuthErrorCodes.USERNOTFOUND) {
                 back.setErrorMessageCode(WebBackAlpha.ERRINTERNAL);
                 //----------------------------------------------
                 System.out.println("Failed to get user (Unexpected error code) (Web)");

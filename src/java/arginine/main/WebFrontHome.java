@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 import methionine.auth.User;
 import methionine.project.Project;
-import serine.blogging.publication.PostRecord;
-import serine.webmedia.WebMediaList;
 //***************************************************************************
 @WebServlet(name = "WebFrontHome", urlPatterns = {WebFrontHome.PAGE}, loadOnStartup=1)
 public class WebFrontHome extends WebFrontAlpha {
@@ -24,8 +22,6 @@ public class WebFrontHome extends WebFrontAlpha {
         if (this.toSSLIfLoggedIn(flowbeta)) return;
         if (this.toNonSSLIfNotLoggedIn(flowbeta)) return;
         //===================================================================
-        WebMediaList medlist = flowbeta.getAurigaObject().mediaList();
-        //===================================================================
         Session session = flowbeta.getSession();
         User lggedinuser = flowbeta.getLogedUser();
         Project project = flowbeta.getCurrentProject();
@@ -34,8 +30,6 @@ public class WebFrontHome extends WebFrontAlpha {
         back.setDisplayCustom(lggedinuser, project);
         back.setLoginToken(session.getLoginToken());
         try {
-            PostRecord[] posts = flowbeta.getAurigaObject().getPubsLambda().getPostRecords();
-            back.setPosts(posts);
         }
         catch (Exception e) {
             //----------------------------------------------

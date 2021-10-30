@@ -78,9 +78,6 @@
             </div>
             <div style="flex: 2; text-align: right; font-size: 12px; display: flex; flex-direction: column-reverse">
                 <div>
-                <% if (lgdinuser.isAdmin()) { %>
-                <a href="<%=hback.postingURL()%>" style="color: #030; text-decoration: none">Posting</a>
-                <% } %>
                 </div>
             </div>
         </div>
