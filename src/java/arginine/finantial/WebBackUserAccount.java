@@ -3,7 +3,6 @@ package arginine.finantial;
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;
 import methionine.billing.LedgerEntry;
-import methionine.billing.Payment;
 import methionine.auth.User;
 //***************************************************************************
 public class WebBackUserAccount extends WebBackAlpha {
@@ -28,28 +27,12 @@ public class WebBackUserAccount extends WebBackAlpha {
     public String jLedgerEntries () {
         return JBilling.getLedgerEntryList(getEntries()).toString();
     }
-    //===============================================================
-    Payment[] payments = null;
-    void setPayments (Payment[] payments) { this.payments = payments; }
-    public Payment[] getPayments () {
-        if (payments == null) return new Payment[0];
-        return payments;
-    }
-    public String jPayments () {
-        return JBilling.getPaymentList(this.getPayments()).toString();
-    }
     //***************************************************************
     public String addLedgerEntryURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(ApiAddLedgerEntry.URL);
         return url.toString();
     } 
-    //===============================================================
-    public String createPaymentURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(ApiCreatePayment.URL);
-        return url.toString();
-    }
     //===============================================================
     public String getLedgerURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());

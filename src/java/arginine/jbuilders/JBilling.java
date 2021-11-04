@@ -5,7 +5,6 @@ import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methionine.billing.UsagePeriod;
 import methionine.billing.LedgerEntry;
-import methionine.billing.Payment;
 //***************************************************************************
 public class JBilling {
     //***********************************************************************
@@ -62,42 +61,6 @@ public class JBilling {
         jentry.addPair(new JsonPair(SIZE, entry.entrySize()));
         jentry.addPair(new JsonPair(BILLINGREF, entry.billingRef()));
         return jentry;
-    }
-    //***********************************************************************
-    public static JsonObject getPaymentList (Payment[] payments) {
-        JsonObject jpayments = new JsonObject();
-        JsonArray jarray = new JsonArray();
-        for (Payment payment : payments) {
-            jarray.addPair(new JsonPair(PAYMENTID, payment.paymentID()));
-            jarray.addPair(new JsonPair(PAYMENTCODE, payment.getCode()));
-            jarray.addPair(new JsonPair(DATE, payment.getDate()));
-            jarray.addPair(new JsonPair(CURRENCY, payment.getCurrency()));
-            jarray.addPair(new JsonPair(AMOUNT, payment.getAmount()));
-            jarray.addPair(new JsonPair(SIZE, payment.getSize()));
-            jarray.addPair(new JsonPair(SPENT, payment.getSpent()));
-            jarray.addPair(new JsonPair(REMAIN, payment.getRemain()));
-            jarray.addPair(new JsonPair(SPENTAMOUNT, payment.getSpentSolid()));
-            jarray.addPair(new JsonPair(REMAINAMOUNT, payment.getRemainSolid()));
-            jarray.addToArray();
-        }
-        jpayments.addPair(new JsonPair(COUNT, jarray.getCount()));
-        jpayments.addPair(new JsonPair(ITEMS, jarray.getArray()));
-        return jpayments;
-    }
-    //=======================================================================
-    public static JsonObject getPayment (Payment payment) {
-        JsonObject jpayment = new JsonObject();
-        jpayment.addPair(new JsonPair(PAYMENTID, payment.paymentID()));
-        jpayment.addPair(new JsonPair(PAYMENTCODE, payment.getCode()));
-        jpayment.addPair(new JsonPair(DATE, payment.getDate()));
-        jpayment.addPair(new JsonPair(CURRENCY, payment.getCurrency()));
-        jpayment.addPair(new JsonPair(AMOUNT, payment.getAmount()));
-        jpayment.addPair(new JsonPair(SIZE, payment.getSize()));
-        jpayment.addPair(new JsonPair(SPENT, payment.getSpent()));
-        jpayment.addPair(new JsonPair(REMAIN, payment.getRemain()));
-        jpayment.addPair(new JsonPair(SPENTAMOUNT, payment.getSpentSolid()));
-        jpayment.addPair(new JsonPair(REMAINAMOUNT, payment.getRemainSolid()));
-        return jpayment;
     }
     //***********************************************************************
     public static JsonObject usagePeriods (UsagePeriod[] periods) {
