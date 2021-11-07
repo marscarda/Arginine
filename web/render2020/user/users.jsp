@@ -94,7 +94,7 @@ function addUser (user) {
     column = document.createElement("div");
     column.setAttribute("style", "flex: 3; font-size: 15px; color: #666");
     link = document.createElement("a");
-    link.setAttribute("href", "<%=back.userAccountURL()%>/" + user.userid);
+    link.setAttribute("href", "<%=back.userFinantialURL()%>/" + user.userid);
     link.setAttribute("style", "color: #0055ff; text-decoration: none");
     link.innerHTML = "Account";
     column.appendChild(link);
