@@ -71,7 +71,6 @@ public class ApiAddCredit extends ApiAlpha {
             System.out.println(e.getMessage());
             //----------------------------------------------
         }
-    
         //==========================================================
         this.finalizeJob(flowalpha);
         this.destroyFlowAlpha(flowalpha);
