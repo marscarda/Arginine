@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
+import methionine.auth.User;
 //***************************************************************************
 @WebServlet(name = "WebFrontUserFinantial", urlPatterns = {WebFrontUserFinantial.URLPATTERN}, loadOnStartup=1)
 public class WebFrontUserFinantial extends WebFrontAlpha {
@@ -29,11 +30,28 @@ public class WebFrontUserFinantial extends WebFrontAlpha {
             return;
         }
         //===================================================================
+        long userid = 0;
+        try { userid = Long.parseLong(this.getURLsParamPart(request)); } catch (Exception e) {}
+        //===================================================================
         WebBackUserFinantial back = new WebBackUserFinantial();
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         
+        
+        try{
+            
+            User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
+            back.setUser(user);
+            
+
+        }
+        catch (Exception e) {
+            //----------------------------------------------
+            System.out.println("Failed to get acount for user (Web) vfwqlmc");
+            System.out.println(e.getMessage());
+            //----------------------------------------------
+        }
         
         
         

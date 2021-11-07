@@ -9,6 +9,7 @@ body {
     margin-bottom: 0px;
     font-family: 'General';
 }
+a { text-decoration: none; }
 div.content {
     padding-top: 70px;
     padding-left: 30px;
