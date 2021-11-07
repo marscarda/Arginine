@@ -1,18 +1,20 @@
-package arginine.finantial;
+package arginine.depr_finantial;
 //***************************************************************************
 import arginine.ApiAlpha;
 import arginine.FlowAlpha;
-import static arginine.finantial.ApiFetchUsagePeriods.OPEN;
+import arginine.jbuilders.JBilling;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
+import methionine.billing.LedgerEntry;
 import methionine.auth.Session;
 //***************************************************************************
-@WebServlet(name = "ApiCutUsagePeriods", urlPatterns = {ApiCutUsagePeriods.URL}, loadOnStartup=1)
-public class ApiCutUsagePeriods extends ApiAlpha {
-    public static final String URL = "/account/cutusageperiods";
+@WebServlet(name = "ApiFetchLedger", urlPatterns = {ApiFetchLedger.URL}, loadOnStartup=1)
+public class ApiFetchLedger extends ApiAlpha {
+    public static final String URL = "/account/fetchledger";
+    public static final String JLEDGER = "ledger";
     //***********************************************************************
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -29,20 +31,20 @@ public class ApiCutUsagePeriods extends ApiAlpha {
             return;
         }
         //==========================================================
-        int count = 0;
-        try { count = Integer.parseInt(req.getParameter(COUNT)); } catch(Exception e) {}
+        long userid = 0;
+        try { userid = Long.parseLong(req.getParameter(USERID)); } catch (Exception e) {}
         try {
-            flowalpha.getAurigaObject().getBillingLambda().cutUsagePeriods(count);
+            LedgerEntry[] entries = flowalpha.getAurigaObject().getBillingLambda().getLedgerForUserID(userid);
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
-            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Periods Cut Done"));
-            //-------------------------------------------------------
+            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "User list"));
+            jsonresp.addPair(new JsonPair(JLEDGER, JBilling.getLedgerEntryList(entries)));
             this.sendResponse(resp, jsonresp);
-            //-------------------------------------------------------
-        }        
+            //----------------------------------------
+        }
         catch (Exception e) {
             sendServerErrorResponse(resp);
-            System.out.println("Unable to cut usage periods Api nmnwrfhg");
+            System.out.println("Unable to fetch ledger mrksgqwax");
             System.out.println(e.getMessage());            
         }
         //==========================================================

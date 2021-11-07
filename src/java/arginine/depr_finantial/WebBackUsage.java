@@ -1,4 +1,4 @@
-package arginine.finantial;
+package arginine.depr_finantial;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;

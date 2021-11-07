@@ -1,25 +1,17 @@
-package arginine.finantial;
+package arginine.depr_finantial;
 //***************************************************************************
 import arginine.ApiAlpha;
 import arginine.FlowAlpha;
-import arginine.jbuilders.JBilling;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
-import methionine.billing.UsagePeriod;
-import methionine.billing.UsageQueryData;
 import methionine.auth.Session;
 //***************************************************************************
-@WebServlet(name = "ApiFetchUsagePeriods", urlPatterns = {ApiFetchUsagePeriods.URL}, loadOnStartup=1)
-public class ApiFetchUsagePeriods extends ApiAlpha {
-    public static final String URL = "/account/fetchusageperiods";
-    public static final String OPEN = "open";
-    public static final String CLOSED = "closed";
-    public static final String BILLED = "billed";
-    public static final String NOTBILLED = "notbilled";
-    public static final String JPERIODS = "periods";
+@WebServlet(name = "ApiDoBilling", urlPatterns = {ApiDoBilling.URL}, loadOnStartup=1)
+public class ApiDoBilling extends ApiAlpha {
+    public static final String URL = "/account/dobilling";
     //***********************************************************************
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -36,25 +28,20 @@ public class ApiFetchUsagePeriods extends ApiAlpha {
             return;
         }
         //==========================================================
-        UsageQueryData querydata = new UsageQueryData();
-        try { querydata.setOpen(Integer.parseInt(req.getParameter(OPEN))); } catch(Exception e) {}
-        try { querydata.setClosed(Integer.parseInt(req.getParameter(CLOSED))); } catch(Exception e) {}
-        try { querydata.setBilled(Integer.parseInt(req.getParameter(BILLED))); } catch(Exception e) {}
-        try { querydata.setNoBilled(Integer.parseInt(req.getParameter(NOTBILLED))); } catch(Exception e) {}
+        int count = 0;
+        try { count = Integer.parseInt(req.getParameter(COUNT)); } catch(Exception e) {}
         try {
-            //----------------------------------------
-            UsagePeriod[] periods = flowalpha.getAurigaObject().getBillingLambda().getBillingPeriods(querydata);
-            //----------------------------------------
+            flowalpha.getAurigaObject().getBillingLambda().doBilling(count);
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
-            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "User list"));
-            jsonresp.addPair(new JsonPair(JPERIODS, JBilling.usagePeriods(periods)));
+            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Billing done"));
+            //-------------------------------------------------------
             this.sendResponse(resp, jsonresp);
-            //----------------------------------------
-        }    
+            //-------------------------------------------------------
+        }        
         catch (Exception e) {
             sendServerErrorResponse(resp);
-            System.out.println("Unable to fetch usage periods Api nmjkjhg");
+            System.out.println("Unable to bill usage periods Api nmkiofhg");
             System.out.println(e.getMessage());            
         }
         //==========================================================

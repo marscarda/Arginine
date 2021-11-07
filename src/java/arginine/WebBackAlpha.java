@@ -1,6 +1,6 @@
 package arginine;
 //***************************************************************************
-import arginine.finantial.WebFrontUsage;
+import arginine.depr_finantial.WebFrontUsage;
 import arginine.main.WebFrontAuth;
 import arginine.main.WebFrontHome;
 import arginine.main.WebFrontLogout;

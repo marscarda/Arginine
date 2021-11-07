@@ -1,4 +1,4 @@
-package arginine.finantial;
+package arginine.depr_finantial;
 //***************************************************************************
 import arginine.ApiAlpha;
 import arginine.FlowAlpha;

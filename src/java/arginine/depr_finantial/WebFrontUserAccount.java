@@ -1,18 +1,19 @@
-package arginine.finantial;
+package arginine.depr_finantial;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import methionine.billing.UsagePeriod;
-import methionine.billing.UsageQueryData;
+import methionine.billing.LedgerEntry;
 import methionine.auth.Session;
+import methionine.auth.User;
 //***************************************************************************
-@WebServlet(name = "WebFrontUsage", urlPatterns = {WebFrontUsage.PAGE}, loadOnStartup=1)
-public class WebFrontUsage extends WebFrontAlpha {
+@WebServlet(name = "WebFrontUserAccount", urlPatterns = {WebFrontUserAccount.URLPATTERN}, loadOnStartup=1)
+public class WebFrontUserAccount extends WebFrontAlpha {
     //=======================================================================
-    public static final String PAGE = "/account/usagebilling";
+    public static final String PAGE = "/account/useraccount";
+    public static final String URLPATTERN = PAGE + "/*";
     //=======================================================================
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -39,25 +40,31 @@ public class WebFrontUsage extends WebFrontAlpha {
             return;
         }
         //===================================================================
-        WebBackUsage back = new WebBackUsage();
+        long userid = 0;
+        try { userid = Long.parseLong(this.getURLsParamPart(request)); } catch (Exception e) {}
+        //===================================================================
+        WebBackUserAccount back = new WebBackUserAccount();
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try{
-            UsageQueryData querydata = new UsageQueryData();
-            UsagePeriod[] periods = flowbeta.getAurigaObject().getBillingLambda().getBillingPeriods(querydata);
-            back.setPeriods(periods);
+            User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
+            int totalbalance = flowbeta.getAurigaObject().getBillingLambda().getTotalBalanceForUserID(userid);
+            LedgerEntry[] ledger = flowbeta.getAurigaObject().getBillingLambda().getLedgerForUserID(userid);
+            back.setUser(user);
+            back.setTotalBalance(totalbalance);
+            back.setLedger(ledger);
         }
         catch (Exception e) {
             //----------------------------------------------
-            System.out.println("Web page usage bghfgfh");
+            System.out.println("Failed to get acount for user (Web) vfwqlmc");
             System.out.println(e.getMessage());
             //----------------------------------------------
         }
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
-        this.dispatchNormal("/render2020/finantial/usage.jsp", request, response);
+        this.dispatchNormal("/render2020/finantial/useraccount.jsp", request, response);
         //===================================================================
         this.finallJob(flowbeta);
         this.destroyFlowBeta(flowbeta);

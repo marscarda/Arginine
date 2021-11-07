@@ -1,4 +1,4 @@
-package arginine.finantial;
+package arginine.depr_finantial;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;
@@ -18,7 +18,7 @@ public class WebBackUserAccount extends WebBackAlpha {
     void setTotalBalance (int balance) { totalbalance = balance; }
     public int getTotalBalance () { return totalbalance; }
     //===============================================================
-    LedgerEntry [] entries = null;
+    LedgerEntry[] entries = null;
     void setLedger (LedgerEntry[] entries) { this.entries = entries; }
     public LedgerEntry[] getEntries () {
         if (entries == null) return new LedgerEntry[0];
