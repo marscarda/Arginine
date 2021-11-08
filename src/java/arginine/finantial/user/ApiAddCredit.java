@@ -1,10 +1,8 @@
 package arginine.finantial.user;
 //***************************************************************************
 import arginine.ApiAlpha;
-import static arginine.ApiAlpha.RESULT;
-import static arginine.ApiAlpha.RESULTDESCRIPTION;
-import static arginine.ApiAlpha.RESULTOK;
 import arginine.FlowAlpha;
+import arginine.jbuilders.JBilling;
 import histidine.billing.ExcLedger;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +20,7 @@ public class ApiAddCredit extends ApiAlpha {
     public static final String CONVERTAMOUNT = "moneyamount";
     public static final String DESCRIPTION = "description";
     public static final String URAMOUNT = "uramount";
+    public static final String JENTRY = "entry";
    //************************************************************************
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
@@ -60,7 +59,7 @@ public class ApiAddCredit extends ApiAlpha {
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
             jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Ledger Entry Added"));
             //-------------------------------------------------------
-            
+            jsonresp.addPair(new JsonPair(JENTRY, JBilling.getLedgerEntry(ledgeritem)));
             //-------------------------------------------------------
             this.sendResponse(resp, jsonresp);
         }

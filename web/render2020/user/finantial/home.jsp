@@ -21,6 +21,7 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
 var ledger = <%=back.jLedgerEntries()%>;
+var entrynumber = 1;
 let openAddCredit = () => {
     document.getElementById('divaddcredit').style.height = '100%';
     document.getElementById('divaddcredit').style.width = '100%';
@@ -33,11 +34,7 @@ let closeAddCredit = () => {
     document.getElementById('divaddcredit').style.width = '0px';
     document.getElementById('formdivaddcredit').reset();
 }
-
-
-
-
-function addCredit () {
+let addCredit = () => {
     var form = document.getElementById('formdivaddcredit');
     var formdata = new FormData (form);
     var req = new HttpRequest();
@@ -55,11 +52,11 @@ function addCredit () {
             return;
         }
         closeAddCredit();
-        addLedgerEntry (objresp.entry, true);
+        addEntry(objresp.entry, true);
         var turnon = new ElementFadeIn();
-        turnon.setElement(document, 'ledgerentry' + entryid);
+        turnon.setElement(document, 'entry' + entrynumber);
         turnon.start();
-        entryid++;
+        entrynumber++;
     }
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
@@ -74,23 +71,95 @@ function addCredit () {
         alert (err.getMessage);
     }
 }
-
-
-
-
-
-
+let fillLedger = () => {
+    if (ledger.count === 0) return;
+    var div = document.getElementById('ledger');
+    while (div.hasChildNodes())
+        div.removeChild(div.lastChild);
+    for (n = 0; n < ledger.count; n++) {
+        addEntry(ledger.items[n], false);
+        entrynumber++;
+    }
+}
+let addEntry = (entry, isnew) => {
+    var top;
+    var img;
+    var line;
+    var column;
+    var subline;
+    var cell;
+    var bartop;
+    var barprop;
+    var link;
+    /*---------------------------------------------------*/
+    top = document.createElement("div");
+    top.setAttribute('id', 'entry' + entrynumber);
+    top.setAttribute('style', 'padding: 8px 0px; border-bottom: solid 1px #ddd');
+    if (isnew) top.style.opacity = 0;
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row');
+    /*---------------------------------------------------*/
+    /*Column Date*/{
+        column = document.createElement("div");
+        column.style.width = "110px";
+        column.style.fontSize = "15px";
+        column.style.color = "#666";
+        column.style.textAlign = "left";
+        column.innerHTML = decodeURIComponent(entry.date);
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*Column Conversion*/{
+        column = document.createElement("div");
+        column.style.width = "180px";
+        column.style.fontSize = "12px";
+        column.style.color = "#666";
+        column.style.display = "flex";
+        column.style.flexDirection = "row";
+        cell = document.createElement('div');
+        cell.style.width = "60px";
+        cell.style.textAlign = "left";
+        cell.innerHTML = decodeURIComponent(entry.conversioncurrency);
+        column.appendChild(cell);
+        cell = document.createElement('div');
+        cell.style.width = "60px";
+        cell.style.textAlign = "right";
+        cell.innerHTML = decodeURIComponent(entry.conversionamount);
+        column.appendChild(cell);
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*Column Description*/{
+        column = document.createElement("div");
+        column.style.width = "600px"
+        column.style.fontSize = "14px";
+        column.style.color = "666#";
+        column.innerHTML = decodeURIComponent(entry.description);
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*Colum Amount*/{
+        column = document.createElement("div");
+        column.style.flex = 1;
+        column.style.fontSize = "14px";
+        column.style.fontWeight = 600;
+        column.style.color = "#555";
+        column.style.textAlign = "right";
+        column.innerHTML = decodeURIComponent(entry.amount);
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    top.appendChild(line);
+    if (isnew)
+        document.getElementById('ledger').insertBefore(top, document.getElementById('ledger').childNodes[0]);
+    else document.getElementById('ledger').appendChild(top);
+    /*---------------------------------------------------*/
+}
 </script>
 <title>User Account</title>
 </head>
 <body>
-    
 <%@include file="../../main/header.jsp" %>
-
-
-
-
-
 <div id="divaddcredit" class="popupformmodal">
     <div id="divaddcreditbox" class="formbox" style="width: 500px">
         <div style="color: #666666; font-size: 17px; margin-bottom: 20px">Give Credit</div>
@@ -105,37 +174,29 @@ function addCredit () {
             <input type="text" name="<%=ApiAddCredit.URAMOUNT%>" placeholder="Quantity of <%=UsageCost.CURRENCYNAME%>" />
             <div style="height: 35px"></div>
         </form>
-            
-            
-            
-            
         <button class="greenwidththin" onclick="addCredit(); return false;">Create</button>
         <button class="graywidththin" onclick="closeAddCredit(); return false;">Cancel</button>
-        
-        
-        
     </div>
 </div>
-
-
-
-
-
-
-
 <div class="content">
-    
-    
-    
-    
-    <a href="#" style="color: #05f" onclick="openAddCredit(); return false;">Add Credit</a>
-    
-    
-    
-    
-    
-    
-    
+<div style="margin-top: 40px; display: flex; flex-direction: row">
+    <div style="width: 170px">
+        <a href="#" style="color: #05f" onclick="openAddCredit(); return false;">Add Credit</a>
+    </div>
+    <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>
+    <div style="flex: 1; margin-left: 30px">
+        <div style="padding: 8px 0px; border-bottom: solid 1px #ddd; display: flex; flex-direction: row">
+            <div style="width: 110px">Date</div>
+            <div style="width: 180px">Conversion</div>
+            <div style="width: 600px">Description</div>
+            <div style="flex: 1; text-align: right">Amount</div>
+        </div>
+        <div id="ledger"></div>
+    </div>    
+</div>    
 </div>
 </body>
+<script>
+    fillLedger();
+</script>
 </html>

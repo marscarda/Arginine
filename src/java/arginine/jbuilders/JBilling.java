@@ -12,20 +12,13 @@ public class JBilling {
     public static final String COUNT = "count";
     public static final String ITEMS = "items";
     //-----------------------------------------------------------------------
-    public static final String PAYMENTID = "paymentid";
-    public static final String PAYMENTCODE = "paymentcode";
     public static final String USERID = "userid";
     public static final String DATE = "date";
-    public static final String SIZE = "size";
-    public static final String SPENT = "spent";
-    public static final String REMAIN = "remain";
     public static final String CONVERTCURRENCY = "conversioncurrency";
     public static final String CONVERTAMOUNT = "conversionamount";
-
     public static final String AMOUNT = "amount";
     public static final String DESCRIPTION = "description";
     public static final String REFERENCE = "reference";
-    
     public static final String IDECODE = "idcode";
     public static final String PROJECTID = "projectid";
     public static final String DATESTART = "datestart";
@@ -54,15 +47,16 @@ public class JBilling {
         jledger.addPair(new JsonPair(ITEMS, jarray.getArray()));
         return jledger;
     }
-    //***********************************************************************
-    public static JsonObject getLedgerEntry (LedgerEntry entry) {
+    //=======================================================================
+    public static JsonObject getLedgerEntry (LedgerItem item) {
         JsonObject jentry = new JsonObject();
-        jentry.addPair(new JsonPair(DATE, entry.getDate()));
-        jentry.addPair(new JsonPair(USERID, entry.userID()));
-        jentry.addPair(new JsonPair(PAYMENTCODE, entry.paymentCode()));
-        jentry.addPair(new JsonPair(DESCRIPTION, entry.description()));
-        jentry.addPair(new JsonPair(SIZE, entry.entrySize()));
-        jentry.addPair(new JsonPair(BILLINGREF, entry.billingRef()));
+        jentry.addPair(new JsonPair(DATE, item.getDate()));
+        jentry.addPair(new JsonPair(USERID, item.userID()));
+        jentry.addPair(new JsonPair(CONVERTCURRENCY, item.conversionCurrency()));
+        jentry.addPair(new JsonPair(CONVERTAMOUNT, item.conversionAmount()));
+        jentry.addPair(new JsonPair(DESCRIPTION, item.getDescription()));
+        jentry.addPair(new JsonPair(AMOUNT, item.getAmount()));
+        jentry.addPair(new JsonPair(REFERENCE, item.getReference()));
         return jentry;
     }
     //***********************************************************************
