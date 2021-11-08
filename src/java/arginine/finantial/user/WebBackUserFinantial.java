@@ -1,7 +1,9 @@
 package arginine.finantial.user;
 //***************************************************************************
 import arginine.WebBackAlpha;
+import arginine.jbuilders.JBilling;
 import methionine.auth.User;
+import methionine.billing.LedgerItem;
 //***************************************************************************
 public class WebBackUserFinantial extends WebBackAlpha {
     //***************************************************************
@@ -10,6 +12,16 @@ public class WebBackUserFinantial extends WebBackAlpha {
     public User getUser () {
         if (user == null) return new User();
         return user;
+    }
+    //***************************************************************
+    LedgerItem[] ledger = null;
+    void setLedger (LedgerItem[] ledger) { this.ledger = ledger; }
+    public LedgerItem[] getLedger () {
+        if (ledger == null) return new LedgerItem[0];
+        return ledger;
+    }
+    public String jLedgerEntries () {
+        return JBilling.getLedger(getLedger()).toString();
     }
     //***************************************************************
     public String addCreditURL () {

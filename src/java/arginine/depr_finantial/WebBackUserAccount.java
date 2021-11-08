@@ -1,7 +1,6 @@
 package arginine.depr_finantial;
 //***************************************************************************
 import arginine.WebBackAlpha;
-import arginine.jbuilders.JBilling;
 import methionine.billing.LedgerEntry;
 import methionine.auth.User;
 //***************************************************************************
@@ -24,15 +23,12 @@ public class WebBackUserAccount extends WebBackAlpha {
         if (entries == null) return new LedgerEntry[0];
         return entries;
     }
+    /*
     public String jLedgerEntries () {
         return JBilling.getLedgerEntryList(getEntries()).toString();
     }
+    */
     //***************************************************************
-    public String addLedgerEntryURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(ApiAddLedgerEntry.URL);
-        return url.toString();
-    } 
     //===============================================================
     public String getLedgerURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());

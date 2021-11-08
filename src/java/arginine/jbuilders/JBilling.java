@@ -5,6 +5,7 @@ import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methionine.billing.UsagePeriod;
 import methionine.billing.LedgerEntry;
+import methionine.billing.LedgerItem;
 //***************************************************************************
 public class JBilling {
     //***********************************************************************
@@ -18,12 +19,13 @@ public class JBilling {
     public static final String SIZE = "size";
     public static final String SPENT = "spent";
     public static final String REMAIN = "remain";
-    public static final String CURRENCY = "currency";
+    public static final String CONVERTCURRENCY = "conversioncurrency";
+    public static final String CONVERTAMOUNT = "conversionamount";
+
     public static final String AMOUNT = "amount";
-    public static final String SPENTAMOUNT = "spentamount";
-    public static final String REMAINAMOUNT = "remainamount";
     public static final String DESCRIPTION = "description";
-    //public static final String STATUS = "status";
+    public static final String REFERENCE = "reference";
+    
     public static final String IDECODE = "idcode";
     public static final String PROJECTID = "projectid";
     public static final String DATESTART = "datestart";
@@ -35,23 +37,24 @@ public class JBilling {
     public static final String FINALCOST = "finalcost";
     public static final String BILLINGREF = "billingref";
     //***********************************************************************
-    public static JsonObject getLedgerEntryList (LedgerEntry[] entries) {
-        JsonObject jentries = new JsonObject();
+    public static JsonObject getLedger (LedgerItem[] ledger) {
+        JsonObject jledger = new JsonObject();
         JsonArray jarray = new JsonArray();
-        for (LedgerEntry entry : entries) {
-            jarray.addPair(new JsonPair(DATE, entry.getDate()));
-            jarray.addPair(new JsonPair(USERID, entry.userID()));
-            jarray.addPair(new JsonPair(PAYMENTCODE, entry.paymentCode()));
-            jarray.addPair(new JsonPair(DESCRIPTION, entry.description()));
-            jarray.addPair(new JsonPair(SIZE, entry.entrySize()));
-            jarray.addPair(new JsonPair(BILLINGREF, entry.billingRef()));
+        for (LedgerItem item : ledger) {
+            jarray.addPair(new JsonPair(DATE, item.getDate()));
+            jarray.addPair(new JsonPair(USERID, item.userID()));
+            jarray.addPair(new JsonPair(CONVERTCURRENCY, item.conversionCurrency()));
+            jarray.addPair(new JsonPair(CONVERTAMOUNT, item.conversionAmount()));
+            jarray.addPair(new JsonPair(DESCRIPTION, item.getDescription()));
+            jarray.addPair(new JsonPair(AMOUNT, item.getAmount()));
+            jarray.addPair(new JsonPair(REFERENCE, item.getReference()));
             jarray.addToArray();
         }
-        jentries.addPair(new JsonPair(COUNT, jarray.getCount()));
-        jentries.addPair(new JsonPair(ITEMS, jarray.getArray()));
-        return jentries;
+        jledger.addPair(new JsonPair(COUNT, jarray.getCount()));
+        jledger.addPair(new JsonPair(ITEMS, jarray.getArray()));
+        return jledger;
     }
-    //=======================================================================
+    //***********************************************************************
     public static JsonObject getLedgerEntry (LedgerEntry entry) {
         JsonObject jentry = new JsonObject();
         jentry.addPair(new JsonPair(DATE, entry.getDate()));

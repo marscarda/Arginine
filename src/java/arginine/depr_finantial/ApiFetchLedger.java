@@ -34,12 +34,14 @@ public class ApiFetchLedger extends ApiAlpha {
         long userid = 0;
         try { userid = Long.parseLong(req.getParameter(USERID)); } catch (Exception e) {}
         try {
+            /*
             LedgerEntry[] entries = flowalpha.getAurigaObject().getBillingLambda().getLedgerForUserID(userid);
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
             jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "User list"));
             jsonresp.addPair(new JsonPair(JLEDGER, JBilling.getLedgerEntryList(entries)));
             this.sendResponse(resp, jsonresp);
+            */
             //----------------------------------------
         }
         catch (Exception e) {

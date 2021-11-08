@@ -20,6 +20,7 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
+var ledger = <%=back.jLedgerEntries()%>;
 let openAddCredit = () => {
     document.getElementById('divaddcredit').style.height = '100%';
     document.getElementById('divaddcredit').style.width = '100%';

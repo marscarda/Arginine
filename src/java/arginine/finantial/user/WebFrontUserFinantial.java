@@ -2,11 +2,13 @@ package arginine.finantial.user;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.WebFrontAlpha;
+import histidine.billing.ExcLedger;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 import methionine.auth.User;
+import methionine.billing.LedgerItem;
 //***************************************************************************
 @WebServlet(name = "WebFrontUserFinantial", urlPatterns = {WebFrontUserFinantial.URLPATTERN}, loadOnStartup=1)
 public class WebFrontUserFinantial extends WebFrontAlpha {
@@ -37,14 +39,13 @@ public class WebFrontUserFinantial extends WebFrontAlpha {
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
-        
-        
         try{
-            
+            ExcLedger exec = new ExcLedger();
+            exec.setAuriga(flowbeta.getAurigaObject());
             User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
+            LedgerItem[] ledger = exec.getLedgerByUser(userid, session.getUserId());
             back.setUser(user);
-            
-
+            back.setLedger(ledger);
         }
         catch (Exception e) {
             //----------------------------------------------
@@ -52,12 +53,6 @@ public class WebFrontUserFinantial extends WebFrontAlpha {
             System.out.println(e.getMessage());
             //----------------------------------------------
         }
-        
-        
-        
-        
-        
-        
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
