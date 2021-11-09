@@ -1,11 +1,58 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="arginine.ApiAlpha"%>
+<%@page import="arginine.WebFrontStatic"%>
+<%@page import="arginine.WebFrontAlpha"%>
+<%@page import="arginine.finantial.WebBackFinancialPanel"%>
+<% WebBackFinancialPanel back = (WebBackFinancialPanel)request.getAttribute(WebFrontAlpha.PAGEATTRKEY); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JSP Page</title>
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSROOT%>">
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSFORM%>">
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSPOPUP%>">
+<script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
+<script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
+<script>
+let closeUsagePeriods = () => {
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showNotice('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showNotice('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showNotice(objresp.description, '#ff3333');
+            return;
+        }
+        showNotice('Closing periods started', '#290');
+    }
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.setURL('<%=back.closePeriodsURL()%>');
+    try { req.executepost(); }
+    catch(err) {
+        alert (err.getMessage);
+    }
+}
+</script>
+<title>Financial panel</title>
 </head>
 <body>
-<h1>Hello World!</h1>
+<%@include file="../main/header.jsp" %>
+<div class="content">
+    <h1>Financial panel</h1>
+    
+    <div>
+        <a href="#" style="color: #05f" onclick="closeUsagePeriods(); return false">Close Open Usage Periods</a>
+    </div>
+    
+    
+    
+</div>
 </body>
 </html>
