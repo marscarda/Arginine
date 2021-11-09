@@ -76,6 +76,14 @@
             <div style="flex: 3; text-align: left; font-size: 15px">
                 <a href="<%=hback.usageURL()%>" style="color: #030; text-decoration: none">Usage & Billing</a>
             </div>
+
+
+            <div style="flex: 3; text-align: left; font-size: 15px">
+                <a href="<%=hback.financialURL()%>" style="color: #030; text-decoration: none">Financial</a>
+            </div>
+            
+
+
             <div style="flex: 2; text-align: right; font-size: 12px; display: flex; flex-direction: column-reverse">
                 <div>
                 </div>

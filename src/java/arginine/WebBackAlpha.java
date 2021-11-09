@@ -1,6 +1,7 @@
 package arginine;
 //***************************************************************************
 import arginine.depr_finantial.WebFrontUsage;
+import arginine.finantial.WebFrontFinancialPanel;
 import arginine.main.WebFrontAuth;
 import arginine.main.WebFrontHome;
 import arginine.main.WebFrontLogout;
@@ -74,6 +75,11 @@ public class WebBackAlpha {
     }
     //=======================================================================
     
+    public String financialURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontFinancialPanel.PAGE);
+        return url.toString();
+    }
     
 
     //***********************************************************************
@@ -85,20 +91,6 @@ public class WebBackAlpha {
         url.append(WebFrontHome.PAGE);
         return url.toString();
     }
-    //=======================================================================
-    /*
-    public String universesURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(WebFrontUniverses.PAGE);
-        return url.toString();
-    }
-    //=======================================================================
-    public String mapRecordsURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(WebFrontMapRecords.PAGE);
-        return url.toString();
-    }
-    */
     //***********************************************************************
 }
 //***************************************************************************
