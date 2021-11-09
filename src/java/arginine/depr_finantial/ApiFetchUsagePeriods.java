@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methionine.billing.UsagePeriod;
-import methionine.billing.UsageQueryData;
 import methionine.auth.Session;
 //***************************************************************************
 @WebServlet(name = "ApiFetchUsagePeriods", urlPatterns = {ApiFetchUsagePeriods.URL}, loadOnStartup=1)
@@ -36,19 +35,19 @@ public class ApiFetchUsagePeriods extends ApiAlpha {
             return;
         }
         //==========================================================
-        UsageQueryData querydata = new UsageQueryData();
-        try { querydata.setOpen(Integer.parseInt(req.getParameter(OPEN))); } catch(Exception e) {}
-        try { querydata.setClosed(Integer.parseInt(req.getParameter(CLOSED))); } catch(Exception e) {}
-        try { querydata.setBilled(Integer.parseInt(req.getParameter(BILLED))); } catch(Exception e) {}
-        try { querydata.setNoBilled(Integer.parseInt(req.getParameter(NOTBILLED))); } catch(Exception e) {}
+        //UsageQueryData querydata = new UsageQueryData();
+        //try { querydata.setOpen(Integer.parseInt(req.getParameter(OPEN))); } catch(Exception e) {}
+        //try { querydata.setClosed(Integer.parseInt(req.getParameter(CLOSED))); } catch(Exception e) {}
+        //try { querydata.setBilled(Integer.parseInt(req.getParameter(BILLED))); } catch(Exception e) {}
+        //try { querydata.setNoBilled(Integer.parseInt(req.getParameter(NOTBILLED))); } catch(Exception e) {}
         try {
             //----------------------------------------
-            UsagePeriod[] periods = flowalpha.getAurigaObject().getBillingLambda().getBillingPeriods(querydata);
+            //UsagePeriod[] periods = flowalpha.getAurigaObject().getBillingLambda().getBillingPeriods(querydata);
             //----------------------------------------
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
             jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "User list"));
-            jsonresp.addPair(new JsonPair(JPERIODS, JBilling.usagePeriods(periods)));
+            //jsonresp.addPair(new JsonPair(JPERIODS, JBilling.usagePeriods(periods)));
             this.sendResponse(resp, jsonresp);
             //----------------------------------------
         }    
