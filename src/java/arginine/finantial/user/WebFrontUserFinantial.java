@@ -2,7 +2,7 @@ package arginine.finantial.user;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.WebFrontAlpha;
-import histidine.billing.ExcLedger;
+import histidine.finance.ExcLedgerBackOfice;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +40,7 @@ public class WebFrontUserFinantial extends WebFrontAlpha {
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try{
-            ExcLedger exec = new ExcLedger();
+            ExcLedgerBackOfice exec = new ExcLedgerBackOfice();
             exec.setAuriga(flowbeta.getAurigaObject());
             User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
             LedgerItem[] ledger = exec.getLedgerByUser(userid, session.getUserId());

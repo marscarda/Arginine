@@ -4,7 +4,6 @@ import mars.jsonsimple.JsonArray;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methionine.billing.UsagePeriod;
-import methionine.billing.LedgerEntry;
 import methionine.billing.LedgerItem;
 //***************************************************************************
 public class JBilling {

@@ -3,7 +3,7 @@ package arginine.finantial.user;
 import arginine.ApiAlpha;
 import arginine.FlowAlpha;
 import arginine.jbuilders.JBilling;
-import histidine.billing.ExcLedger;
+import histidine.finance.ExcLedgerBackOfice;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +52,7 @@ public class ApiAddCredit extends ApiAlpha {
             ledgeritem.setMoney(moneyamount);
             ledgeritem.setDescription(description);
             ledgeritem.setCredit(uramount);
-            ExcLedger exec = new ExcLedger();
+            ExcLedgerBackOfice exec = new ExcLedgerBackOfice();
             exec.setAuriga(flowalpha.getAurigaObject());
             exec.addEnty(ledgeritem, session.getUserId());
             JsonObject jsonresp = new JsonObject();
