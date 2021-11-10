@@ -24,6 +24,12 @@ public class WebBackUserFinantial extends WebBackAlpha {
         return JBilling.getLedger(getLedger()).toString();
     }
     //***************************************************************
+    public String usagePeriodsURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontUsagePeriods.PAGE);
+        return url.toString();
+    }
+    //===============================================================
     public String addCreditURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(ApiAddCredit.URL);
