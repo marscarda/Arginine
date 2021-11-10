@@ -32,7 +32,7 @@ public class ApiCutUsagePeriods extends ApiAlpha {
         int count = 0;
         try { count = Integer.parseInt(req.getParameter(COUNT)); } catch(Exception e) {}
         try {
-            flowalpha.getAurigaObject().getBillingLambda().cutUsagePeriods(count);
+            //flowalpha.getAurigaObject().getBillingLambda().cutUsagePeriods(count);
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
             jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Periods Cut Done"));
