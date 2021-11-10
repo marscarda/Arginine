@@ -73,9 +73,6 @@
             <div style="flex: 3; text-align: left; font-size: 15px">
                 <a href="<%=hback.usersURL()%>" style="color: #030; text-decoration: none">Users</a>
             </div>
-            <div style="flex: 3; text-align: left; font-size: 15px">
-                <a href="<%=hback.usageURL()%>" style="color: #030; text-decoration: none">Usage & Billing</a>
-            </div>
 
 
             <div style="flex: 3; text-align: left; font-size: 15px">

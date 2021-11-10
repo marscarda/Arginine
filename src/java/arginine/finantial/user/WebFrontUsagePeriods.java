@@ -2,10 +2,14 @@ package arginine.finantial.user;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.finantial.WebFrontFinancialPanel;
+import histidine.finance.ExcLedgerBackOfice;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
+import methionine.auth.User;
+import methionine.billing.LedgerItem;
+import methionine.billing.UsagePeriod;
 //***************************************************************************
 @WebServlet(name = "WebFrontUsagePeriods", urlPatterns = {WebFrontUsagePeriods.URLPATTERN}, loadOnStartup=1)
 public class WebFrontUsagePeriods extends WebFrontFinancialPanel {
@@ -37,8 +41,22 @@ public class WebFrontUsagePeriods extends WebFrontFinancialPanel {
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
 
-
-
+        try{
+            ExcLedgerBackOfice exec = new ExcLedgerBackOfice();
+            exec.setAuriga(flowbeta.getAurigaObject());
+            exec.setAuriga(flowbeta.getAurigaObject());
+            UsagePeriod[] periods = exec.getPeriodsByUser(userid, session.getUserId());
+            back.setUsagePeriods(periods);
+            /*
+            back.setUser(user);
+            */
+        }
+        catch (Exception e) {
+            //----------------------------------------------
+            System.out.println("Failed to get usage for user (Web) vfwqlmc");
+            System.out.println(e.getMessage());
+            //----------------------------------------------
+        }
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
