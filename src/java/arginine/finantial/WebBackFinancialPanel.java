@@ -10,8 +10,11 @@ public class WebBackFinancialPanel extends WebBackAlpha {
         return url.toString();
     }
     //===============================================================
-    
-    
+    public String billPeriodsURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiBillUsage.URL);
+        return url.toString();
+    }
     //***************************************************************
 }
 //***************************************************************************

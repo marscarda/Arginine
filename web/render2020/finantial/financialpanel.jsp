@@ -39,6 +39,31 @@ let closeUsagePeriods = () => {
         alert (err.getMessage);
     }
 }
+let billUsagePeriods = () => {
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showNotice('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showNotice('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showNotice(objresp.description, '#ff3333');
+            return;
+        }
+        showNotice('Billing periods started', '#290');
+    }
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.setURL('<%=back.billPeriodsURL()%>');
+    try { req.executepost(); }
+    catch(err) {
+        alert (err.getMessage);
+    }
+}
 </script>
 <title>Financial panel</title>
 </head>
@@ -46,13 +71,12 @@ let closeUsagePeriods = () => {
 <%@include file="../main/header.jsp" %>
 <div class="content">
     <h1>Financial panel</h1>
-    
     <div>
-        <a href="#" style="color: #05f" onclick="closeUsagePeriods(); return false">Close Open Usage Periods</a>
+        <a href="#" style="color: #05f" onclick="closeUsagePeriods(); return false">Close Usage Periods</a>
     </div>
-    
-    
-    
+    <div style="margin-top: 20px">
+        <a href="#" style="color: #05f" onclick="billUsagePeriods(); return false">Bill Usage Periods</a>
+    </div>
 </div>
 </body>
 </html>
