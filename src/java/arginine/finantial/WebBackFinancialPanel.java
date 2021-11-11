@@ -15,6 +15,12 @@ public class WebBackFinancialPanel extends WebBackAlpha {
         url.append(ApiBillUsage.URL);
         return url.toString();
     }
+    //===============================================================
+    public String billSystemChargesURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiBillSystemCharge.URL);
+        return url.toString();
+    }
     //***************************************************************
 }
 //***************************************************************************
