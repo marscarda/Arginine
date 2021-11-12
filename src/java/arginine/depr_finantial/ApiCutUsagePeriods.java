@@ -2,7 +2,6 @@ package arginine.depr_finantial;
 //***************************************************************************
 import arginine.ApiAlpha;
 import arginine.FlowAlpha;
-import static arginine.depr_finantial.ApiFetchUsagePeriods.OPEN;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
