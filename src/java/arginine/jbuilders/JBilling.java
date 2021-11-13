@@ -5,6 +5,7 @@ import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methionine.billing.UsagePeriod;
 import methionine.billing.LedgerItem;
+import methionine.billing.SystemCharge;
 //***************************************************************************
 public class JBilling {
     //***********************************************************************
@@ -22,7 +23,8 @@ public class JBilling {
     public static final String PROJECTID = "projectid";
     public static final String DATESTART = "datestart";
     public static final String DATEEND = "dateend";
-    public static final String COSTPERDAY = "costperday";    
+    public static final String COSTPERDAY = "costperday";
+    public static final String COST = "cost";
     public static final String PROJECTNAME = "projectname";
     public static final String EVENT = "event";
     public static final String FINALMINUTES = "finalminutes";
@@ -79,6 +81,25 @@ public class JBilling {
         jentries.addPair(new JsonPair(COUNT, jarray.getCount()));
         jentries.addPair(new JsonPair(ITEMS, jarray.getArray()));
         return jentries;
+    }
+    //***********************************************************************
+    public static JsonObject systemCharges (SystemCharge[] charges) {
+        JsonObject jcharges = new JsonObject();
+        JsonArray jarray = new JsonArray();
+        for (SystemCharge charge : charges) {
+            jarray.addPair(new JsonPair(IDECODE, charge.idCode()));
+            jarray.addPair(new JsonPair(DATE, charge.getDate()));
+            jarray.addPair(new JsonPair(USERID, charge.userID()));
+            jarray.addPair(new JsonPair(PROJECTID, charge.projectID()));
+            jarray.addPair(new JsonPair(PROJECTNAME, charge.projectName()));
+            jarray.addPair(new JsonPair(DESCRIPTION, charge.getDescription()));
+            jarray.addPair(new JsonPair(COST, charge.getCost()));
+            jarray.addPair(new JsonPair(BILLINGREF, charge.ledgerRef()));
+            jarray.addToArray();
+        }
+        jcharges.addPair(new JsonPair(COUNT, jarray.getCount()));
+        jcharges.addPair(new JsonPair(ITEMS, jarray.getArray()));
+        return jcharges;
     }
     //***********************************************************************
 }

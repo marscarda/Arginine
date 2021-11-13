@@ -7,7 +7,7 @@
 <%@page import="arginine.WebFrontStatic"%>
 <%@page import="arginine.WebFrontAlpha"%>
 <%@page import="arginine.finantial.user.WebBackUserFinantial"%>
-<% 
+<%
     WebBackUserFinantial back = (WebBackUserFinantial)request.getAttribute(WebFrontAlpha.PAGEATTRKEY); 
     User user = back.getUser();
 %>
@@ -258,6 +258,9 @@ let addEntry = (entry, isnew) => {
         <div style="margin-top: 15px">
             <a href="<%=back.usagePeriodsURL()%>/<%=back.getUser().userID()%>" style="color: #05f">Usage Periods</a>
         </div>
+        <div style="margin-top: 15px">
+            <a href="<%=back.systemChargeURL()%>/<%=back.getUser().userID()%>" style="color: #05f">System Charges</a>
+        </div>        
     </div>
     <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>
     <div style="flex: 1; margin-left: 30px">

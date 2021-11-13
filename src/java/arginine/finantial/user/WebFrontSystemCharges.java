@@ -1,17 +1,20 @@
-package arginine.finantial;
+package arginine.finantial.user;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.WebFrontAlpha;
+import histidine.finance.ExcLedgerBackOfice;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
+import methionine.billing.SystemCharge;
 //***************************************************************************
-@WebServlet(name = "WebFrontFinancialPanel", urlPatterns = {WebFrontFinancialPanel.PAGE}, loadOnStartup=1)
-public class WebFrontFinancialPanel extends WebFrontAlpha {
+@WebServlet(name = "WebFrontSystemCharges", urlPatterns = {WebFrontSystemCharges.URLPATTERN}, loadOnStartup=1)
+public class WebFrontSystemCharges extends WebFrontAlpha {
     //=======================================================================
-    public static final String PAGE = "/financial";
-    //***********************************************************************
+    public static final String PAGE = "/finantial/user/systemcharge";
+    public static final String URLPATTERN = PAGE + "/*";
+    //=======================================================================
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         //===================================================================
@@ -28,45 +31,35 @@ public class WebFrontFinancialPanel extends WebFrontAlpha {
             return;
         }
         //===================================================================
-        boolean allowed = false;
-        if (session.isAdmin()) allowed = true;
-        //-------------------------------------------------------------------
-        if (!allowed) {
-            flowbeta.setStatusResponse(403);
-            this.fleeRequest(flowbeta);
-            return;
-        }
+        long userid = 0;
+        try { userid = Long.parseLong(this.getURLsParamPart(request)); } catch (Exception e) {}
         //===================================================================
-        WebBackFinancialPanel back = new WebBackFinancialPanel();
+        WebBackSystemCharge back = new WebBackSystemCharge();
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try{
-            /*
-            User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
-            int totalbalance = flowbeta.getAurigaObject().getBillingLambda().getTotalBalanceForUserID(userid);
-            LedgerEntry[] ledger = flowbeta.getAurigaObject().getBillingLambda().getLedgerForUserID(userid);
-            back.setUser(user);
-            back.setTotalBalance(totalbalance);
-            back.setLedger(ledger);
-            */
+            ExcLedgerBackOfice exec = new ExcLedgerBackOfice();
+            exec.setAuriga(flowbeta.getAurigaObject());
+            exec.setAuriga(flowbeta.getAurigaObject());
+            SystemCharge[] charges = exec.systemChargesByUser(userid, session.getUserId());
+            back.setSystemCharges(charges);
         }
         catch (Exception e) {
             //----------------------------------------------
-            //System.out.println("Failed to get acount for user (Web) vfwqlmc");
-            //System.out.println(e.getMessage());
+            System.out.println("Failed to get usage for user (Web) vfwqlmc");
+            System.out.println(e.getMessage());
             //----------------------------------------------
         }
-
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
-        this.dispatchNormal("/render2020/finantial/financialpanel.jsp", request, response);
+        this.dispatchNormal("/render2020/user/finantial/systemcharges.jsp", request, response);
         //===================================================================
         this.finallJob(flowbeta);
         this.destroyFlowBeta(flowbeta);
         //===================================================================
     }
-    //***********************************************************************
+    //=======================================================================
 }
 //***************************************************************************
