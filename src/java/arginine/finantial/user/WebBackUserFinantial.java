@@ -36,6 +36,14 @@ public class WebBackUserFinantial extends WebBackAlpha {
         return url.toString();
     }
     //===============================================================
+    public String transferURL () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontTransfer.PAGE);
+        return url.toString();
+    }
+    //===============================================================
+    
+    
     public String addCreditURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(ApiAddCredit.URL);

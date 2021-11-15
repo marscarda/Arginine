@@ -256,6 +256,9 @@ let addEntry = (entry, isnew) => {
             <a href="#" style="color: #05f" onclick="openAddDebit(); return false;">Add Debit</a>
         </div>
         <div style="margin-top: 15px">
+            <a href="<%=back.transferURL()%>/<%=back.getUser().userID()%>" style="color: #05f">Transfers</a>
+        </div>        
+        <div style="margin-top: 15px">
             <a href="<%=back.usagePeriodsURL()%>/<%=back.getUser().userID()%>" style="color: #05f">Usage Periods</a>
         </div>
         <div style="margin-top: 15px">
