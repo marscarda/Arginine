@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
+import methionine.auth.User;
 //***************************************************************************
 @WebServlet(name = "WebFrontTransfer", urlPatterns = {WebFrontTransfer.URLPATTERN}, loadOnStartup=1)
 public class WebFrontTransfer extends WebFrontAlpha {
@@ -36,11 +37,16 @@ public class WebFrontTransfer extends WebFrontAlpha {
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
-        
-        
-        
-        
-        
+        try {
+            User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
+            back.setUser(user);
+        }
+        catch (Exception e) {
+            //----------------------------------------------
+            System.out.println("Failure in transfers page for user (Web) banijar");
+            System.out.println(e.getMessage());
+            //----------------------------------------------
+        }            
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
