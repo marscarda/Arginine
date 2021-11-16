@@ -141,45 +141,48 @@ let addTransfer = (transfer, isnew) => {
     /*---------------------------------------------------*/
     top = document.createElement("div");
     top.setAttribute('id', 'transfer' + transfer.idcode);
-    top.setAttribute('style', 'padding: 8px 0px; border-bottom: solid 1px #ddd');
+    top.style.padding = "8px 0px";
+    top.style.borderBottom = "solid 1px #ddd";
+    if (transfer.direction > 0) top.style.color = "#080";
+    else top.style.color = "#f00";
     line = document.createElement("div");
     line.setAttribute('style', 'display: flex; flex-direction: row');
     /*---------------------------------------------------*/
     /*Date*/{
         column = document.createElement("div");
-        column.style.width = "130px";
-        column.style.fontSize = "12px";
-        column.style.color = "#666";
+        column.style.width = "110px";
+        column.style.fontSize = "14px";
+        //column.style.color = "#666";
         column.style.textAlign = "left";
         column.innerHTML = decodeURIComponent(transfer.date);
         line.appendChild(column);
     }
     /*---------------------------------------------------*/
-    /*From User*/{ 
+    /*Direction*/{
         column = document.createElement("div");
         column.style.width = "100px";
         column.style.fontSize = "12px";
-        column.style.color = "#666";
         column.style.textAlign = "left";
-        column.innerHTML = "fromuser";
+        if (transfer.direction > 0) column.innerHTML = "IN";
+        else column.innerHTML = "OUT";
         line.appendChild(column);
     }
     /*---------------------------------------------------*/
-    /*To User*/{ 
+    /*Username*/{ 
         column = document.createElement("div");
-        column.style.width = "100px";
+        column.style.width = "150px";
         column.style.fontSize = "12px";
-        column.style.color = "#666";
+        //column.style.color = "#666";
         column.style.textAlign = "left";
-        column.innerHTML = "touser"
+        column.innerHTML = transfer.username;
         line.appendChild(column);
     }
     /*---------------------------------------------------*/
     /*Description*/{
         column = document.createElement("div");
-        column.style.width = "300px";
-        column.style.fontSize = "12px";
-        column.style.color = "#666";
+        column.style.width = "450px";
+        column.style.fontSize = "14px";
+        //column.style.color = "#666";
         column.style.textAlign = "left";
         column.innerHTML = decodeURIComponent(transfer.description);
         line.appendChild(column);
@@ -188,29 +191,34 @@ let addTransfer = (transfer, isnew) => {
     /*Amount*/{
         column = document.createElement("div");
         column.style.width = "100px";
-        column.style.fontSize = "12px";
-        column.style.color = "#666";
-        column.style.textAlign = "left";
+        column.style.fontSize = "15px";
+        column.style.textAlign = "right";
         column.innerHTML = transfer.amount;
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*Sep*/{
+        column = document.createElement("div");
+        column.style.width = "40px";
         line.appendChild(column);
     }
     /*---------------------------------------------------*/
     /*Convrsion currency*/{
         column = document.createElement("div");
-        column.style.width = "100px";
-        column.style.fontSize = "12px";
-        column.style.color = "#666";
+        column.style.width = "70px";
+        column.style.fontSize = "13px";
+        //column.style.color = "#666";
         column.style.textAlign = "left";
         column.innerHTML = decodeURIComponent(decodeURI(transfer.conversioncurrency));
         line.appendChild(column);
     }
     /*---------------------------------------------------*/
-    /*Convrsion currency*/{
+    /*Convrsion amount*/{
         column = document.createElement("div");
-        column.style.width = "100px";
-        column.style.fontSize = "12px";
-        column.style.color = "#666";
-        column.style.textAlign = "left";
+        column.style.width = "70px";
+        column.style.fontSize = "13px";
+        //column.style.color = "#666";
+        column.style.textAlign = "right";
         column.innerHTML = transfer.conversionamount;
         line.appendChild(column);
     }
@@ -272,8 +280,22 @@ let addTransfer = (transfer, isnew) => {
         <a href="#" style="color: #05f" onclick="openTransferFrom(); return false">Transfer From</a>
     </div>
 </div>
-<div style="margin-top: 30px">
+
+
+<div style="padding: 8px 0px; border-bottom: solid 1px #0df; display: flex; flex-direction: row;
+     font-size: 12px; color: #666666; font-weight: 600; margin-top: 30px">
+    <div style="width: 110px">Date</div>
+    <div style="width: 100px">Direction</div>
+    <div style="width: 150px">User</div>
+    <div style="width: 450px">Description</div>
+    <div style="width: 100px; text-align: right">Amount</div>
+    
+    <div style="width: 40px"></div>
+    
+    <div style="width: 140px">Conversion</div>
 </div>
+
+
 <div id="transferlist">
 </div>
 </div>

@@ -16,6 +16,7 @@ public class JBilling {
     public static final String USERID = "userid";
     public static final String FROMUSER = "fromuser";
     public static final String TOUSER = "touser";
+    public static final String USERNAME = "username";
     public static final String DATE = "date";
     public static final String CONVERTCURRENCY = "conversioncurrency";
     public static final String CONVERTAMOUNT = "conversionamount";
@@ -33,6 +34,7 @@ public class JBilling {
     public static final String FINALMINUTES = "finalminutes";
     public static final String FINALCOST = "finalcost";
     public static final String BILLINGREF = "billingref";
+    public static final String DIRECTION = "direction";
     //***********************************************************************
     public static JsonObject getLedger (LedgerItem[] ledger) {
         JsonObject jledger = new JsonObject();
@@ -70,14 +72,15 @@ public class JBilling {
         jtransfer.addPair(new JsonPair(DATE, transfer.getDate()));
         jtransfer.addPair(new JsonPair(FROMUSER, transfer.fromUser()));
         jtransfer.addPair(new JsonPair(TOUSER, transfer.toUser()));
+        jtransfer.addPair(new JsonPair(USERNAME, transfer.getDisplayUser()));
         jtransfer.addPair(new JsonPair(DESCRIPTION, transfer.getDescription()));
         jtransfer.addPair(new JsonPair(AMOUNT, transfer.getAmount()));
         jtransfer.addPair(new JsonPair(CONVERTCURRENCY, transfer.conversionCurrency()));
         jtransfer.addPair(new JsonPair(CONVERTAMOUNT, transfer.getConversionAmount()));
+        jtransfer.addPair(new JsonPair(DIRECTION, transfer.getDirection()));
         return jtransfer;
     }
     //=======================================================================
-    
     public static JsonObject getTransfers (ComunityTransfer[] transfers) {
         JsonObject jtransfers = new JsonObject();
         JsonArray jarray = new JsonArray();
@@ -86,10 +89,12 @@ public class JBilling {
             jarray.addPair(new JsonPair(DATE, transfer.getDate()));
             jarray.addPair(new JsonPair(FROMUSER, transfer.fromUser()));
             jarray.addPair(new JsonPair(TOUSER, transfer.toUser()));
+            jarray.addPair(new JsonPair(USERNAME, transfer.getDisplayUser()));
             jarray.addPair(new JsonPair(DESCRIPTION, transfer.getDescription()));
             jarray.addPair(new JsonPair(AMOUNT, transfer.getAmount()));
             jarray.addPair(new JsonPair(CONVERTCURRENCY, transfer.conversionCurrency()));
             jarray.addPair(new JsonPair(CONVERTAMOUNT, transfer.getConversionAmount()));
+            jarray.addPair(new JsonPair(DIRECTION, transfer.getDirection()));
             jarray.addToArray();
         }
         jtransfers.addPair(new JsonPair(COUNT, jarray.getCount()));
