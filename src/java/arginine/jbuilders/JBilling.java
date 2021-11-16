@@ -3,6 +3,7 @@ package arginine.jbuilders;
 import mars.jsonsimple.JsonArray;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
+import methionine.billing.ComunityTransfer;
 import methionine.billing.UsagePeriod;
 import methionine.billing.LedgerItem;
 import methionine.billing.SystemCharge;
@@ -13,6 +14,8 @@ public class JBilling {
     public static final String ITEMS = "items";
     //-----------------------------------------------------------------------
     public static final String USERID = "userid";
+    public static final String FROMUSER = "fromuser";
+    public static final String TOUSER = "touser";
     public static final String DATE = "date";
     public static final String CONVERTCURRENCY = "conversioncurrency";
     public static final String CONVERTAMOUNT = "conversionamount";
@@ -59,6 +62,39 @@ public class JBilling {
         jentry.addPair(new JsonPair(AMOUNT, item.getAmount()));
         jentry.addPair(new JsonPair(REFERENCE, item.getReference()));
         return jentry;
+    }
+    //***********************************************************************
+    public static JsonObject getTransfer (ComunityTransfer transfer) {
+        JsonObject jtransfer = new JsonObject();
+        jtransfer.addPair(new JsonPair(IDECODE, transfer.idCode()));
+        jtransfer.addPair(new JsonPair(DATE, transfer.getDate()));
+        jtransfer.addPair(new JsonPair(FROMUSER, transfer.fromUser()));
+        jtransfer.addPair(new JsonPair(TOUSER, transfer.toUser()));
+        jtransfer.addPair(new JsonPair(DESCRIPTION, transfer.getDescription()));
+        jtransfer.addPair(new JsonPair(AMOUNT, transfer.getAmount()));
+        jtransfer.addPair(new JsonPair(CONVERTCURRENCY, transfer.conversionCurrency()));
+        jtransfer.addPair(new JsonPair(CONVERTAMOUNT, transfer.getConversionAmount()));
+        return jtransfer;
+    }
+    //=======================================================================
+    
+    public static JsonObject getTransfers (ComunityTransfer[] transfers) {
+        JsonObject jtransfers = new JsonObject();
+        JsonArray jarray = new JsonArray();
+        for (ComunityTransfer transfer : transfers) {
+            jarray.addPair(new JsonPair(IDECODE, transfer.idCode()));
+            jarray.addPair(new JsonPair(DATE, transfer.getDate()));
+            jarray.addPair(new JsonPair(FROMUSER, transfer.fromUser()));
+            jarray.addPair(new JsonPair(TOUSER, transfer.toUser()));
+            jarray.addPair(new JsonPair(DESCRIPTION, transfer.getDescription()));
+            jarray.addPair(new JsonPair(AMOUNT, transfer.getAmount()));
+            jarray.addPair(new JsonPair(CONVERTCURRENCY, transfer.conversionCurrency()));
+            jarray.addPair(new JsonPair(CONVERTAMOUNT, transfer.getConversionAmount()));
+            jarray.addToArray();
+        }
+        jtransfers.addPair(new JsonPair(COUNT, jarray.getCount()));
+        jtransfers.addPair(new JsonPair(ITEMS, jarray.getArray()));
+        return jtransfers;
     }
     //***********************************************************************
     public static JsonObject usagePeriods (UsagePeriod[] periods) {

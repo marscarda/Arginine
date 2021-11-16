@@ -2,11 +2,13 @@ package arginine.finantial.user;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.WebFrontAlpha;
+import histidine.finance.ExcLedgerBackOfice;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 import methionine.auth.User;
+import methionine.billing.ComunityTransfer;
 //***************************************************************************
 @WebServlet(name = "WebFrontTransfer", urlPatterns = {WebFrontTransfer.URLPATTERN}, loadOnStartup=1)
 public class WebFrontTransfer extends WebFrontAlpha {
@@ -38,8 +40,12 @@ public class WebFrontTransfer extends WebFrontAlpha {
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try {
+            ExcLedgerBackOfice exec = new ExcLedgerBackOfice();
+            exec.setAuriga(flowbeta.getAurigaObject());
+            ComunityTransfer[] transfers = exec.getTransferByUser(userid, session.getUserId());
             User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
             back.setUser(user);
+            back.setTransfers(transfers);
         }
         catch (Exception e) {
             //----------------------------------------------

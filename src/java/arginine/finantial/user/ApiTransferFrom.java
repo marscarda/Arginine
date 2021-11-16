@@ -13,10 +13,10 @@ import methionine.AppException;
 import methionine.auth.Session;
 import methionine.billing.ComunityTransfer;
 //***************************************************************************
-@WebServlet(name = "ApiTransferTo", urlPatterns = {ApiTransferTo.URL}, loadOnStartup=1)
-public class ApiTransferTo extends ApiAlpha {
-    public static final String URL = "/finantial/user/transferto";
-    public static final String TRANSFERTO = "transferto";
+@WebServlet(name = "ApiTransferFrom", urlPatterns = {ApiTransferFrom.URL}, loadOnStartup=1)
+public class ApiTransferFrom extends ApiAlpha {
+    public static final String URL = "/finantial/user/transferfrom";
+    public static final String TRANSFERFROM = "transferfrom";
     public static final String CONVERTCURRENCY = "currency";
     public static final String CONVERTAMOUNT = "moneyamount";
     public static final String DESCRIPTION = "description";
@@ -48,7 +48,7 @@ public class ApiTransferTo extends ApiAlpha {
         try { amount = Float.parseFloat(req.getParameter(AMOUNT)); } catch (Exception e) {}
         try {
             ComunityTransfer transfer = new ComunityTransfer();
-            transfer.setUserToId(userid);
+            transfer.setFromUserId(userid);
             transfer.setAmount(amount);
             transfer.setConversionCurrency(convertcurrency);
             transfer.setConversionAmount(convertamount);
@@ -58,7 +58,7 @@ public class ApiTransferTo extends ApiAlpha {
             exec.addSystemTransfer(transfer, session.getUserId());
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
-            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Transfer to done"));
+            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Transfer from done"));
             //-------------------------------------------------------
             jsonresp.addPair(new JsonPair(JTRANSFER, JBilling.getTransfer(transfer)));
             //-------------------------------------------------------
@@ -77,5 +77,27 @@ public class ApiTransferTo extends ApiAlpha {
         //==========================================================
    }
    //************************************************************************
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
 }
 //***************************************************************************

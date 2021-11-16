@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="arginine.finantial.user.ApiTransferFrom"%>
 <%@page import="arginine.ApiAlpha"%>
 <%@page import="methionine.billing.UsageCost"%>
 <%@page import="arginine.finantial.user.ApiTransferTo"%>
@@ -19,20 +20,33 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
-let openAddCredit = () => {
-    document.getElementById('divaddcredit').style.height = '100%';
-    document.getElementById('divaddcredit').style.width = '100%';
+var transfers = <%=back.jTransfers()%>;
+let openTransferTo = () => {
+    document.getElementById('divtransferto').style.height = '100%';
+    document.getElementById('divtransferto').style.width = '100%';
     var turnon = new ElementFadeIn();
-    turnon.setElement(document, 'divaddcreditbox');
+    turnon.setElement(document, 'divtransfertobox');
     turnon.start();
 }
-let closeAddCredit = () => {
-    document.getElementById('divaddcredit').style.height = '0px';
-    document.getElementById('divaddcredit').style.width = '0px';
-    document.getElementById('formdivaddcredit').reset();
+let closeTransferTo = () => {
+    document.getElementById('divtransferto').style.height = '0px';
+    document.getElementById('divtransferto').style.width = '0px';
+    document.getElementById('formtransferto').reset();
 }
-let addCredit = () => {
-    var form = document.getElementById('formdivaddcredit');
+let openTransferFrom = () => {
+    document.getElementById('divtransferfrom').style.height = '100%';
+    document.getElementById('divtransferfrom').style.width = '100%';
+    var turnon = new ElementFadeIn();
+    turnon.setElement(document, 'divtransferfrombox');
+    turnon.start();
+}
+let closeTransferFrom = () => {
+    document.getElementById('divtransferfrom').style.height = '0px';
+    document.getElementById('divtransferfrom').style.width = '0px';
+    document.getElementById('formtransferfrom').reset();
+}
+let addTransferTo = () => {
+    var form = document.getElementById('formtransferto');
     var formdata = new FormData (form);
     var req = new HttpRequest();
     var callback = (status, objresp) => {
@@ -48,12 +62,12 @@ let addCredit = () => {
             showNotice(objresp.description, '#ff3333');
             return;
         }
-        closeAddCredit();
-        addEntry(objresp.entry, true);
+        closeTransferTo();
+        showNotice("Added", "#295");
+        addTransfer(objresp.transfer, true);
         var turnon = new ElementFadeIn();
-        turnon.setElement(document, 'entry' + entrynumber);
+        turnon.setElement(document, 'transfer' + objresp.transfer.idcode);
         turnon.start();
-        entrynumber++;
     }
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
@@ -68,15 +82,154 @@ let addCredit = () => {
         alert (err.getMessage);
     }
 }
+let addTransferFrom = () => {
+    var form = document.getElementById('formtransferfrom');
+    var formdata = new FormData (form);
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showNotice('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showNotice('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showNotice(objresp.description, '#ff3333');
+            return;
+        }
+        closeTransferFrom();
+        showNotice("Added", "#295");
+        addTransfer(objresp.transfer, true);
+        var turnon = new ElementFadeIn();
+        turnon.setElement(document, 'transfer' + objresp.transfer.idcode);
+        turnon.start();
+    }
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.addParam('<%=ApiTransferFrom.USERID%>', <%=user.userID()%>);
+    req.addParam('<%=ApiTransferFrom.DESCRIPTION%>', formdata.get('<%=ApiTransferFrom.DESCRIPTION%>'));
+    req.addParam('<%=ApiTransferFrom.AMOUNT%>', formdata.get('<%=ApiTransferFrom.AMOUNT%>'));
+    req.addParam('<%=ApiTransferFrom.CONVERTCURRENCY%>', formdata.get('<%=ApiTransferFrom.CONVERTCURRENCY%>'));
+    req.addParam('<%=ApiTransferFrom.CONVERTAMOUNT%>', formdata.get('<%=ApiTransferFrom.CONVERTAMOUNT%>'));
+    req.setURL('<%=back.transferFromURL()%>');
+    try { req.executepost(); }
+    catch(err) {
+        alert (err.getMessage);
+    }
+}
+let fillTransfers = () => {
+    if (transfers.count === 0) return;
+    var div = document.getElementById('transferlist');
+    while (div.hasChildNodes())
+        div.removeChild(div.lastChild);
+    for (n = 0; n < transfers.count; n++) {
+        addTransfer(transfers.items[n], false);
+    }
+}
+let addTransfer = (transfer, isnew) => {
+    var top;
+    var img;
+    var line;
+    var column;
+    var subline;
+    var cell;
+    var bartop;
+    var barprop;
+    var link;
+    /*---------------------------------------------------*/
+    top = document.createElement("div");
+    top.setAttribute('id', 'transfer' + transfer.idcode);
+    top.setAttribute('style', 'padding: 8px 0px; border-bottom: solid 1px #ddd');
+    line = document.createElement("div");
+    line.setAttribute('style', 'display: flex; flex-direction: row');
+    /*---------------------------------------------------*/
+    /*Date*/{
+        column = document.createElement("div");
+        column.style.width = "130px";
+        column.style.fontSize = "12px";
+        column.style.color = "#666";
+        column.style.textAlign = "left";
+        column.innerHTML = decodeURIComponent(transfer.date);
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*From User*/{ 
+        column = document.createElement("div");
+        column.style.width = "100px";
+        column.style.fontSize = "12px";
+        column.style.color = "#666";
+        column.style.textAlign = "left";
+        column.innerHTML = "fromuser";
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*To User*/{ 
+        column = document.createElement("div");
+        column.style.width = "100px";
+        column.style.fontSize = "12px";
+        column.style.color = "#666";
+        column.style.textAlign = "left";
+        column.innerHTML = "touser"
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*Description*/{
+        column = document.createElement("div");
+        column.style.width = "300px";
+        column.style.fontSize = "12px";
+        column.style.color = "#666";
+        column.style.textAlign = "left";
+        column.innerHTML = decodeURIComponent(transfer.description);
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*Amount*/{
+        column = document.createElement("div");
+        column.style.width = "100px";
+        column.style.fontSize = "12px";
+        column.style.color = "#666";
+        column.style.textAlign = "left";
+        column.innerHTML = transfer.amount;
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*Convrsion currency*/{
+        column = document.createElement("div");
+        column.style.width = "100px";
+        column.style.fontSize = "12px";
+        column.style.color = "#666";
+        column.style.textAlign = "left";
+        column.innerHTML = decodeURIComponent(decodeURI(transfer.conversioncurrency));
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
+    /*Convrsion currency*/{
+        column = document.createElement("div");
+        column.style.width = "100px";
+        column.style.fontSize = "12px";
+        column.style.color = "#666";
+        column.style.textAlign = "left";
+        column.innerHTML = transfer.conversionamount;
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/    
+    top.appendChild(line);
+    if (isnew)
+        document.getElementById('transferlist').insertBefore(top, document.getElementById('transferlist').childNodes[0]);
+    else document.getElementById('transferlist').appendChild(top);
+    /*---------------------------------------------------*/
+}
 </script>
 <title>Transfers</title>
 </head>
 <body>
 <%@include file="../../main/header.jsp" %>
-<div id="divaddcredit" class="popupformmodal">
-    <div id="divaddcreditbox" class="formbox" style="width: 500px">
-        <div style="color: #666666; font-size: 17px; margin-bottom: 20px">Give Credit</div>
-        <form id="formdivaddcredit">
+<div id="divtransferto" class="popupformmodal">
+    <div id="divtransfertobox" class="formbox" style="width: 500px">
+        <div style="color: #666666; font-size: 17px; margin-bottom: 20px">Transfer To</div>
+        <form id="formtransferto">
             <label for="<%=ApiTransferTo.DESCRIPTION%>">Description</label>
             <input type="text" name="<%=ApiTransferTo.DESCRIPTION%>" placeholder="Description" />
             <label for="<%=ApiTransferTo.AMOUNT%>">Amount</label>
@@ -87,13 +240,45 @@ let addCredit = () => {
             <input type="text" name="<%=ApiTransferTo.CONVERTAMOUNT%>" placeholder="Conversion amount" />
             <div style="height: 35px"></div>
         </form>
-        <button class="greenwidththin" onclick="addCredit(); return false;">Create</button>
-        <button class="graywidththin" onclick="closeAddCredit(); return false;">Cancel</button>
+        <button class="greenwidththin" onclick="addTransferTo(); return false;">Create</button>
+        <button class="graywidththin" onclick="closeTransferTo(); return false;">Cancel</button>
+    </div>
+</div>
+<div id="divtransferfrom" class="popupformmodal">
+    <div id="divtransferfrombox" class="formbox" style="width: 500px">
+        <div style="color: #666666; font-size: 17px; margin-bottom: 20px">Transfer From</div>
+        <form id="formtransferfrom">
+            <label for="<%=ApiTransferTo.DESCRIPTION%>">Description</label>
+            <input type="text" name="<%=ApiTransferTo.DESCRIPTION%>" placeholder="Description" />
+            <label for="<%=ApiTransferTo.AMOUNT%>">Amount</label>
+            <input type="text" name="<%=ApiTransferTo.AMOUNT%>" placeholder="Quantity of <%=UsageCost.CURRENCYNAME%>" />
+            <label for="<%=ApiTransferTo.CONVERTCURRENCY%>">Conversion Currency</label>
+            <input type="text" name="<%=ApiTransferTo.CONVERTCURRENCY%>" placeholder="Currency of convertion" />
+            <label for="<%=ApiTransferTo.CONVERTAMOUNT%>">Conversion Amount</label>
+            <input type="text" name="<%=ApiTransferTo.CONVERTAMOUNT%>" placeholder="Conversion amount" />
+            <div style="height: 35px"></div>
+        </form>
+        <button class="greenwidththin" onclick="addTransferFrom(); return false;">Create</button>
+        <button class="graywidththin" onclick="closeTransferFrom(); return false;">Cancel</button>
     </div>
 </div>
 <div class="content">
-    <h1>Transfers!</h1>
-    <a href="#" onclick="openAddCredit(); return false">Transfer To</a>
+<h3>Transfers</h3>
+<div style="display: flex; flex-direction: row; font-size: 15px; font-weight: 600">
+    <div style="width: 150px">
+        <a href="#" style="color: #05f" onclick="openTransferTo(); return false">Transfer To</a>
+    </div>
+    <div style="width: 150px">
+        <a href="#" style="color: #05f" onclick="openTransferFrom(); return false">Transfer From</a>
+    </div>
+</div>
+<div style="margin-top: 30px">
+</div>
+<div id="transferlist">
+</div>
 </div>
 </body>
+<script>
+    fillTransfers();
+</script>
 </html>
