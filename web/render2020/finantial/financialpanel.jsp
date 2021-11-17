@@ -64,10 +64,6 @@ let billUsagePeriods = () => {
         alert (err.getMessage);
     }
 }
-
-
-
-
 let billSystemCharges = () => {
     var req = new HttpRequest();
     var callback = (status, objresp) => {
@@ -97,6 +93,35 @@ let billSystemCharges = () => {
 
 
 
+let billTransfers = () => {
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showNotice('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showNotice('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showNotice(objresp.description, '#ff3333');
+            return;
+        }
+        showNotice('Billing transfers started', '#290');
+    }
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.setURL('<%=back.billTansfersURL()%>');
+    try { req.executepost(); }
+    catch(err) {
+        alert (err.getMessage);
+    }
+}
+
+
+
+
 
 </script>
 <title>Financial panel</title>
@@ -107,6 +132,9 @@ let billSystemCharges = () => {
     <h1>Financial panel</h1>
     <div>
         <a href="#" style="color: #05f" onclick="closeUsagePeriods(); return false">Close Usage Periods</a>
+    </div>
+    <div style="margin-top: 20px">
+        <a href="#" style="color: #05f" onclick="billTransfers(); return false">Bill Transfers</a>
     </div>
     <div style="margin-top: 20px">
         <a href="#" style="color: #05f" onclick="billUsagePeriods(); return false">Bill Usage Periods</a>
