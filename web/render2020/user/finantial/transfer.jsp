@@ -180,9 +180,8 @@ let addTransfer = (transfer, isnew) => {
     /*---------------------------------------------------*/
     /*Description*/{
         column = document.createElement("div");
-        column.style.width = "450px";
+        column.style.width = "380px";
         column.style.fontSize = "14px";
-        //column.style.color = "#666";
         column.style.textAlign = "left";
         column.innerHTML = decodeURIComponent(transfer.description);
         line.appendChild(column);
@@ -222,7 +221,16 @@ let addTransfer = (transfer, isnew) => {
         column.innerHTML = transfer.conversionamount;
         line.appendChild(column);
     }
-    /*---------------------------------------------------*/    
+    /*---------------------------------------------------*/
+    /*Ledger Ref*/{
+        column = document.createElement("div");
+        column.style.flex = "1";
+        column.style.fontSize = "13px";
+        column.style.textAlign = "right";
+        column.innerHTML = transfer.billingref;
+        line.appendChild(column);
+    }
+    /*---------------------------------------------------*/
     top.appendChild(line);
     if (isnew)
         document.getElementById('transferlist').insertBefore(top, document.getElementById('transferlist').childNodes[0]);
@@ -287,12 +295,11 @@ let addTransfer = (transfer, isnew) => {
     <div style="width: 110px">Date</div>
     <div style="width: 100px">Direction</div>
     <div style="width: 150px">User</div>
-    <div style="width: 450px">Description</div>
+    <div style="width: 380px">Description</div>
     <div style="width: 100px; text-align: right">Amount</div>
-    
     <div style="width: 40px"></div>
-    
     <div style="width: 140px">Conversion</div>
+    <div style="flex: 1; text-align: right">Ledger Ref</div>
 </div>
 
 

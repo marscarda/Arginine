@@ -94,6 +94,7 @@ public class JBilling {
             jarray.addPair(new JsonPair(AMOUNT, transfer.getAmount()));
             jarray.addPair(new JsonPair(CONVERTCURRENCY, transfer.conversionCurrency()));
             jarray.addPair(new JsonPair(CONVERTAMOUNT, transfer.getConversionAmount()));
+            jarray.addPair(new JsonPair(BILLINGREF, transfer.ledgerReference()));
             jarray.addPair(new JsonPair(DIRECTION, transfer.getDirection()));
             jarray.addToArray();
         }
