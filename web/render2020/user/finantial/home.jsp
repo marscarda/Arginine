@@ -1,9 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
-<%@page import="arginine.finantial.user.ApiAddDebit"%>
 <%@page import="arginine.ApiAlpha"%>
 <%@page import="methionine.auth.User"%>
 <%@page import="methionine.billing.UsageCost"%>
-<%@page import="arginine.finantial.user.ApiAddCredit"%>
 <%@page import="arginine.WebFrontStatic"%>
 <%@page import="arginine.WebFrontAlpha"%>
 <%@page import="arginine.finantial.user.WebBackUserFinantial"%>
@@ -46,80 +44,6 @@ let closeAddDebit = () => {
     document.getElementById('divadddebit').style.height = '0px';
     document.getElementById('divadddebit').style.width = '0px';
     document.getElementById('formdivadddebit').reset();
-}
-let addCredit = () => {
-    var form = document.getElementById('formdivaddcredit');
-    var formdata = new FormData (form);
-    var req = new HttpRequest();
-    var callback = (status, objresp) => {
-        if (status === 0) {
-            showNotice('Could not connect to server', '#ff3333');
-            return;
-        }
-        if (status !== 200) {
-            showNotice('Error server. Probably in maintenance', '#ff3333');
-            return;
-        }
-        if (objresp.result !== 'OK') {
-            showNotice(objresp.description, '#ff3333');
-            return;
-        }
-        closeAddCredit();
-        addEntry(objresp.entry, true);
-        var turnon = new ElementFadeIn();
-        turnon.setElement(document, 'entry' + entrynumber);
-        turnon.start();
-        entrynumber++;
-    }
-    req.setCallBack(callback);
-    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
-    req.addParam('<%=ApiAddCredit.USERID%>', <%=user.userID()%>);
-    req.addParam('<%=ApiAddCredit.CONVERTCURRENCY%>', formdata.get('<%=ApiAddCredit.CONVERTCURRENCY%>'));
-    req.addParam('<%=ApiAddCredit.CONVERTAMOUNT%>', formdata.get('<%=ApiAddCredit.CONVERTAMOUNT%>'));
-    req.addParam('<%=ApiAddCredit.DESCRIPTION%>', formdata.get('<%=ApiAddCredit.DESCRIPTION%>'));
-    req.addParam('<%=ApiAddCredit.URAMOUNT%>', formdata.get('<%=ApiAddCredit.URAMOUNT%>'));
-    req.setURL('<%=back.addCreditURL()%>');
-    try { req.executepost(); }
-    catch(err) {
-        alert (err.getMessage);
-    }
-}
-let addDebit = () => {
-    var form = document.getElementById('formdivadddebit');
-    var formdata = new FormData (form);
-    var req = new HttpRequest();
-    var callback = (status, objresp) => {
-        if (status === 0) {
-            showNotice('Could not connect to server', '#ff3333');
-            return;
-        }
-        if (status !== 200) {
-            showNotice('Error server. Probably in maintenance', '#ff3333');
-            return;
-        }
-        if (objresp.result !== 'OK') {
-            showNotice(objresp.description, '#ff3333');
-            return;
-        }
-        closeAddDebit();
-        addEntry(objresp.entry, true);
-        var turnon = new ElementFadeIn();
-        turnon.setElement(document, 'entry' + entrynumber);
-        turnon.start();
-        entrynumber++;
-    }
-    req.setCallBack(callback);
-    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
-    req.addParam('<%=ApiAddDebit.USERID%>', <%=user.userID()%>);
-    req.addParam('<%=ApiAddDebit.CONVERTCURRENCY%>', formdata.get('<%=ApiAddDebit.CONVERTCURRENCY%>'));
-    req.addParam('<%=ApiAddDebit.CONVERTAMOUNT%>', formdata.get('<%=ApiAddDebit.CONVERTAMOUNT%>'));
-    req.addParam('<%=ApiAddDebit.DESCRIPTION%>', formdata.get('<%=ApiAddDebit.DESCRIPTION%>'));
-    req.addParam('<%=ApiAddDebit.URAMOUNT%>', formdata.get('<%=ApiAddDebit.URAMOUNT%>'));
-    req.setURL('<%=back.addDebitURL()%>');
-    try { req.executepost(); }
-    catch(err) {
-        alert (err.getMessage);
-    }
 }
 let fillLedger = () => {
     if (ledger.count === 0) return;
@@ -210,51 +134,9 @@ let addEntry = (entry, isnew) => {
 </head>
 <body>
 <%@include file="../../main/header.jsp" %>
-<div id="divaddcredit" class="popupformmodal">
-    <div id="divaddcreditbox" class="formbox" style="width: 500px">
-        <div style="color: #666666; font-size: 17px; margin-bottom: 20px">Give Credit</div>
-        <form id="formdivaddcredit">
-            <label for="<%=ApiAddCredit.CONVERTCURRENCY%>">Conversion Currency</label>
-            <input type="text" name="<%=ApiAddCredit.CONVERTCURRENCY%>" placeholder="Currency of convertion" />
-            <label for="<%=ApiAddCredit.CONVERTAMOUNT%>">Conversion Amount</label>
-            <input type="text" name="<%=ApiAddCredit.CONVERTAMOUNT%>" placeholder="Conversion amount" />
-            <label for="<%=ApiAddCredit.DESCRIPTION%>">Description</label>
-            <input type="text" name="<%=ApiAddCredit.DESCRIPTION%>" placeholder="Description" />
-            <label for="<%=ApiAddCredit.URAMOUNT%>">Amount</label>
-            <input type="text" name="<%=ApiAddCredit.URAMOUNT%>" placeholder="Quantity of <%=UsageCost.CURRENCYNAME%>" />
-            <div style="height: 35px"></div>
-        </form>
-        <button class="greenwidththin" onclick="addCredit(); return false;">Create</button>
-        <button class="graywidththin" onclick="closeAddCredit(); return false;">Cancel</button>
-    </div>
-</div>
-<div id="divadddebit" class="popupformmodal">
-    <div id="divadddebitbox" class="formbox" style="width: 500px">
-        <div style="color: #666666; font-size: 17px; margin-bottom: 20px">Remove Credit</div>
-        <form id="formdivadddebit">
-            <label for="<%=ApiAddDebit.CONVERTCURRENCY%>">Conversion Currency</label>
-            <input type="text" name="<%=ApiAddDebit.CONVERTCURRENCY%>" placeholder="Currency of convertion" />
-            <label for="<%=ApiAddDebit.CONVERTAMOUNT%>">Conversion Amount</label>
-            <input type="text" name="<%=ApiAddDebit.CONVERTAMOUNT%>" placeholder="Conversion amount" />
-            <label for="<%=ApiAddDebit.DESCRIPTION%>">Description</label>
-            <input type="text" name="<%=ApiAddDebit.DESCRIPTION%>" placeholder="Description" />
-            <label for="<%=ApiAddDebit.URAMOUNT%>">Amount</label>
-            <input type="text" name="<%=ApiAddDebit.URAMOUNT%>" placeholder="Quantity of <%=UsageCost.CURRENCYNAME%>" />
-            <div style="height: 35px"></div>
-        </form>
-        <button class="greenwidththin" onclick="addDebit(); return false;">Create</button>
-        <button class="graywidththin" onclick="closeAddDebit(); return false;">Cancel</button>
-    </div>
-</div>
 <div class="content">
 <div style="margin-top: 40px; display: flex; flex-direction: row">
     <div style="width: 170px">
-        <div>
-            <a href="#" style="color: #05f" onclick="openAddCredit(); return false;">Add Credit</a>
-        </div>
-        <div style="margin-top: 15px">
-            <a href="#" style="color: #05f" onclick="openAddDebit(); return false;">Add Debit</a>
-        </div>
         <div style="margin-top: 15px">
             <a href="<%=back.transferURL()%>/<%=back.getUser().userID()%>" style="color: #05f">Transfers</a>
         </div>        

@@ -42,19 +42,6 @@ public class WebBackUserFinantial extends WebBackAlpha {
         return url.toString();
     }
     //===============================================================
-    
-    
-    public String addCreditURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(ApiAddCredit.URL);
-        return url.toString();
-    }
-    //===============================================================
-    public String addDebitURL () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(ApiAddDebit.URL);
-        return url.toString();
-    }
     //***************************************************************
 }
 //***************************************************************************
