@@ -3,6 +3,7 @@ package arginine.finantial.user;
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;
 import methionine.auth.User;
+import methionine.billing.BalanceInfo;
 import methionine.billing.LedgerItem;
 //***************************************************************************
 public class WebBackUserFinantial extends WebBackAlpha {
@@ -12,6 +13,13 @@ public class WebBackUserFinantial extends WebBackAlpha {
     public User getUser () {
         if (user == null) return new User();
         return user;
+    }
+    //***************************************************************
+    BalanceInfo balance = null;
+    void setBalance (BalanceInfo balance) { this.balance = balance; }
+    public BalanceInfo getBalance() {
+        if (balance == null) return new BalanceInfo();
+        return balance;
     }
     //***************************************************************
     LedgerItem[] ledger = null;

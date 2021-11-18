@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 import methionine.auth.User;
+import methionine.billing.BalanceInfo;
 import methionine.billing.LedgerItem;
 //***************************************************************************
 @WebServlet(name = "WebFrontUserFinantial", urlPatterns = {WebFrontUserFinantial.URLPATTERN}, loadOnStartup=1)
@@ -44,7 +45,9 @@ public class WebFrontUserFinantial extends WebFrontAlpha {
             exec.setAuriga(flowbeta.getAurigaObject());
             User user = flowbeta.getAurigaObject().getAuthLambda().getUser(userid, true);
             LedgerItem[] ledger = exec.getLedgerByUser(userid, session.getUserId());
+            BalanceInfo balance = flowbeta.getAurigaObject().getBillingLambda().getTotalBalance(userid);
             back.setUser(user);
+            back.setBalance(balance);
             back.setLedger(ledger);
         }
         catch (Exception e) {

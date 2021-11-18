@@ -1,7 +1,6 @@
 package arginine.user;
 //***************************************************************************
 import arginine.WebBackAlpha;
-import arginine.depr_finantial.WebFrontUserAccount;
 import arginine.finantial.user.WebFrontUserFinantial;
 import methionine.auth.User;
 //***************************************************************************

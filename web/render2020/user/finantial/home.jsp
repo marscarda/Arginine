@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.text.Format"%>
+<%@page import="methionine.billing.BalanceInfo"%>
 <%@page import="arginine.ApiAlpha"%>
 <%@page import="methionine.auth.User"%>
 <%@page import="methionine.billing.UsageCost"%>
@@ -8,6 +11,8 @@
 <%
     WebBackUserFinantial back = (WebBackUserFinantial)request.getAttribute(WebFrontAlpha.PAGEATTRKEY); 
     User user = back.getUser();
+    BalanceInfo balance = back.getBalance();
+    Format format = new DecimalFormat("#.######");
 %>
 <!DOCTYPE html>
 <html>
@@ -137,6 +142,16 @@ let addEntry = (entry, isnew) => {
 <div class="content">
 <div style="margin-top: 40px; display: flex; flex-direction: row">
     <div style="width: 170px">
+        <div style="font-size: 13px; color: #777">
+            Total balance
+        </div>
+        <div style="font-size: 25px; color: #333; font-weight: 600">
+            
+            
+            <%=format.format(balance.getTotalBalance())%>
+            
+            
+        </div>
         <div style="margin-top: 15px">
             <a href="<%=back.transferURL()%>/<%=back.getUser().userID()%>" style="color: #05f">Transfers</a>
         </div>        
