@@ -146,11 +146,7 @@ let addEntry = (entry, isnew) => {
             Total balance
         </div>
         <div style="font-size: 25px; color: #333; font-weight: 600">
-            
-            
             <%=format.format(balance.getTotalBalance())%>
-            
-            
         </div>
         <div style="margin-top: 15px">
             <a href="<%=back.transferURL()%>/<%=back.getUser().userID()%>" style="color: #05f">Transfers</a>
@@ -160,6 +156,9 @@ let addEntry = (entry, isnew) => {
         </div>
         <div style="margin-top: 15px">
             <a href="<%=back.systemChargeURL()%>/<%=back.getUser().userID()%>" style="color: #05f">System Charges</a>
+        </div>
+        <div style="margin-top: 15px">
+            <a href="<%=back.commerciaTransferURL()%>/<%=back.getUser().userID()%>" style="color: #05f">Commercial Transfer</a>
         </div>        
     </div>
     <div style="width: 1px; background-color: #dddddd; margin-left: 30px"></div>

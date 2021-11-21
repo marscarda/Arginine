@@ -3,6 +3,7 @@ package arginine.jbuilders;
 import mars.jsonsimple.JsonArray;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
+import methionine.billing.CommerceTransfer;
 import methionine.billing.ComunityTransfer;
 import methionine.billing.UsagePeriod;
 import methionine.billing.LedgerItem;
@@ -143,6 +144,26 @@ public class JBilling {
         jcharges.addPair(new JsonPair(ITEMS, jarray.getArray()));
         return jcharges;
     }
+    //***********************************************************************
+    public static JsonObject commerceTransfers (CommerceTransfer[] transfers) {
+        JsonObject jtransfers = new JsonObject();
+        JsonArray jarray = new JsonArray();
+        for (CommerceTransfer transfer : transfers) {
+            jarray.addPair(new JsonPair(IDECODE, transfer.idCode()));
+            jarray.addPair(new JsonPair(DATE, transfer.getDate()));
+            jarray.addPair(new JsonPair(FROMUSER, transfer.fromUser()));
+            jarray.addPair(new JsonPair(TOUSER, transfer.toUser()));
+            jarray.addPair(new JsonPair(USERNAME, transfer.getDisplayUser()));
+            jarray.addPair(new JsonPair(DESCRIPTION, transfer.getDescription()));
+            jarray.addPair(new JsonPair(AMOUNT, transfer.getAmount()));
+            jarray.addPair(new JsonPair(BILLINGREF, transfer.ledgerReference()));
+            jarray.addPair(new JsonPair(DIRECTION, transfer.getDirection()));
+            jarray.addToArray();
+        }
+        jtransfers.addPair(new JsonPair(COUNT, jarray.getCount()));
+        jtransfers.addPair(new JsonPair(ITEMS, jarray.getArray()));
+        return jtransfers;
+    }    
     //***********************************************************************
 }
 //***************************************************************************
