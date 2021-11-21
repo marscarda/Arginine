@@ -89,10 +89,6 @@ let billSystemCharges = () => {
         alert (err.getMessage);
     }
 }
-
-
-
-
 let billTransfers = () => {
     var req = new HttpRequest();
     var callback = (status, objresp) => {
@@ -118,11 +114,31 @@ let billTransfers = () => {
         alert (err.getMessage);
     }
 }
-
-
-
-
-
+let billCommerceTransfers = () => {
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showNotice('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showNotice('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showNotice(objresp.description, '#ff3333');
+            return;
+        }
+        showNotice('Billing Commerce Transfers started', '#290');
+    }
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.setURL('<%=back.billComerceTransferURL()%>');
+    try { req.executepost(); }
+    catch(err) {
+        alert (err.getMessage);
+    }
+}
 </script>
 <title>Financial panel</title>
 </head>
@@ -142,6 +158,9 @@ let billTransfers = () => {
     <div style="margin-top: 20px">
         <a href="#" style="color: #05f" onclick="billSystemCharges(); return false">Bill System Charges</a>
     </div>
+    <div style="margin-top: 20px">
+        <a href="#" style="color: #05f" onclick="billCommerceTransfers(); return false">Bill Commerce Transfers</a>
+    </div>    
 </div>
 </body>
 </html>
