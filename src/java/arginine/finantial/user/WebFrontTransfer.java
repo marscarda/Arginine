@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 import methionine.auth.User;
-import methionine.billing.ComunityTransfer;
+import methionine.finance.ComunityTransfer;
 //***************************************************************************
 @WebServlet(name = "WebFrontTransfer", urlPatterns = {WebFrontTransfer.URLPATTERN}, loadOnStartup=1)
 public class WebFrontTransfer extends WebFrontAlpha {

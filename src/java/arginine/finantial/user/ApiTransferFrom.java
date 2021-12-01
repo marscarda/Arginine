@@ -11,7 +11,7 @@ import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methionine.AppException;
 import methionine.auth.Session;
-import methionine.billing.ComunityTransfer;
+import methionine.finance.ComunityTransfer;
 //***************************************************************************
 @WebServlet(name = "ApiTransferFrom", urlPatterns = {ApiTransferFrom.URL}, loadOnStartup=1)
 public class ApiTransferFrom extends ApiAlpha {

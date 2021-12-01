@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
-import methionine.billing.UsagePeriod;
+import methionine.finance.UsagePeriod;
 //***************************************************************************
 @WebServlet(name = "WebFrontUsagePeriods", urlPatterns = {WebFrontUsagePeriods.URLPATTERN}, loadOnStartup=1)
 public class WebFrontUsagePeriods extends WebFrontFinancialPanel {

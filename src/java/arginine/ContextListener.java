@@ -4,7 +4,7 @@ import java.util.Properties;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import methionine.billing.BillingLambda;
+import methionine.finance.BillingLambda;
 import methionine.Electra;
 import methionine.auth.AuthLamda;
 import methionine.project.ProjectLambda;

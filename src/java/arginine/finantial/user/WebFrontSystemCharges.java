@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
-import methionine.billing.SystemCharge;
+import methionine.finance.SystemCharge;
 //***************************************************************************
 @WebServlet(name = "WebFrontSystemCharges", urlPatterns = {WebFrontSystemCharges.URLPATTERN}, loadOnStartup=1)
 public class WebFrontSystemCharges extends WebFrontAlpha {

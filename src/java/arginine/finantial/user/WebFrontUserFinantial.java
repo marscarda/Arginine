@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
 import methionine.auth.User;
-import methionine.billing.BalanceInfo;
-import methionine.billing.LedgerItem;
+import methionine.finance.BalanceInfo;
+import methionine.finance.LedgerItem;
 //***************************************************************************
 @WebServlet(name = "WebFrontUserFinantial", urlPatterns = {WebFrontUserFinantial.URLPATTERN}, loadOnStartup=1)
 public class WebFrontUserFinantial extends WebFrontAlpha {

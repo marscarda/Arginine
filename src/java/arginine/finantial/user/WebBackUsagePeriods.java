@@ -2,7 +2,7 @@ package arginine.finantial.user;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;
-import methionine.billing.UsagePeriod;
+import methionine.finance.UsagePeriod;
 //***************************************************************************
 public class WebBackUsagePeriods extends WebBackAlpha {
     //***************************************************************

@@ -3,7 +3,7 @@ package arginine.finantial.user;
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JBilling;
 import methionine.auth.User;
-import methionine.billing.CommerceTransfer;
+import methionine.finance.CommerceTransfer;
 //***************************************************************************
 public class WebBackCommerce extends WebBackAlpha {
     //***************************************************************
