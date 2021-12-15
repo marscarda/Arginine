@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="arginine.finantial.user.ApiTransferFrom"%>
 <%@page import="arginine.ApiAlpha"%>
-<%@page import="methionine.billing.UsageCost"%>
+<%@page import="methionine.finance.UsageCost"%>
 <%@page import="arginine.finantial.user.ApiTransferTo"%>
 <%@page import="arginine.WebFrontStatic"%>
 <%@page import="arginine.WebFrontAlpha"%>

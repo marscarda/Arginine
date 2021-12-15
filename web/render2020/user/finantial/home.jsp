@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.Format"%>
-<%@page import="methionine.billing.BalanceInfo"%>
+<%@page import="methionine.finance.BalanceInfo"%>
 <%@page import="arginine.ApiAlpha"%>
 <%@page import="methionine.auth.User"%>
-<%@page import="methionine.billing.UsageCost"%>
+<%@page import="methionine.finance.UsageCost"%>
 <%@page import="arginine.WebFrontStatic"%>
 <%@page import="arginine.WebFrontAlpha"%>
 <%@page import="arginine.finantial.user.WebBackUserFinantial"%>

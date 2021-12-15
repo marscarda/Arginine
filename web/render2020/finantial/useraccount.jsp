@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="arginine.finantial.ApiFetchLedger"%>
-<%@page import="methionine.billing.UsageCost"%>
+<%@page import="methionine.finance.billing.UsageCost"%>
 <%@page import="arginine.finantial.ApiCreatePayment"%>
 <%@page import="arginine.finantial.ApiAddLedgerEntry"%>
 <%@page import="arginine.ApiAlpha"%>
