@@ -2,12 +2,12 @@ package arginine.main;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.WebFrontAlpha;
+import histidine.auth.ExcAuth;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.AppException;
 import methionine.auth.Session;
-import methionine.auth.SignUpUser;
 //***************************************************************************
 @WebServlet(name = "WebFrontLogin", urlPatterns = {WebFrontAuth.PAGE})
 public class WebFrontAuth extends WebFrontAlpha {
@@ -84,13 +84,17 @@ public class WebFrontAuth extends WebFrontAlpha {
         String password = flowbeta.getRequest().getParameter(PASSWORD);
         //===================================================================
         try {
-            Session session = flowbeta.getAurigaObject().getAuthLambda().createSession(flowbeta.getIpAddress(), user, password);
+            ExcAuth exc = new ExcAuth();
+            exc.setAuriga(flowbeta.getAurigaObject());
+            String ipaddr = flowbeta.getIpAddress();
+            String app = "Web Admin Panel";
+            String client = flowbeta.getCookiesFlow().clientId();
+            Session session = exc.signIn(ipaddr, app, client, user, password);
             flowbeta.getCookiesFlow().setLoggedIn(true);
             flowbeta.getCookiesFlow().setLoginToken(session.getLoginToken());
             flowbeta.getCookiesFlow().commitCookies();
             flowbeta.setStatusResponse(302);
             flowbeta.setHeader("location", flowbeta.getCookiesFlow().goBackTo());
-            return;
         }
         catch (AppException e) {
             //----------------------------------------------
@@ -104,7 +108,6 @@ public class WebFrontAuth extends WebFrontAlpha {
             this.beforeSend(flowbeta);
             this.dispatchNormal("/render2020/main/auth.jsp", flowbeta.getRequest(), flowbeta.getResponse());
             //----------------------------------------------
-            return;
         }
         catch (Exception e) {
             WebBackAuth back = new WebBackAuth();
@@ -118,7 +121,6 @@ public class WebFrontAuth extends WebFrontAlpha {
             System.out.println("Failed auth user (Web)");
             System.out.println(e.getMessage());
             //----------------------------------------------
-            return;
         }
         //===================================================================
     }
