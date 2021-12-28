@@ -8,7 +8,7 @@ public class LifeTimeValues {
     //*****************************************************************
     //DATABASES PROPERTIES NAME.
     static final String PROP_DATABASE_USERS = "db_users";
-    static final String PROP_DATABASE_BILLING = "db_billing";
+    static final String PROP_DATABASE_BILLING = "db_finance";
     static final String PROP_DATABASE_UNIVERSE = "db_universe";
     static final String PROP_DATABASE_MAPS = "db_maps";
     static final String PROP_DATABASE_DESIGN = "db_design";
