@@ -180,6 +180,8 @@ public class ContextListener implements ServletContextListener {
             System.out.println(e.getMessage());
         }        
         //*******************************************************************
+        auriga.getElectra().disposeDBConnection();
+        //*******************************************************************
     }
     //***********************************************************************
 }
