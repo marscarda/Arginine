@@ -67,20 +67,18 @@
                 
     <div class="menuouter">
         <div class="menuinner">
-            <div style="flex: 3; text-align: left; font-size: 15px">
+            <div style="text-align: left; font-size: 15px">
                 <a href="<%=hback.getHomeURL()%>" style="color: #030; text-decoration: none">Home</a>
             </div>
-            <div style="flex: 3; text-align: left; font-size: 15px">
+            <div style="text-align: left; font-size: 15px; margin-left: 30px">
                 <a href="<%=hback.usersURL()%>" style="color: #030; text-decoration: none">Users</a>
             </div>
-
-
-            <div style="flex: 3; text-align: left; font-size: 15px">
+            <div style="text-align: left; font-size: 15px; margin-left: 30px">
+                <a href="<%=hback.projectlURL()%>" style="color: #030; text-decoration: none">Projects</a>
+            </div>            
+            <div style="text-align: left; font-size: 15px; margin-left: 30px">
                 <a href="<%=hback.financialURL()%>" style="color: #030; text-decoration: none">Financial</a>
             </div>
-            
-
-
             <div style="flex: 2; text-align: right; font-size: 12px; display: flex; flex-direction: column-reverse">
                 <div>
                 </div>
