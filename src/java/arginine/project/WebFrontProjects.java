@@ -5,11 +5,15 @@ import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lycine.project.ExcProjectBack;
 import methionine.auth.Session;
+import methionine.project.Project;
 //***************************************************************************
 @WebServlet(name = "WebFrontProjects", urlPatterns = {WebFrontProjects.PAGE}, loadOnStartup=1)
 public class WebFrontProjects extends WebFrontAlpha {
     public static final String PAGE = "/project/list";
+    public static final String USERID = "userid";
+    public static final String OFFSET = "offset";
     //***********************************************************************
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -36,12 +40,20 @@ public class WebFrontProjects extends WebFrontAlpha {
             return;
         }
         //===================================================================
+        long userid = 0;
+        int offset = 0;
+        try { userid = Long.parseLong(request.getParameter(USERID)); } catch (Exception e) {}
+        try { offset = Integer.parseInt(request.getParameter(OFFSET)); } catch (Exception e) {}
+        //===================================================================
         WebBackProjects back = new WebBackProjects();
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try{
-            
+            ExcProjectBack exc = new ExcProjectBack();
+            exc.setAuriga(flowbeta.getAurigaObject());
+            Project[] projects = exc.getProjectList(userid, offset);
+            back.setProjects(projects);
         }
         catch (Exception e) {
             //----------------------------------------------
