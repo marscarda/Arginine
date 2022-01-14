@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.AppException;
 import methionine.Electra;
+import methionine.auth.AuthErrorCodes;
 import methionine.auth.Session;
 //**************************************************************************
 /**
@@ -90,7 +91,7 @@ public class FlowAlpha {
             return session.isValid();
         }
         catch (AppException e) {
-            if (e.getErrorCode() != AppException.SESSIONNOTFOUND) {
+            if (e.getErrorCode() != AuthErrorCodes.SESSIONNOTFOUND) {
                 System.out.println("Trying to set a session. Unexpected error");
                 System.out.println(e.getErrorCode() + " " + e.getMessage());
             }
