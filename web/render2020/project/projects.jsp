@@ -14,9 +14,6 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
 var projects = <%=back.jProjects()%>;
-
-
-
 let fillProjects = () => {
     if (projects.count === 0) return;
     var n;
@@ -27,16 +24,13 @@ let fillProjects = () => {
         addProject(projects.items[n], false);
     }    
 }
-
-
-
-
 let addProject = (project) => {
     /*---------------------------------------------------*/
     var top;
     var line;
     var column;
     var space;
+    var link;
     /*---------------------------------------------------*/
     top = document.createElement("div");
     top.id = "projectbox" + project.sellpubid;
@@ -58,7 +52,6 @@ let addProject = (project) => {
         line.innerHTML = decodeURI(decodeURIComponent(project.name));
         top.appendChild(line);
     }
-    
     /*---------------------------------------------------*/
     /* Project Name */ {
         line = document.createElement("div");
@@ -80,6 +73,23 @@ let addProject = (project) => {
         line.innerHTML = "Project ID: " + project.projectid;
         top.appendChild(line);
     }    
+    /*---------------------------------------------------*/
+    /* Options */ {
+        line = document.createElement("div");
+        line.style.display = "flex";
+        line.style.flexDirection = "row";
+        line.style.fontSize = "14px";
+        line.style.marginTop = "12px";
+        link = document.createElement("a");
+        link.href = "<%=back.setProjectAsAdminURL()%>/" + project.projectid;
+        link.style.color = "#05f";
+        link.innerHTML = "Open";
+        column = document.createElement("div");
+        column.style.width = "50px";
+        column.appendChild(link);
+        line.appendChild(column);
+        top.appendChild(line);
+    }
     /*---------------------------------------------------*/
     document.getElementById('projectlist').appendChild(top);    
     /*---------------------------------------------------*/
