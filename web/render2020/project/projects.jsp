@@ -38,7 +38,7 @@ let addProject = (project) => {
     //else top.style.border = "solid 4px #8c5";
     //if (isnew) top.style.opacity = 0;
     top.style.borderRadius = "7px";
-    top.style.width = "320px";
+    top.style.width = "450px";
     top.style.float = "left";
     top.style.marginRight = "30px";
     top.style.marginTop = "30px";
