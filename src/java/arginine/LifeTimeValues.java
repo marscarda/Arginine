@@ -25,7 +25,7 @@ public class LifeTimeValues {
         //========================================================
     }    
     //*****************************************************************
-    public static final String PANELHOST = "http://radareleven.com";
+    public static final String PANELHOST = "https://survey.radareleven.com";
     //*****************************************************************
 }
 //**************************************************************************
