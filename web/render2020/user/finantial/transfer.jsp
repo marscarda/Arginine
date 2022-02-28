@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="arginine.finantial.user.ApiTransferFrom"%>
 <%@page import="arginine.ApiAlpha"%>
-<%@page import="methionine.finance.UsageCost"%>
+<%@page import="methionine.finance.FinanceRules"%>
 <%@page import="arginine.finantial.user.ApiTransferTo"%>
 <%@page import="arginine.WebFrontStatic"%>
 <%@page import="arginine.WebFrontAlpha"%>
@@ -249,7 +249,7 @@ let addTransfer = (transfer, isnew) => {
             <label for="<%=ApiTransferTo.DESCRIPTION%>">Description</label>
             <input type="text" name="<%=ApiTransferTo.DESCRIPTION%>" placeholder="Description" />
             <label for="<%=ApiTransferTo.AMOUNT%>">Amount</label>
-            <input type="text" name="<%=ApiTransferTo.AMOUNT%>" placeholder="Quantity of <%=UsageCost.CURRENCYNAME%>" />
+            <input type="text" name="<%=ApiTransferTo.AMOUNT%>" placeholder="Quantity of <%=FinanceRules.CURRENCYNAME%>" />
             <label for="<%=ApiTransferTo.CONVERTCURRENCY%>">Conversion Currency</label>
             <input type="text" name="<%=ApiTransferTo.CONVERTCURRENCY%>" placeholder="Currency of convertion" />
             <label for="<%=ApiTransferTo.CONVERTAMOUNT%>">Conversion Amount</label>
@@ -267,7 +267,7 @@ let addTransfer = (transfer, isnew) => {
             <label for="<%=ApiTransferTo.DESCRIPTION%>">Description</label>
             <input type="text" name="<%=ApiTransferTo.DESCRIPTION%>" placeholder="Description" />
             <label for="<%=ApiTransferTo.AMOUNT%>">Amount</label>
-            <input type="text" name="<%=ApiTransferTo.AMOUNT%>" placeholder="Quantity of <%=UsageCost.CURRENCYNAME%>" />
+            <input type="text" name="<%=ApiTransferTo.AMOUNT%>" placeholder="Quantity of <%=FinanceRules.CURRENCYNAME%>" />
             <label for="<%=ApiTransferTo.CONVERTCURRENCY%>">Conversion Currency</label>
             <input type="text" name="<%=ApiTransferTo.CONVERTCURRENCY%>" placeholder="Currency of convertion" />
             <label for="<%=ApiTransferTo.CONVERTAMOUNT%>">Conversion Amount</label>
