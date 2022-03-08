@@ -4,6 +4,7 @@ import arginine.finantial.WebFrontFinancialPanel;
 import arginine.main.WebFrontAuth;
 import arginine.main.WebFrontHome;
 import arginine.main.WebFrontLogout;
+import arginine.mapping.WebFrontMapping;
 import arginine.project.WebFrontProjects;
 import arginine.user.WebFrontUsers;
 import methionine.auth.User;
@@ -78,6 +79,12 @@ public class WebBackAlpha {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(WebFrontFinancialPanel.PAGE);
         return url.toString();
+    }
+    //=======================================================================
+    public String pageMapping () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontMapping.PAGE);
+        return url.toString();        
     }
     //***********************************************************************
     //=======================================================================

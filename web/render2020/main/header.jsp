@@ -64,7 +64,6 @@
             </div>
         </div>
     </div>
-                
     <div class="menuouter">
         <div class="menuinner">
             <div style="text-align: left; font-size: 15px">
@@ -79,9 +78,8 @@
             <div style="text-align: left; font-size: 15px; margin-left: 30px">
                 <a href="<%=hback.financialURL()%>" style="color: #030; text-decoration: none">Financial</a>
             </div>
-            <div style="flex: 2; text-align: right; font-size: 12px; display: flex; flex-direction: column-reverse">
-                <div>
-                </div>
+            <div style="text-align: left; font-size: 15px; margin-left: 30px">
+                <a href="<%=hback.pageMapping()%>" style="color: #030; text-decoration: none">Mapping</a>
             </div>
         </div>
     </div>                
