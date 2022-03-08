@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
+import threonine.map.MapLayer;
 //***************************************************************************
 @WebServlet(name = "WebFrontMapping", urlPatterns = {WebFrontMapping.PAGE}, loadOnStartup=1)
 public class WebFrontMapping extends WebFrontAlpha {
@@ -40,11 +41,17 @@ public class WebFrontMapping extends WebFrontAlpha {
         WebBackMapping back = new WebBackMapping();
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
-        back.setLoginToken(session.getLoginToken());        
-        
-        
-        
-        
+        back.setLoginToken(session.getLoginToken());
+        try {
+            MapLayer[] layers = flowbeta.getAurigaObject().getMapsLambda().publicLayers();
+            back.setLayers(layers);
+        }
+        catch (Exception e) {
+            //----------------------------------------------
+            System.out.println("Failure in mapping page (Web) cananite");
+            System.out.println(e.getMessage());
+            //----------------------------------------------
+        }
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
