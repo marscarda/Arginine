@@ -16,7 +16,6 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
 <script>
 var layers = <%=back.jLayers()%>;
-
 let fillLayers = () => {
     var div = document.getElementById('layerlist');
     for (n = 0; n < layers.count; n++) 
@@ -25,7 +24,6 @@ let fillLayers = () => {
     clear.style.clear = "both";
     div.appendChild(clear);
 }
-
 let addLayer = (layer) => {
     var top;
     var line;
@@ -64,9 +62,13 @@ let addLayer = (layer) => {
 <body>
 <%@include file="../main/header.jsp" %>
 <div class="content">
-    
+    <div style="width: 100%; margin-top: 5px; padding: 5px 0px;">
+        <a href="<%=back.pageForPublish()%>">For Publish Candidates</a>
+    </div>
+    <div style="width: 100%; margin-top: 5px; border-bottom: solid 3px #baa; font-size: 25px; color: #444"> 
+        Map Layers
+    </div>
     <div id="layerlist"></div>
-    
 </div>
 </body>
 <script>

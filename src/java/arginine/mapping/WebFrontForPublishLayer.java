@@ -5,12 +5,13 @@ import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lycine.mapping.ExcMapLayer;
 import methionine.auth.Session;
 import threonine.mapping.MapLayer;
 //***************************************************************************
-@WebServlet(name = "WebFrontMapping", urlPatterns = {WebFrontMapping.PAGE}, loadOnStartup=1)
-public class WebFrontMapping extends WebFrontAlpha {
-    public static final String PAGE = "/mapping/home";
+@WebServlet(name = "WebFrontForPublishLayer", urlPatterns = {WebFrontForPublishLayer.PAGE}, loadOnStartup=1)
+public class WebFrontForPublishLayer extends WebFrontAlpha {
+    public static final String PAGE = "/mapping/forpublish";
    //************************************************************************    
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -28,38 +29,31 @@ public class WebFrontMapping extends WebFrontAlpha {
             return;
         }
         //===================================================================
-        boolean allowed = false;
-        if (session.isAdmin()) allowed = true;
-        //-------------------------------------------------------------------
-        if (!allowed) {
-            flowbeta.setStatusResponse(403);
-            this.fleeRequest(flowbeta);
-            return;
-        }        
-        //===================================================================
-        WebBackMapping back = new WebBackMapping();
+        WebBackForPublishLayer back = new WebBackForPublishLayer();
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try {
-            MapLayer[] layers = flowbeta.getAurigaObject().getMapsLambda().publicLayers();
+            ExcMapLayer exc = new ExcMapLayer();
+            exc.setAuriga(flowbeta.getAurigaObject());
+            MapLayer[] layers = exc.getForPublishLayers(session);
             back.setLayers(layers);
         }
         catch (Exception e) {
             //----------------------------------------------
-            System.out.println("Failure in mapping page (Web) cananite");
+            System.out.println("Failure in mapping page (Web) cameite");
             System.out.println(e.getMessage());
             //----------------------------------------------
         }
-        request.setAttribute(PAGEATTRKEY, back);
+        request.setAttribute(PAGEATTRKEY, back);        
         //===================================================================
         this.beforeSend(flowbeta);
-        this.dispatchNormal("/render2020/mapping/home.jsp", request, response);
+        this.dispatchNormal("/render2020/mapping/forpublish.jsp", request, response);
         //===================================================================
         this.finallJob(flowbeta);
         this.destroyFlowBeta(flowbeta);
         //===================================================================
     }
-    //************************************************************************
+    //************************************************************************        
 }
 //***************************************************************************

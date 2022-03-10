@@ -4,7 +4,7 @@ import arginine.WebBackAlpha;
 import arginine.jbuilders.JMaps;
 import threonine.mapping.MapLayer;
 //***************************************************************************
-public class WebBackMapping extends WebBackAlpha {
+public class WebBackForPublishLayer extends WebBackAlpha {
     //***************************************************************
     MapLayer[] layers = null;
     void setLayers (MapLayer[] layers) { this.layers = layers; }
@@ -15,12 +15,6 @@ public class WebBackMapping extends WebBackAlpha {
     public String jLayers () {
         return JMaps.getLayerList(getLayers()).toString();
     }
-    //***************************************************************
-    public String pageForPublish () {
-        StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(WebFrontForPublishLayer.PAGE);
-        return url.toString();
-    }    
     //***************************************************************
 }
 //***************************************************************************
