@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
-import threonine.map.MapLayer;
+import threonine.mapping.MapLayer;
 //***************************************************************************
 @WebServlet(name = "WebFrontMapping", urlPatterns = {WebFrontMapping.PAGE}, loadOnStartup=1)
 public class WebFrontMapping extends WebFrontAlpha {

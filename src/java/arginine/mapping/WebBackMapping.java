@@ -2,7 +2,7 @@ package arginine.mapping;
 //***************************************************************************
 import arginine.WebBackAlpha;
 import arginine.jbuilders.JMaps;
-import threonine.map.MapLayer;
+import threonine.mapping.MapLayer;
 //***************************************************************************
 public class WebBackMapping extends WebBackAlpha {
     //***************************************************************
