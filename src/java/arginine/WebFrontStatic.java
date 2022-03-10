@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet (name="WebEntryStatic", urlPatterns= { WebFrontStatic.URLPATTERN} )
 public class WebFrontStatic extends WebFrontAlpha {
     //=======================================================================
-    public static final String PAGE = "/static";
+    public static final String PAGE = "/static_old";
     public static final String URLPATTERN = PAGE + "/*";
     //***********************************************************************
     static final int MAXAGE = 3600;

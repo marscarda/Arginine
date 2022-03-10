@@ -17,9 +17,7 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="content">
-    
-    <div style="height: 1000px"></div>
-
+<div style="height: 1000px"></div>
 </div>
 </body>
 </html>
