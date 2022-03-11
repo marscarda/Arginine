@@ -1,19 +1,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
-<%@page import="arginine.WebFrontStatic"%>
+<%@page import="arginine.WebFrontStatic22"%>
 <%@page import="arginine.WebFrontAlpha"%>
-<%@page import="arginine.mapping.WebBackForPublishLayer"%>
+<%@page import="arginine.mapping.WebBackMapping"%>
 <%
-    WebBackForPublishLayer back = (WebBackForPublishLayer)request.getAttribute(WebFrontAlpha.PAGEATTRKEY); 
+    WebBackMapping back = (WebBackMapping)request.getAttribute(WebFrontAlpha.PAGEATTRKEY); 
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSROOT%>">
-<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSFORM%>">
-<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSPOPUP%>">
-<script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
-<script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.CSSROOT%>">
+<script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSHTTP%>"></script>
+<script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSTAGANIMATE%>"></script><!-- comment -->
 <script>
 var layers = <%=back.jLayers()%>;
 let fillLayers = () => {
@@ -54,16 +52,16 @@ let addLayer = (layer) => {
     document.getElementById('layerlist').appendChild(top);
 }
 </script>
-<title>For Publish Candidate Layers</title>
+<title>Mapping</title>
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
 <div class="content">
-    <div style="width: 100%; margin-top: 5px; padding: 5px 0px;">
-        <a href="<%=back.pageMapping()%>">Map Layers</a>
+    <div class="submenu">
+        <a href="<%=back.pageForPublish()%>">For Publish Candidates</a>
     </div>
-    <div style="width: 100%; margin-top: 5px; border-bottom: solid 3px #baa; font-size: 25px; color: #444"> 
-        Publish Candidates Map Layers
+    <div class="pagetit"> 
+        Map Layers
     </div>
     <div id="layerlist"></div>
 </div>

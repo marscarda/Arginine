@@ -1,9 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="arginine.WebFrontStatic22"%>
 <%@page import="arginine.WebFrontStatic"%>
 <%@page import="arginine.WebFrontAlpha"%>
-<%@page import="arginine.mapping.WebBackMapping"%>
+<%@page import="arginine.mapping.WebBackForPublishLayer"%>
 <%
-    WebBackMapping back = (WebBackMapping)request.getAttribute(WebFrontAlpha.PAGEATTRKEY); 
+    WebBackForPublishLayer back = (WebBackForPublishLayer)request.getAttribute(WebFrontAlpha.PAGEATTRKEY); 
 %>
 <!DOCTYPE html>
 <html>
@@ -12,8 +13,8 @@
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSROOT%>">
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSFORM%>">
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSPOPUP%>">
-<script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSHTTP%>"></script>
-<script src="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.JSTAGANIMATE%>"></script>
+<script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSHTTP%>"></script>
+<script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSTAGANIMATE%>"></script><!-- comment -->
 <script>
 var layers = <%=back.jLayers()%>;
 let fillLayers = () => {
@@ -38,7 +39,6 @@ let addLayer = (layer) => {
     top.style.width = "480px";
     top.style.marginRight = "30px";
     top.style.float = "left";    
-    
     /* Layer name */ {
         line = document.createElement("div");
         line.style.fontSize = "15px";
@@ -46,29 +46,26 @@ let addLayer = (layer) => {
         line.style.fontSize = "16px";
         line.style.fontWeight = 600;
         link = document.createElement('a');
-        link.href = '<%--=back.pageRecords()--%>/' + layer.layerid;
+        link.href = '#';
         link.innerHTML = decodeURI(decodeURIComponent(layer.layername));
         line.appendChild(link);
         top.appendChild(line);
     }    
-    
-    
-    
     document.getElementById('layerlist').appendChild(top);
 }
 </script>
-<title>Mapping</title>
+<title>For Publish Candidate Layers</title>
 </head>
 <body>
 <%@include file="../main/header.jsp" %>
 <div class="content">
     <div style="width: 100%; margin-top: 5px; padding: 5px 0px;">
-        <a href="<%=back.pageForPublish()%>">For Publish Candidates</a>
+        <a href="<%=back.pageMapping()%>">Map Layers</a>
     </div>
     <div style="width: 100%; margin-top: 5px; border-bottom: solid 3px #baa; font-size: 25px; color: #444"> 
-        Map Layers
+        Publish Candidates Map Layers
     </div>
-    <div id="layerlist"></div>
+    <div id="layerlist" style="margin-top: 30px"></div>
 </div>
 </body>
 <script>

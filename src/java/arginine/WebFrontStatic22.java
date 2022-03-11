@@ -18,6 +18,10 @@ public class WebFrontStatic22 extends WebFrontAlpha {
     //CSSs
     public static final String CSSROOT = "mekelarewa";
     //***********************************************************************
+    //JS
+    public static final String JSHTTP = "janertywe";
+    public static final String JSTAGANIMATE = "majlarian";
+    //***********************************************************************
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         //===================================================================
@@ -35,10 +39,13 @@ public class WebFrontStatic22 extends WebFrontAlpha {
         //===================================================================
         //Fonts
         if (resourcename.equals(TEXTGRAL20)) dispatchfile = "/static22/arm.ttf";
-        //-------------------------------------------------------------------
+        //===================================================================
         //CSS
         if (resourcename.equals(CSSROOT)) dispatchfile = "/static22/root.css";
-        //-------------------------------------------------------------------
+        //===================================================================
+        if (resourcename.equals(JSHTTP)) dispatchfile = "/static22/httprequest.js";
+        if (resourcename.equals(JSTAGANIMATE)) dispatchfile = "/static22/taganimate.js";
+        //===================================================================
         if (dispatchfile == null) {
             libintfc.setStatusResponse(404);
             this.finallJob(libintfc);

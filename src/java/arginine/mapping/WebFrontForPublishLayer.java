@@ -48,7 +48,7 @@ public class WebFrontForPublishLayer extends WebFrontAlpha {
         request.setAttribute(PAGEATTRKEY, back);        
         //===================================================================
         this.beforeSend(flowbeta);
-        this.dispatchNormal("/render2020/mapping/forpublish.jsp", request, response);
+        this.dispatchNormal("/render22/mapping/forpublish.jsp", request, response);
         //===================================================================
         this.finallJob(flowbeta);
         this.destroyFlowBeta(flowbeta);

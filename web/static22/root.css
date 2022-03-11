@@ -16,3 +16,15 @@ div.content {
     padding-right: 30px;
     padding-bottom: 200px;
 }
+div.submenu {
+    width: 100%; 
+    margin-top: 5px; 
+    padding: 5px 0px;
+}
+div.pagetit {
+    width: 100%; 
+    margin-top: 5px; 
+    border-bottom: solid 3px #baa; 
+    font-size: 25px; 
+    color: #444
+}

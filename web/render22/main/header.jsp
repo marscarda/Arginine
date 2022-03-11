@@ -20,7 +20,7 @@
     padding: 3px 0px;
     font-size: 18px;
     font-weight: bold;
-    color: #cfc;
+    color: #ffb;
 }
 .headerouter {
     background-color: #030;

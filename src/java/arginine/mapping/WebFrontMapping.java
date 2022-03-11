@@ -54,7 +54,7 @@ public class WebFrontMapping extends WebFrontAlpha {
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);
-        this.dispatchNormal("/render2020/mapping/home.jsp", request, response);
+        this.dispatchNormal("/render22/mapping/home.jsp", request, response);
         //===================================================================
         this.finallJob(flowbeta);
         this.destroyFlowBeta(flowbeta);
