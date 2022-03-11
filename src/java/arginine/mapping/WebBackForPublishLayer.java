@@ -22,6 +22,11 @@ public class WebBackForPublishLayer extends WebBackAlpha {
         return url.toString();
     }
     //===============================================================
+    public String apiSetLayerPublic () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiSetLayerPublic.URL);
+        return url.toString();        
+    }
     //***************************************************************
 }
 //***************************************************************************

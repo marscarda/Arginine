@@ -1,0 +1,41 @@
+div.messagebox {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    z-index: 150;
+    width: 600px;
+    height: 0px;
+    overflow: hidden;
+    margin-left: -300px;
+    border: solid 1px #666666;
+    border-radius: 3px;
+    padding: 20px 35px;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    background-color: #ffffff;
+}
+div.confirmbox {
+    position: fixed;
+    top: 90px;
+    border: solid 5px #dda;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    left: 50%;
+    z-index: 110;
+    padding: 25px 15px;
+    width: 600px;
+    margin-left: -300px;
+}
+div.formlite {
+    position: fixed;
+    top: 90px;
+    border: solid 2px #cf5;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    left: 50%;
+    z-index: 110;
+    padding: 25px 15px;
+}

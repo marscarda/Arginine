@@ -17,6 +17,8 @@ public class WebFrontStatic22 extends WebFrontAlpha {
     //***********************************************************************
     //CSSs
     public static final String CSSROOT = "mekelarewa";
+    public static final String CSSFORM = "wertenfert";
+    public static final String CSSPOPUP = "hartonketf";
     //***********************************************************************
     //JS
     public static final String JSHTTP = "janertywe";
@@ -50,6 +52,8 @@ public class WebFrontStatic22 extends WebFrontAlpha {
         //===================================================================
         //CSS
         if (resourcename.equals(CSSROOT)) dispatchfile = "/static22/root.css";
+        if (resourcename.equals(CSSFORM)) dispatchfile = "/static22/form.css";
+        if (resourcename.equals(CSSPOPUP)) dispatchfile = "/static22/popup.css";
         //===================================================================
         //JS
         if (resourcename.equals(JSHTTP)) dispatchfile = "/static22/httprequest.js";

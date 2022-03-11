@@ -38,6 +38,40 @@ a.headermenuitem {
     color: #fff;
 }
 </style>
+<script>
+let setCurtain = () => {
+    var expand = new DivExpandHeight();
+    expand.setDimensions (0, 1500);
+    expand.setElement(document, 'curtain');
+    expand.start();
+}
+let hideCurtain = () => { document.getElementById('curtain').style.height = "0px"; }
+let showToast = (message, color) => {
+    var msg = document.getElementById('divtoast');
+    msg.style.color = color;
+    msg.innerHTML = decodeURI(message);
+    var popupmessage = new ToastMessage();
+    popupmessage.setElement('divtoast');
+    popupmessage.start();
+}
+let confirmOk = () => {};
+let closeConfirm = () => {
+    var div = document.getElementById('confirmbox');
+    div.style.height = 0;
+    div.style.opacity = 0;
+    hideCurtain();
+}
+let askContirmation = (message, confirmok) => {
+    confirmOk = confirmok;
+    var msg = document.getElementById('confirmmsg');
+    msg.innerHTML = message;
+    setCurtain();
+    document.getElementById('confirmbox').style.height = 'auto';
+    var fadein = new ElementFadeIn();
+    fadein.setElement('confirmbox');
+    fadein.start();    
+}
+</script>
 <div class="headertop">
     <div class="headerouter">
         <div class="headertitle">
@@ -57,5 +91,16 @@ a.headermenuitem {
                 <a href="<%=hback.pageMapping()%>" class="headermenuitem">Mapping</a>
             </div>                    
         </div>
+    </div>
+    <div id="curtain" style="height: 0px; overflow: hidden; background-color: #335000; opacity: 0.15"></div>
+</div>
+<div id="divtoast" class="messagebox">
+    <div id="toastmessage">Message</div>
+</div>
+<div id="confirmbox" class="confirmbox" style="height: 0px; opacity: 0">
+    <div id="confirmmsg" style="font-size: 16px; font-weight: 600; color: #666"></div>
+    <div style="margin-top: 30px">
+        <button class="ok" onclick="confirmOk(); return false">Ok</button>
+        <button class="cancel" onclick="closeConfirm(); return false">Cancel</button>
     </div>
 </div>

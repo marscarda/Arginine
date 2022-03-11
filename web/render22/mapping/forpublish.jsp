@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
+<%@page import="arginine.ApiAlpha"%>
+<%@page import="arginine.mapping.ApiSetLayerPublic"%>
 <%@page import="arginine.WebFrontStatic22"%>
 <%@page import="arginine.WebFrontStatic"%>
 <%@page import="arginine.WebFrontAlpha"%>
@@ -10,13 +12,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSROOT%>">
-<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSFORM%>">
-<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSPOPUP%>">
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.CSSROOT%>">
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.CSSFORM%>">
+<link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.CSSPOPUP%>">
 <script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSTAGANIMATE%>"></script>
 <script>
 var layers = <%=back.jLayers()%>;
+var currentlayer = 0;
 let fillLayers = () => {
     var div = document.getElementById('layerlist');
     for (n = 0; n < layers.count; n++) 
@@ -51,13 +54,110 @@ let addLayer = (layer) => {
         link.innerHTML = decodeURI(decodeURIComponent(layer.layername));
         line.appendChild(link);
         top.appendChild(line);
-    }    
+    }
+    /* Options */ {
+        line = document.createElement("div");
+        line.style.fontSize = "15px";
+        line.style.color = "#333";
+        line.style.fontSize = "16px";
+        line.style.display = 'flex';
+        line.style.flexDirection = 'row';
+        line.style.marginTop = "15px";
+        /* Accept */ {
+            column = document.createElement('div');
+            column.style.marginRight = '25px';
+            link = document.createElement("a");
+            link.href = '#';
+            link.onclick = () => {
+                openAccept();
+                return false;
+            }
+            link.innerHTML = "Accept";
+            column.appendChild(link);
+            line.appendChild(column);
+        }
+        /* Reject */ {
+            column = document.createElement('div');
+            column.style.marginRight = '25px';
+            link = document.createElement("a");
+            link.href = '#';
+            link.onclick = () => {
+                alert("Reject");
+                return false;
+            }
+            link.innerHTML = "Reject";
+            column.appendChild(link);
+            line.appendChild(column);
+        }
+        top.appendChild(line);
+    }
     document.getElementById('layerlist').appendChild(top);
+}
+let openAccept = (layerid) => {
+    currentlayer = layerid;
+    document.getElementById('divsetpublic').style.height = 'auto';
+    setCurtain();
+    var fadein = new ElementFadeIn();
+    fadein.setElement('divsetpublic');
+    fadein.start();
+}
+let closeAccept = () => {
+    document.getElementById('divsetpublic').style.height = '0px';
+    hideCurtain();
+    document.getElementById('divsetpublic').style.opacity = 0;
+    document.getElementById('formsetpublic').reset();
+}
+let setLayerPublic = () => {
+    var form = document.getElementById('formsetpublic');
+    var formdata = new FormData (form);
+    var req = new HttpRequest();
+    var callback = (status, objresp) => {
+        if (status === 0) {
+            showToast ('Could not connect to server', '#ff3333');
+            return;
+        }
+        if (status !== 200) {
+            showToast ('Error server. Probably in maintenance', '#ff3333');
+            return;
+        }
+        if (objresp.result !== 'OK') {
+            showToast (objresp.description, '#ff3333');
+            return;
+        }
+        /* Success */
+        showToast ("Layer is now public", "#290");
+        closeAccept();
+    };
+    req.setCallBack(callback);
+    req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
+    req.addParam('<%=ApiSetLayerPublic.LAYERID%>', currentlayer);
+    req.addParam('<%=ApiSetLayerPublic.DESCRIPTION%>', formdata.get('<%=ApiSetLayerPublic.DESCRIPTION%>'));
+    req.setURL('<%=back.apiSetLayerPublic()%>');
+    try { req.executepost(); }
+    catch(err) { alert (err.getMessage); }    
 }
 </script>
 <title>For Publish Candidate Layers</title>
 </head>
 <body>
+    
+    
+    
+<div id="divsetpublic" class="formlite" style="width: 460px; height: 0px; margin-left: -230px; opacity: 0">
+    <div class="formtitle">
+        Set Map Layer public
+    </div>
+    <form id="formsetpublic">
+        <div class="fieldname">Form Name</div>
+        <textarea name="<%=ApiSetLayerPublic.DESCRIPTION%>" style="" placeholder="A description for the public"></textarea>
+    </form>
+    <div style="margin-top: 30px">
+        <button class="ok" onclick="setLayerPublic(); return false">Create</button>
+        <button class="cancel" onclick="closeAccept(); return false">Cancel</button>
+    </div>
+</div>
+    
+    
 <%@include file="../main/header.jsp" %>
 <div class="content">
     <div style="width: 100%; margin-top: 5px; padding: 5px 0px;">
