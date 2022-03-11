@@ -22,6 +22,14 @@ public class WebFrontStatic22 extends WebFrontAlpha {
     public static final String JSHTTP = "janertywe";
     public static final String JSTAGANIMATE = "majlarian";
     //***********************************************************************
+    //MAM BITMAP 
+    public static final String ZOOMINICON = "mssewsdtetsda";
+    public static final String ZOOMOUTICON = "bstdrgdgdfgd";
+    public static final String HANDICON = "rwerdfsdfsdfs";
+    public static final String MAPRECINFOICON = "mqftyfgdrt";
+    public static final String MAPENTERICON = "hetdfvdtes";
+    public static final String MAPSTATSICON = "bfgrtgfhghg";
+    //***********************************************************************
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
         //===================================================================
@@ -43,8 +51,17 @@ public class WebFrontStatic22 extends WebFrontAlpha {
         //CSS
         if (resourcename.equals(CSSROOT)) dispatchfile = "/static22/root.css";
         //===================================================================
+        //JS
         if (resourcename.equals(JSHTTP)) dispatchfile = "/static22/httprequest.js";
         if (resourcename.equals(JSTAGANIMATE)) dispatchfile = "/static22/taganimate.js";
+        //===================================================================
+        //MAP BITMAP
+        if (resourcename.equals(MAPRECINFOICON)) dispatchfile = "/static22/mapbuttons/maprecinfo.png";
+        if (resourcename.equals(MAPENTERICON)) dispatchfile = "/static22/mapbuttons/mapentericon.png";
+        if (resourcename.equals(MAPSTATSICON)) dispatchfile = "/static22/mapbuttons/stats.png";
+        if (resourcename.equals(ZOOMINICON)) dispatchfile = "/static22/mapbuttons/zoomin.png";
+        if (resourcename.equals(ZOOMOUTICON)) dispatchfile = "/static22/mapbuttons/zoomout.png";
+        if (resourcename.equals(HANDICON)) dispatchfile = "/static22/mapbuttons/hand.png";
         //===================================================================
         if (dispatchfile == null) {
             libintfc.setStatusResponse(404);

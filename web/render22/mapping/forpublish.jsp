@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSFORM%>">
 <link rel="stylesheet" type="text/css" href="<%=back.getRootURL()%><%=WebFrontStatic.PAGE%>/<%=WebFrontStatic.CSSPOPUP%>">
 <script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSHTTP%>"></script>
-<script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSTAGANIMATE%>"></script><!-- comment -->
+<script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSTAGANIMATE%>"></script>
 <script>
 var layers = <%=back.jLayers()%>;
 let fillLayers = () => {
@@ -46,7 +46,7 @@ let addLayer = (layer) => {
         line.style.fontSize = "16px";
         line.style.fontWeight = 600;
         link = document.createElement('a');
-        link.href = '#';
+        link.href = '<%=back.pageMapView()%>/' + layer.layerid;
         link.innerHTML = decodeURI(decodeURIComponent(layer.layername));
         line.appendChild(link);
         top.appendChild(line);

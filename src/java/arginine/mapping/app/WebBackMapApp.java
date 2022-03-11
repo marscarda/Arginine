@@ -4,7 +4,6 @@ import arginine.WebBackAlpha;
 //***************************************************************************
 public class WebBackMapApp extends WebBackAlpha {
     //***********************************************************************
-    /*
     public String apiGetDrawingURL () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(ApiMapGetDrawLayer.URL);
@@ -28,8 +27,6 @@ public class WebBackMapApp extends WebBackAlpha {
         url.append(ApiPointInRecordLayer.URL);
         return url.toString();
     }
-    */
-    //=======================================================================
     //***********************************************************************
 }
 //***************************************************************************
