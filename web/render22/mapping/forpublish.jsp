@@ -47,6 +47,7 @@ let addLayer = (layer) => {
         line.style.fontWeight = 600;
         link = document.createElement('a');
         link.href = '<%=back.pageMapView()%>/' + layer.layerid;
+        link.target = "_blank";
         link.innerHTML = decodeURI(decodeURIComponent(layer.layername));
         line.appendChild(link);
         top.appendChild(line);

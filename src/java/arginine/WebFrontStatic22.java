@@ -53,7 +53,7 @@ public class WebFrontStatic22 extends WebFrontAlpha {
         //===================================================================
         //JS
         if (resourcename.equals(JSHTTP)) dispatchfile = "/static22/httprequest.js";
-        if (resourcename.equals(JSTAGANIMATE)) dispatchfile = "/static22/taganimate.js";
+        if (resourcename.equals(JSTAGANIMATE)) dispatchfile = "/static22/animate.js";
         //===================================================================
         //MAP BITMAP
         if (resourcename.equals(MAPRECINFOICON)) dispatchfile = "/static22/mapbuttons/maprecinfo.png";

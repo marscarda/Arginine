@@ -5,10 +5,9 @@ import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lycine.sample.ExcSamplePanel;
+import lycine.mapping.ExcMapLayer;
 import methionine.auth.Session;
-import tryptophan.sample.ResponseCall;
-import tryptophan.sample.Sample;
+import threonine.mapping.MapLayer;
 //***************************************************************************
 @WebServlet(name = "WebFrontMapView", urlPatterns = {WebFrontMapView.URLPATTERN}, loadOnStartup=1)
 public class WebFrontMapView extends WebFrontAlpha {
@@ -47,7 +46,10 @@ public class WebFrontMapView extends WebFrontAlpha {
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try {
-            
+            ExcMapLayer exc = new ExcMapLayer();
+            exc.setAuriga(flowbeta.getAurigaObject());
+            MapLayer layer = exc.getLayer(layerid);
+            back.setLayer(layer);
         }
         catch (Exception e) {
             //----------------------------------------------

@@ -10,7 +10,7 @@ import methionine.auth.Session;
 @WebServlet(name = "WebFrontMapApp", urlPatterns = {WebFrontMapApp.PAGE}, loadOnStartup=1)
 public class WebFrontMapApp extends WebFrontAlpha {
     //=======================================================================
-    public static final String PAGE = "/maps/gftrgfsfd6rgfgdf";
+    public static final String PAGE = "/mapping/malantga";
     //=======================================================================
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -30,7 +30,7 @@ public class WebFrontMapApp extends WebFrontAlpha {
         //===================================================================
         response.setHeader("Cache-Control", "max-age=30, max-stale=30");
         this.beforeSend(flowbeta);
-        this.dispatchNormal("/render2022/mapping/mapjscriptapp.jsp", request, response);
+        this.dispatchNormal("/render22/mapping/mapjscriptapp.jsp", request, response);
         //===================================================================
         this.finallJob(flowbeta);
         this.destroyFlowBeta(flowbeta);
