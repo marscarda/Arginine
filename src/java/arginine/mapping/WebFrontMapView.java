@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lycine.mapping.ExcMapLayer;
+import lycine.mapping.ExcMapLayerAdmin;
 import methionine.auth.Session;
 import threonine.mapping.MapLayer;
 //***************************************************************************
@@ -46,9 +47,9 @@ public class WebFrontMapView extends WebFrontAlpha {
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
         try {
-            ExcMapLayer exc = new ExcMapLayer();
+            ExcMapLayerAdmin exc = new ExcMapLayerAdmin();
             exc.setAuriga(flowbeta.getAurigaObject());
-            MapLayer layer = exc.getLayer(layerid);
+            MapLayer layer = exc.getLayer(layerid, session);
             back.setLayer(layer);
         }
         catch (Exception e) {

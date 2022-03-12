@@ -69,7 +69,7 @@ let addLayer = (layer) => {
             link = document.createElement("a");
             link.href = '#';
             link.onclick = () => {
-                openAccept();
+                openAccept(layer.layerid, layer.layername, layer.description);
                 return false;
             }
             link.innerHTML = "Accept";
@@ -93,8 +93,10 @@ let addLayer = (layer) => {
     }
     document.getElementById('layerlist').appendChild(top);
 }
-let openAccept = (layerid) => {
+let openAccept = (layerid, name, description) => {
     currentlayer = layerid;
+    document.getElementById('<%=ApiSetLayerPublic.LAYERNAME%>').value = name;
+    document.getElementById('<%=ApiSetLayerPublic.DESCRIPTION%>').value = description;
     document.getElementById('divsetpublic').style.height = 'auto';
     setCurtain();
     var fadein = new ElementFadeIn();
@@ -131,6 +133,7 @@ let setLayerPublic = () => {
     req.setCallBack(callback);
     req.addParam('<%=ApiAlpha.CREDENTIALTOKEN%>','<%=back.loginToken()%>');
     req.addParam('<%=ApiSetLayerPublic.LAYERID%>', currentlayer);
+    req.addParam('<%=ApiSetLayerPublic.LAYERNAME%>', formdata.get('<%=ApiSetLayerPublic.LAYERNAME%>'));    
     req.addParam('<%=ApiSetLayerPublic.DESCRIPTION%>', formdata.get('<%=ApiSetLayerPublic.DESCRIPTION%>'));
     req.setURL('<%=back.apiSetLayerPublic()%>');
     try { req.executepost(); }
@@ -140,24 +143,21 @@ let setLayerPublic = () => {
 <title>For Publish Candidate Layers</title>
 </head>
 <body>
-    
-    
-    
 <div id="divsetpublic" class="formlite" style="width: 460px; height: 0px; margin-left: -230px; opacity: 0">
     <div class="formtitle">
         Set Map Layer public
     </div>
     <form id="formsetpublic">
-        <div class="fieldname">Form Name</div>
-        <textarea name="<%=ApiSetLayerPublic.DESCRIPTION%>" style="" placeholder="A description for the public"></textarea>
+        <div class="fieldname">Layer Name</div>
+        <textarea id="<%=ApiSetLayerPublic.LAYERNAME%>" name="<%=ApiSetLayerPublic.LAYERNAME%>" style="" placeholder="The name of the layer"></textarea>
+        <div class="fieldname">Layer Description</div>
+        <textarea id="<%=ApiSetLayerPublic.DESCRIPTION%>" name="<%=ApiSetLayerPublic.DESCRIPTION%>" style="" placeholder="A description for the public"></textarea>
     </form>
     <div style="margin-top: 30px">
         <button class="ok" onclick="setLayerPublic(); return false">Create</button>
         <button class="cancel" onclick="closeAccept(); return false">Cancel</button>
     </div>
 </div>
-    
-    
 <%@include file="../main/header.jsp" %>
 <div class="content">
     <div style="width: 100%; margin-top: 5px; padding: 5px 0px;">
