@@ -5,7 +5,6 @@ import arginine.WebFrontAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lycine.mapping.ExcMapLayer;
 import lycine.mapping.ExcMapLayerAdmin;
 import methionine.auth.Session;
 import threonine.mapping.MapLayer;

@@ -50,9 +50,9 @@ let showToast = (message, color) => {
     var msg = document.getElementById('divtoast');
     msg.style.color = color;
     msg.innerHTML = decodeURI(message);
-    var popupmessage = new ToastMessage();
-    popupmessage.setElement('divtoast');
-    popupmessage.start();
+    var toastmsg = new ToastMessage();
+    toastmsg.setElement('divtoast');
+    toastmsg.start();
 }
 let confirmOk = () => {};
 let closeConfirm = () => {
@@ -94,7 +94,7 @@ let askContirmation = (message, confirmok) => {
     </div>
     <div id="curtain" style="height: 0px; overflow: hidden; background-color: #335000; opacity: 0.15"></div>
 </div>
-<div id="divtoast" class="messagebox">
+<div id="divtoast" class="toastmessage">
     <div id="toastmessage">Message</div>
 </div>
 <div id="confirmbox" class="confirmbox" style="height: 0px; opacity: 0">

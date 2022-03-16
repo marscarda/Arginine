@@ -16,11 +16,17 @@ public class WebBackMapping extends WebBackAlpha {
         return JMaps.getLayerList(getLayers()).toString();
     }
     //***************************************************************
-    public String pageForPublish () {
+    public String pageMapView () {
         StringBuilder url = new StringBuilder(this.getRootURL());
-        url.append(WebFrontForPublishLayer.PAGE);
+        url.append(WebFrontMapView.PAGE);
         return url.toString();
-    }    
+    }
+    //===============================================================
+    public String apiSetPublic () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(ApiSetLayerPublic.URL);
+        return url.toString();
+    }
     //***************************************************************
 }
 //***************************************************************************

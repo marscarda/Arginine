@@ -21,7 +21,7 @@ var layer = <%=back.jMapLayer()%>;
 <body>
 <%@include file="../main/header.jsp" %>
 <div class="content">
-    <div id="mapview" style="height: 450px"></div>
+    <div id="mapview" style="height: 450px; margin-top: 40px"></div>
 </div>
 </body>
 <script>

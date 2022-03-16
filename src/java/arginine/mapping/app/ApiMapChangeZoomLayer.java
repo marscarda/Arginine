@@ -79,7 +79,7 @@ public class ApiMapChangeZoomLayer extends ApiAlpha {
         catch (Exception e) {
             sendServerErrorResponse(resp);
             System.out.println("Unable to change map zoom map");
-            System.out.println(e.getMessage());            
+            System.out.println(e.getMessage());
         }        
         //==========================================================
         this.finalizeJob(flowalpha);

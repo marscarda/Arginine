@@ -1,4 +1,4 @@
-div.messagebox {
+div.toastmessage {
     position: fixed;
     top: -100px;
     left: 50%;

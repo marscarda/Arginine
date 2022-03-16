@@ -9,22 +9,58 @@ body {
     margin-bottom: 0px;
     font-family: 'General';
 }
-a { text-decoration: none; }
 div.content {
-    padding-top: 70px;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 200px;
+    padding: 0px 15px;
+    min-height: 450px;
+}
+a {
+    text-decoration: none;
+    color: #05f;
+}
+div.listheadertop {
+    width: 100%;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 3px #baa;
+    padding: 8px 0px;
+}
+div.listheadertit {
+    font-size: 25px;
+    font-weight: 600;
+    color: #444;
+    flex: 1;
+    text-align: left;
+    margin-bottom: 0px;
+}
+div.listheadertopsubtit {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid 3px #baa;
+    padding: 8px 0px;
+}
+div.listheadertitsecondary {
+    font-size: 20px;
+    font-weight: 600;
+    color: #444;
+    flex: 1;
+    text-align: left;
+    margin-top: auto;
+    margin-bottom: 0px;
+}
+div.listheaderadd {
+    flex: 1;
+    font-size: 15px;
+    height: 15px;
+    margin-top: auto;
+    margin-bottom: 3px;
+    text-align: right
 }
 div.submenu {
-    width: 100%; 
-    margin-top: 5px; 
-    padding: 5px 0px;
-}
-div.pagetit {
-    width: 100%; 
-    margin-top: 5px; 
-    border-bottom: solid 3px #baa; 
-    font-size: 25px; 
-    color: #444
+    display: flex; 
+    flex-direction: row; 
+    font-size: 15px; 
+    margin-top: 50px
 }
