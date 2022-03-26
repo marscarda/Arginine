@@ -89,7 +89,10 @@ let askContirmation = (message, confirmok) => {
             </div>
             <div class="headermenuitem">
                 <a href="<%=hback.pageMapping()%>" class="headermenuitem">Mapping</a>
-            </div>                    
+            </div>
+            <div class="headermenuitem">
+                <a href="<%=hback.pageUniverse()%>" class="headermenuitem">Universes</a>
+            </div>            
         </div>
     </div>
     <div id="curtain" style="height: 0px; overflow: hidden; background-color: #335000; opacity: 0.15"></div>

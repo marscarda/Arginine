@@ -139,8 +139,7 @@ let setLayerPublic = () => {
 <title>Mapping</title>
 </head>
 <body>
-
-
+<%@include file="../main/header.jsp" %>
 <div id="divsetpublic" class="formlite" style="width: 460px; height: auto; margin-left: -230px; margin-top: -1000px; opacity: 0">
     <div class="formtitle">
         Set Layer Public
@@ -158,10 +157,6 @@ let setLayerPublic = () => {
         <button class="cancel" onclick="closeSetPublic(); return false">Cancel</button>
     </div>    
 </div>
-
-
-
-<%@include file="../main/header.jsp" %>
 <div class="content">
     <div class="listheadertop"> 
         <div class="listheadertit">Map Layers</div>

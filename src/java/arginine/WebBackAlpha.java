@@ -6,6 +6,7 @@ import arginine.main.WebFrontHome;
 import arginine.main.WebFrontLogout;
 import arginine.mapping.WebFrontMapping;
 import arginine.project.WebFrontProjects;
+import arginine.universe.WebFrontUniverses;
 import arginine.user.WebFrontUsers;
 import methionine.auth.User;
 import methionine.project.Project;
@@ -84,6 +85,12 @@ public class WebBackAlpha {
     public String pageMapping () {
         StringBuilder url = new StringBuilder(this.getRootURL());
         url.append(WebFrontMapping.PAGE);
+        return url.toString();        
+    }
+    //=======================================================================
+    public String pageUniverse () {
+        StringBuilder url = new StringBuilder(this.getRootURL());
+        url.append(WebFrontUniverses.PAGE);
         return url.toString();        
     }
     //***********************************************************************
