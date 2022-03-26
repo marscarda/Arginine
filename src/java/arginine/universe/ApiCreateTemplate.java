@@ -5,6 +5,7 @@ import arginine.FlowAlpha;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lycine.universe.ExcUniverseAdmin;
 import mars.jsonsimple.JsonObject;
 import mars.jsonsimple.JsonPair;
 import methionine.AppException;
@@ -39,18 +40,18 @@ public class ApiCreateTemplate extends ApiAlpha {
         try { universeid = Long.parseLong(req.getParameter(UNIVERSEID)); } catch(Exception e) {}
         try {
             //---------------------------------------------------------------
-            System.out.println(universeid);
-            System.out.println(name);
-            System.out.println(description);
+            ExcUniverseAdmin exc = new ExcUniverseAdmin();
+            exc.setAuriga(flowalpha.getAurigaObject());
+            exc.createTemplateStart(universeid, name, description, session);
             //---------------------------------------------------------------
             JsonObject jsonresp = new JsonObject();
             jsonresp.addPair(new JsonPair(RESULT, RESULTOK));
-            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Universe copy started"));
+            jsonresp.addPair(new JsonPair(RESULTDESCRIPTION, "Universe copy to public template started"));
             //---------------------------------------------------------------
             this.sendResponse(resp, jsonresp);
             //---------------------------------------------------------------
         }
-//        catch (AppException e) { this.sendErrorResponse(resp, e.getMessage(), e.getErrorCode()); }
+        catch (AppException e) { this.sendErrorResponse(resp, e.getMessage(), e.getErrorCode()); }
         catch (Exception e) {
             sendServerErrorResponse(resp);
             System.out.println("Api add Universe template failure (jertonles)");
