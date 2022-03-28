@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import methionine.auth.Session;
+import threonine.universe.Universe;
 //***************************************************************************
 @WebServlet(name = "WebFrontUniverses", urlPatterns = {WebFrontUniverses.PAGE}, loadOnStartup=1)
 public class WebFrontUniverses extends WebFrontAlpha {
@@ -41,11 +42,18 @@ public class WebFrontUniverses extends WebFrontAlpha {
         back.setRootURL(flowbeta.getRootURL());
         back.setDisplayCustom(flowbeta.getLogedUser(), flowbeta.getCurrentProject());
         back.setLoginToken(session.getLoginToken());
-
-
-
-
-        
+        try {
+            //---------------------------------------------------------------
+            Universe[] templates = flowbeta.getAurigaObject().getUniverseAtlas().getTemplates();
+            back.setUniverses(templates);
+            //---------------------------------------------------------------
+        }
+        catch (Exception e) {
+            //----------------------------------------------
+            System.out.println("Failure in universe templates page (hertyant)");
+            System.out.println(e.getMessage());
+            //----------------------------------------------
+        }
         request.setAttribute(PAGEATTRKEY, back);
         //===================================================================
         this.beforeSend(flowbeta);

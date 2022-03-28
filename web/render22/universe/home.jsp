@@ -1,6 +1,6 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="arginine.universe.ApiCreateTemplate"%>
 <%@page import="arginine.ApiAlpha"%>
-<%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@page import="arginine.WebFrontStatic22"%>
 <%@page import="arginine.WebFrontAlpha"%>
 <%@page import="arginine.universe.WebBackUniverses"%>
@@ -18,6 +18,86 @@
 <script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSHTTP%>"></script>
 <script src="<%=back.getRootURL()%><%=WebFrontStatic22.PAGE%>/<%=WebFrontStatic22.JSTAGANIMATE%>"></script><!-- comment -->
 <script>
+var universes = <%=back.jUniverses()%>;
+let fillUniverses = () => {
+    var div = document.getElementById('universelist');
+    while (div.hasChildNodes())
+        div.removeChild(div.lastChild);
+    for (n = 0; n < universes.count; n++) 
+        addUniverse(universes.items[n], false);
+    var clear = document.createElement("div");
+    clear.style.clear = "both";
+    div.appendChild(clear);    
+}
+let addUniverse = (universe, isnew)  => {
+    /*---------------------------------------------------*/
+    var top;
+    var line;
+    var column;
+    var link;
+    /*---------------------------------------------------*/
+    top = document.createElement("div");
+    top.id = "universe" + universe.universeid;
+    top.style.border = "solid 4px #ce8";
+    if (isnew) top.style.opacity = 0;
+    top.style.borderRadius = "7px";
+    top.style.width = "450px";
+    top.style.float = "left";
+    top.style.marginRight = "30px";
+    top.style.marginTop = "30px";
+    top.style.padding = "25px 20px";
+    /*---------------------------------------------------*/
+    /* Universe Name */ {
+        line = document.createElement("div");
+        line.style.display = "flex";
+        line.style.flexDirection = "row";
+        line.style.fontSize = "15px";
+        line.style.fontWeight = "600";
+        line.innerHTML = decodeURI(decodeURIComponent(universe.universe_name));
+        top.appendChild(line);
+    }
+    /*---------------------------------------------------*/
+    /* Description title */ {
+        line = document.createElement("div");
+        line.style.fontSize = "12px";
+        line.style.fontWeight = "600";
+        line.style.color = "#666";
+        line.style.marginTop = "10px";
+        line.innerHTML = "Description";
+        top.appendChild(line);
+    }
+    /*---------------------------------------------------*/
+    /* Description Body */ {
+        line = document.createElement("div");
+        line.style.fontSize = "12px";
+        line.style.fontWeight = "600";
+        line.style.color = "#666";
+        line.style.marginTop = "4px";
+        line.style.height = "40px";
+        line.style.overflowY = decodeURI(decodeURIComponent(universe.universe_description));
+        line.innerHTML = "";
+        top.appendChild(line);
+    }
+    /*---------------------------------------------------*/
+    /* Options */ {
+        line = document.createElement("div");
+        line.style.fontSize = "15px";
+        line.style.color = "#666";
+        line.style.marginTop = "4px";
+        column = document.createElement("div");
+        link = document.createElement("a");
+        link.href = '<%--=back.universePageURL()--%>/' + universe.universeid;
+        link.style.color = "#05f";
+        link.innerHTML = "Open universe";
+        column.appendChild(link);
+        line.appendChild(column);
+        top.appendChild(line);
+    }
+    /*---------------------------------------------------*/
+    if (isnew) document.getElementById('universelist').insertBefore(top, document.getElementById('universelist').childNodes[0]);
+    else document.getElementById('universelist').appendChild(top);
+    /*---------------------------------------------------*/    
+}
 let openAddTemplate = () => {
     document.getElementById('divaddtemplate').style.height = 'auto';
     document.getElementById('divaddtemplate').style.marginTop = 0;
@@ -90,7 +170,9 @@ let addTemplate = () => {
         <div class="listheadertit">Universe Templates</div>
         <div class="listheaderadd"><a href="#" onclick="openAddTemplate(); return false;">Add Template</a></div>
     </div>
-    <div id="layerlist" style="margin-top: 30px"></div>    
+    <div id="universelist" style="width: 100%; font-weight: normal">
+    </div> 
 </div>
 </body>
+<script>fillUniverses();</script>
 </html>
