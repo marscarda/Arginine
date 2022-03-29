@@ -2,7 +2,6 @@ package arginine.universe;
 //***************************************************************************
 import arginine.FlowBeta;
 import arginine.WebFrontAlpha;
-import arginine.mapping.WebBackMapping;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,7 +43,7 @@ public class WebFrontUniverses extends WebFrontAlpha {
         back.setLoginToken(session.getLoginToken());
         try {
             //---------------------------------------------------------------
-            Universe[] templates = flowbeta.getAurigaObject().getUniverseAtlas().getTemplates();
+            Universe[] templates = flowbeta.getAurigaObject().templateUniverseAtlas().getTemplates();
             back.setUniverses(templates);
             //---------------------------------------------------------------
         }
